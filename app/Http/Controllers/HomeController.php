@@ -91,6 +91,36 @@ class HomeController extends Controller
     public function destroy($id)
     {
         //
+    }    
+
+    public function editor()
+    {
+        return view('user.editors');
+    }
+
+    public function adminlogin(){
+        return view('admin.login');
+    }
+    public function logincheck(Request $request)
+    {
+        if($request->isMethod('post'))
+        {
+            $kullanici=$request->only('email','password');
+            if(Auth::attempt($kullanici)){
+                $request->session()->regenerate();
+                return redirect()->route('admin_home')/*->intended('admin')*/;
+            }
+            return back()->withErrors(['email'=>'The provided credentials do not match our records']);
+        }
+        else {
+            return view('admin/login');
+        }
+    }
+    public function adminlogout(Request $veri){
+        Auth::logout();
+        $veri->session()->invalidate();
+        $veri->session()->regenerateToken();
+        return redirect()->route('admin_login');
     }
     public function userlogout(Request $veri){
         Auth::logout();
