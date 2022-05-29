@@ -56,15 +56,16 @@ Route::middleware('auth')->prefix('admin')->group(function () {
             Route::get('delete/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'destroy'])->name('admin_delete_category');
             Route::get('show', [\App\Http\Controllers\Admin\CategoryController::class, 'show'])->name('admin_category_show');
         });
-        //Product
-        Route::prefix('product')->group(function () {
-            Route::get('/', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('admin_product');
-            Route::get('create', [\App\Http\Controllers\Admin\ProductController::class, 'create'])->name('admin_product_add');
-            Route::post('store', [\App\Http\Controllers\Admin\ProductController::class, 'store'])->name('admin_product_store');
-            Route::get('edit/{id}', [\App\Http\Controllers\Admin\ProductController::class, 'edit'])->name('admin_product_edit');
-            Route::post('update/{id}', [\App\Http\Controllers\Admin\ProductController::class, 'update'])->name('admin_product_update');
-            Route::get('delete/{id}', [\App\Http\Controllers\Admin\ProductController::class, 'destroy'])->name('admin_product_delete');
-            Route::get('show', [\App\Http\Controllers\Admin\ProductController::class, 'show'])->name('admin_product_show');
+        //Camp
+        Route::prefix('camp')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Admin\CampController::class, 'index'])->name('admin_camp');
+            Route::get('add', [\App\Http\Controllers\Admin\CampController::class, 'add'])->name('admin_add_camp');
+            Route::post('create', [\App\Http\Controllers\Admin\CategoryController::class, 'create'])->name('admin_create_camp');
+            Route::post('store', [\App\Http\Controllers\Admin\CampController::class, 'store'])->name('admin_camp_store');
+            Route::get('edit/{id}', [\App\Http\Controllers\Admin\CampController::class, 'edit'])->name('admin_camp_edit');
+            Route::post('update/{id}', [\App\Http\Controllers\Admin\CampController::class, 'update'])->name('admin_camp_update');
+            Route::get('delete/{id}', [\App\Http\Controllers\Admin\CampController::class, 'destroy'])->name('admin_camp_delete');
+            Route::get('show', [\App\Http\Controllers\Admin\CampController::class, 'show'])->name('admin_camp_show');
         });
         //Editor
         Route::prefix('editor')->group(function () {
@@ -82,9 +83,9 @@ Route::middleware('auth')->prefix('admin')->group(function () {
             Route::get('/', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin_user');
             Route::get('create/{id}', [\App\Http\Controllers\Admin\UserController::class, 'create'])->name('admin_user_add');
             Route::post('store/{id}', [\App\Http\Controllers\Admin\UserController::class, 'store'])->name('admin_user_store');
-            Route::get('edit/{id}', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('admin_user_edit');
-            Route::post('update/{id}', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin_user_update');
-            Route::get('delete/{id}', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('admin_user_delete');
+            Route::get('edit/{id}', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('admin_edit_user');
+            Route::post('update/{id}', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin_update_user');
+            Route::get('delete/{id}', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('admin_delete_user');
             Route::get('show/{id}', [\App\Http\Controllers\Admin\UserController::class, 'show'])->name('admin_user_show');
 
             Route::get('role/{id}', [\App\Http\Controllers\Admin\UserController::class, 'userrole'])->name('user_role');
@@ -93,9 +94,9 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         });
         //Image
         Route::prefix('image')->group(function () {
-            Route::get('create/{product_id}', [\App\Http\Controllers\Admin\ImageController::class, 'create'])->name('admin_image_add');
-            Route::post('store/{product_id}', [\App\Http\Controllers\Admin\ImageController::class, 'store'])->name('admin_image_store');
-            Route::get('delete/{id},{product_id}', [\App\Http\Controllers\Admin\ImageController::class, 'destroy'])->name('admin_image_delete');
+            Route::get('create/{camp_id}', [\App\Http\Controllers\Admin\ImageController::class, 'create'])->name('admin_image_add');
+            Route::post('store/{camp_id}', [\App\Http\Controllers\Admin\ImageController::class, 'store'])->name('admin_image_store');
+            Route::get('delete/{id},{camp_id}', [\App\Http\Controllers\Admin\ImageController::class, 'destroy'])->name('admin_image_delete');
             Route::get('show', [\App\Http\Controllers\Admin\ImageController::class, 'show'])->name('admin_image_show');
         });
         //Message

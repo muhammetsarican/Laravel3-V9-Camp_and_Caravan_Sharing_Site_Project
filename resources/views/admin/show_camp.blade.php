@@ -5,13 +5,13 @@
         <!-- Page Heading -->
         <div class="row">
             <div class="col-sm-12 col-md-6">
-                <h2 class="mb-2 text-gray-800">Kullanıcılar</h2>
+                <h2 class="mb-2 text-gray-800">Kamplar</h2>
             </div>
 
             <div class="col-sm-12 col-md-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item "><a href="{{ route('admin_home') }}">Anasayfa</a></li>
-                    <li class="breadcrumb-item active">Kullanıcılar </li>
+                    <li class="breadcrumb-item active">Kamplar </li>
                 </ol>
             </div>
         </div>
@@ -22,7 +22,11 @@
                 <div class="table-responsive">
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
-                            <div class="col-sm-12 col-md-12">
+                            <div class="col-sm-12 col-md-2">
+                                <a href="{{ route('admin_add_category') }}" class="btn btn-black--hover breadcrumb">Kamp
+                                    Ekle</a>
+                            </div>
+                            <div class="col-sm-12 col-md-10">
                                 @include('user.message')
                             </div>
                         </div>
@@ -35,22 +39,28 @@
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
                                                 rowspan="1" colspan="1" aria-sort="ascending"
                                                 aria-label="Name: activate to sort column descending" style="width: 57px;">
-                                                Fotoğraf</th>
+                                                ID</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
                                                 style="width: auto;">İsim</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Office: activate to sort column ascending"
-                                                style="width: auto;">E-Posta</th>
+                                                style="width: auto;">Ekleyen</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Age: activate to sort column ascending"
+                                                style="width: auto;">İşletme Tipi</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Start date: activate to sort column ascending"
+                                                style="width: auto;">İnternet Adresi</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Start date: activate to sort column ascending"
                                                 style="width: auto;">Telefon</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Age: activate to sort column ascending"
-                                                style="width: auto;">Adres</th>
+                                                colspan="1" aria-label="Start date: activate to sort column ascending"
+                                                style="width: auto;">Durum</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Age: activate to sort column ascending"
-                                                style="width: auto;">Roller</th>
+                                                colspan="1" aria-label="Start date: activate to sort column ascending"
+                                                style="width: auto;">Kategoriler</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="2" aria-label="Start date: activate to sort column ascending"
                                                 style="width: auto;">İşlem</th>
@@ -63,34 +73,27 @@
 
                                         @foreach ($datalist as $dl)
                                             <tr class="odd">
-                                                <td>
-                                                    @if ($dl->profile_photo_path)
-                                                        <img src="{{ \Illuminate\Support\Facades\Storage::url($dl->profile_photo_path) }}"
-                                                            height="50" style="border-radius: 10px" alt="">
-                                                    @endif
-                                                </td>
+                                                <td class="sorting_1">{{ $dl->id }}</td>
                                                 <td>{{ $dl->name }}</td>
-                                                <td>{{ $dl->email }}</td>
+                                                <td>{{ $dl->user_id }}</td>
+                                                <td>{{ $dl->operating_type }}</td>
+                                                <td>{{ $dl->web_address }}</td>
                                                 <td>{{ $dl->phone }}</td>
-                                                <td>{{ $dl->address }}</td>
-                                                <td>
-                                                    @foreach ($dl->roles as $row)
-                                                    {{ $row->name }};&nbsp;
-                                                    @endforeach
-                                                        
-                                                    <a href="{{ route('user_role', ['id' => $dl->id]) }}"
+                                                <td>{{ $dl->status }}</td>
+                                                <td><a href="{{ route('admin_edit_category', ['id' => $dl->id]) }}"
                                                         onclick="return !window.open(this.href, '','top=50 left=50 height=1150 width=750')"><img
-                                                            src="{{ asset('admin') }}/img/icons/plus.png"
-                                                            height="25px" alt="Rol Ekle"></a>
+                                                            src="{{ asset('admin') }}/img/icons/edit.png" height="25">
+                                                    </a>
                                                 </td>
-                                                <td><a href="{{ route('admin_edit_user', ['id' => $dl->id]) }}"
+                                                <td><a href="{{ route('admin_edit_category', ['id' => $dl->id]) }}"
                                                         onclick="return !window.open(this.href, '','top=50 left=50 height=1150 width=750')"><img
-                                                            src="{{ asset('admin') }}/img/icons/edit.png"
-                                                            height="25px"></a></td>
-                                                <td><a href="{{ route('admin_delete_user', ['id' => $dl->id]) }}"
+                                                            src="{{ asset('admin') }}/img/icons/edit.png" height="25">
+                                                    </a>
+                                                </td>
+                                                <td><a href="{{ route('admin_delete_category', ['id' => $dl->id]) }}"
                                                         onclick="return confirm('Delete! Are you sure ?')"><img
-                                                            src="{{ asset('admin') }}/img/icons/delete.png"
-                                                            height="25px"></a></td>
+                                                            src="{{ asset('admin') }}/img/icons/delete.png" height="25">
+                                                    </a></td>
                                             </tr>
                                         @endforeach
 

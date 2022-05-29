@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('role',150)->default('user');
+        Schema::create('camp_categories', function (Blueprint $table) {
+            $table->integer('camp_id')->unsigned();
+            $table->integer('category_id')->unsigned();
         });
     }
 
@@ -25,8 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('camp_categories');
     }
 };
