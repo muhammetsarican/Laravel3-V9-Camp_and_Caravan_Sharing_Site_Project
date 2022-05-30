@@ -78,19 +78,19 @@
                                                 <td>{{ $dl->user_id }}</td>
                                                 <td>{{ $dl->operating_type }}</td>
                                                 <td>{{ $dl->web_address }}</td>
-                                                <td>{{ $dl->phone }}</td>
+                                                <td>{{ $dl->camp_phone }}</td>
                                                 <td>{{ $dl->status }}</td>
-                                                <td><a href="{{ route('admin_edit_category', ['id' => $dl->id]) }}"
+                                                <td><a href="{{ route('camp_category', ['id' => $dl->id]) }}"
                                                         onclick="return !window.open(this.href, '','top=50 left=50 height=1150 width=750')"><img
                                                             src="{{ asset('admin') }}/img/icons/edit.png" height="25">
                                                     </a>
                                                 </td>
-                                                <td><a href="{{ route('admin_edit_category', ['id' => $dl->id]) }}"
+                                                <td><a href="{{ route('admin_edit_camp', ['id' => $dl->id]) }}"
                                                         onclick="return !window.open(this.href, '','top=50 left=50 height=1150 width=750')"><img
                                                             src="{{ asset('admin') }}/img/icons/edit.png" height="25">
                                                     </a>
                                                 </td>
-                                                <td><a href="{{ route('admin_delete_category', ['id' => $dl->id]) }}"
+                                                <td><a href="{{ route('admin_delete_camp', ['id' => $dl->id]) }}"
                                                         onclick="return confirm('Delete! Are you sure ?')"><img
                                                             src="{{ asset('admin') }}/img/icons/delete.png" height="25">
                                                     </a></td>

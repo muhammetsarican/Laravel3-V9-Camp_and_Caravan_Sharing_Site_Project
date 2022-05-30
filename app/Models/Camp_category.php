@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Camp_category extends Model
 {
     use HasFactory;
+
+    public function camp()
+    {
+        return $this->belongsToMany(Camp::class);
+    }
 }

@@ -12,7 +12,7 @@
 
             <div class="col-sm-12 col-md-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ route('admin_category') }}">Kamplar</a> </li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin_camp') }}">Kamplar</a> </li>
                     <li class="breadcrumb-item active">Kamp Ekle</li>
                 </ol>
             </div>
@@ -32,19 +32,19 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>İsim</label>
-                                    <input type="text" name="title" class="form-control">
+                                    <input type="text" name="name" class="form-control">
                                 </div>
                                 <hr>
                                 <div class="row form-group">
                                     <div class="col-md-6 mb-3 mb-md-0">
                                         <label>Daha önce bulundunuz mu?</label><br>
-                                        <input type="radio" name="have_you_been">&nbsp;Evet<br>
-                                        <input type="radio" name="have_you_been">&nbsp;Hayır
+                                        <input type="radio" name="have_you_been" value="Evet">&nbsp;Evet<br>
+                                        <input type="radio" name="have_you_been" value="Hayır">&nbsp;Hayır
                                     </div>
                                     <div class="col-md-6">
                                         <label>İşletme Tipi</label><br>
-                                        <input type="radio" name="operating_type">&nbsp;Kamu İşletmesi<br>
-                                        <input type="radio" name="operating_type">&nbsp;Özel İşletme
+                                        <input type="radio" name="operating_type" value="Kamu İşletmesi">&nbsp;Kamu İşletmesi<br>
+                                        <input type="radio" name="operating_type" value="Özel İşletme">&nbsp;Özel İşletme
                                     </div>
                                 </div>
                                 <hr>

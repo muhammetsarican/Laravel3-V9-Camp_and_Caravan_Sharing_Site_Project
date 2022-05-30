@@ -60,12 +60,17 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         Route::prefix('camp')->group(function () {
             Route::get('/', [\App\Http\Controllers\Admin\CampController::class, 'index'])->name('admin_camp');
             Route::get('add', [\App\Http\Controllers\Admin\CampController::class, 'add'])->name('admin_add_camp');
-            Route::post('create', [\App\Http\Controllers\Admin\CategoryController::class, 'create'])->name('admin_create_camp');
+            Route::post('create', [\App\Http\Controllers\Admin\CampController::class, 'create'])->name('admin_create_camp');
             Route::post('store', [\App\Http\Controllers\Admin\CampController::class, 'store'])->name('admin_camp_store');
-            Route::get('edit/{id}', [\App\Http\Controllers\Admin\CampController::class, 'edit'])->name('admin_camp_edit');
-            Route::post('update/{id}', [\App\Http\Controllers\Admin\CampController::class, 'update'])->name('admin_camp_update');
-            Route::get('delete/{id}', [\App\Http\Controllers\Admin\CampController::class, 'destroy'])->name('admin_camp_delete');
+            Route::get('edit/{id}', [\App\Http\Controllers\Admin\CampController::class, 'edit'])->name('admin_edit_camp');
+            Route::post('update/{id}', [\App\Http\Controllers\Admin\CampController::class, 'update'])->name('admin_update_camp');
+            Route::get('delete/{id}', [\App\Http\Controllers\Admin\CampController::class, 'destroy'])->name('admin_delete_camp');
             Route::get('show', [\App\Http\Controllers\Admin\CampController::class, 'show'])->name('admin_camp_show');
+
+
+            Route::get('category/{id}', [\App\Http\Controllers\Admin\CampController::class, 'campcategory'])->name('camp_category');
+            Route::post('category/store/{id}', [\App\Http\Controllers\Admin\CampController::class, 'campcategorysstore'])->name('camp_category_add');
+            Route::get('category/delete/{campid}/{categoryid}', [\App\Http\Controllers\Admin\CampController::class, 'campcategorysdelete'])->name('camp_category_delete');
         });
         //Editor
         Route::prefix('editor')->group(function () {
