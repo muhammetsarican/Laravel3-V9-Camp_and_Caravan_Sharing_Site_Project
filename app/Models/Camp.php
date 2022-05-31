@@ -11,6 +11,6 @@ class Camp extends Model
 
     public function camp_category()
     {
-        return $this->belongsToMany(Camp_category::class);
+        return $this->hasMany(Camp_category::class);
     }
 }

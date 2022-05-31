@@ -11,6 +11,11 @@ class Camp_category extends Model
 
     public function camp()
     {
-        return $this->belongsToMany(Camp::class);
+        return $this->belongsTo(Camp::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

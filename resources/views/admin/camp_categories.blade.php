@@ -35,34 +35,50 @@
                 </div>
                 <div class="card-body">
                     @include('user.message')
-                    <form role="form" action="{{ route('user_role_add', ['id' => $data->id]) }}" method="post"
+                    <form role="form" action="{{ route('camp_category_add', ['id' => $data->id]) }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
+                        <input class="form-control" type="hidden" value="{{ $data->id }}" name="camp_id">
                         <div class="form-group">
                             <label>İsim</label>
                             <p class="form-control">{{ $data->name }}</p>
                         </div>
-                        <div class="form-group">
-                            <label>E-Posta</label>
-                            <p class="form-control">{{ $data->address }}</p>
-                        </div>
-                        <div class="form-group">
-                            <label>Roller</label>
+                        {{-- <div class="row form-group">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <label>Daha önce bulundunuz mu?</label><br>
+                                <input type="radio" name="have_you_been" value="Evet">&nbsp;Evet<br>
+                                <input type="radio" name="have_you_been" value="Hayır">&nbsp;Hayır
+                            </div>
+                            <div class="col-md-6">
+                                <label>İşletme Tipi</label><br>
+                                <input type="radio" name="operating_type" value="Kamu İşletmesi">&nbsp;Kamu İşletmesi<br>
+                                <input type="radio" name="operating_type" value="Özel İşletme">&nbsp;Özel İşletme
+                            </div>
+                        </div> --}}
+                        <div class="row form-group">
+                            <div class="col-md-12">
+
+                                <label>Kategoriler</label>
+                            </div>
                             @foreach ($data->camp_category as $row)
-                                <p class="form-control">
-                                    {{ $row->user_id }} ;
-                                    <a href="{{ route('user_role_delete', ['userid' => $data->id, 'roleid' => $row->id]) }}"
-                                        onclick="return confirm('Delete! Are you sure ?')">
-                                        <img src="{{ asset('admin') }}/img/icons/delete.png" height="25px"></a>
-                                </p>
+                                <div class="col-md-2">
+                                    <p class="form-control">
+                                        {{ $row->category->title }} ;
+                                        <a href="{{ route('camp_category_delete', ['id' => $row->id]) }}">
+                                            <img src="{{ asset('admin') }}/img/icons/delete.png" height="25px">
+                                        </a>
+                                    </p>
+                                </div>
                             @endforeach
                         </div>
                         <hr>
                         <div class="card-body">
-                            <label>Rol Ekle</label>
-                            <select class="form-control select2" name="roleid" style="width: 100%">
-                                @foreach ($datalist as $rs)
-                                    <option value="{{ $rs->id }}">{{ $rs->name }}</option>
+                            <label>Kategori Ekle</label>
+                            <select class="form-control select2" name="category_id" style="width: 100%">
+                                @foreach ($category as $rs)
+                                    <option value="{{ $rs->id }}">
+                                        {{ \App\Http\Controllers\Admin\CategoryController::getParentsTree($rs, $rs->title) }}
+                                    </option>
                                 @endforeach
                             </select>
                             <div class="card-footer">

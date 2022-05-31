@@ -69,8 +69,8 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
 
             Route::get('category/{id}', [\App\Http\Controllers\Admin\CampController::class, 'campcategory'])->name('camp_category');
-            Route::post('category/store/{id}', [\App\Http\Controllers\Admin\CampController::class, 'campcategorysstore'])->name('camp_category_add');
-            Route::get('category/delete/{campid}/{categoryid}', [\App\Http\Controllers\Admin\CampController::class, 'campcategorysdelete'])->name('camp_category_delete');
+            Route::post('category/store/{id}', [\App\Http\Controllers\Admin\CampController::class, 'campcategorystore'])->name('camp_category_add');
+            Route::get('category/delete/{id}', [\App\Http\Controllers\Admin\CampController::class, 'campcategorydelete'])->name('camp_category_delete');
         });
         //Editor
         Route::prefix('editor')->group(function () {

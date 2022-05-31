@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Camp;
 use App\Models\Camp_category;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -29,6 +30,18 @@ class CampController extends Controller
         return view('admin.add_camp');
     }
 
+    protected $appends=[
+        'get_categories'
+    ];
+    public static function get_categories($id){
+        $data=Category::find($id);
+        if ($data->parent_id==0){
+            return $data->title;
+        }
+        CampController::get_categories($data->parent_id);
+        
+        
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -83,8 +96,24 @@ class CampController extends Controller
     public function campcategory(Camp $camp, $id)
     {
         $data = Camp::find($id);
-        $datalist = Camp_category::all()->sortBy('name');
-        return view('admin.camp_categories', ['data' => $data, 'datalist' => $datalist]);
+        $datalist = Camp_category::all()->sortBy('category_id');
+        $category=Category::all();
+        return view('admin.camp_categories', ['data' => $data, 'datalist' => $datalist, 'category'=>$category]);
+    }
+
+    public function campcategorystore(Request $request, Camp $camp, $id)
+    {
+        $data = new Camp_category();
+        $data->camp_id=$request->input('camp_id');
+        $data->category_id=$request->input('category_id');
+        $data->save();
+        return redirect()->back()->with('success', 'Kategori Başarıyla Eklendi.');
+    }
+
+    public function campcategorydelete($id)
+    {
+        Camp_category::destroy($id);
+        return redirect()->back()->with('success', 'Kategori Başarıyla Silindi.');
     }
 
     /**
