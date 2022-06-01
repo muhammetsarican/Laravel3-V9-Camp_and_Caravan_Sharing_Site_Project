@@ -60,6 +60,9 @@
                                                 style="width: auto;">Durum</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Start date: activate to sort column ascending"
+                                                style="width: auto;">Resim Galerisi</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Start date: activate to sort column ascending"
                                                 style="width: auto;">Kategoriler</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="2" aria-label="Start date: activate to sort column ascending"
@@ -80,9 +83,14 @@
                                                 <td>{{ $dl->web_address }}</td>
                                                 <td>{{ $dl->camp_phone }}</td>
                                                 <td>{{ $dl->status }}</td>
+                                                <td><a href="{{ route('admin_image_add', ['camp_id' => $dl->id]) }}"
+                                                        onclick="return !window.open(this.href, '','top=50 left=50 height=1150 width=750')">
+                                                        <img src="{{ asset('admin') }}/img/icons/gallery.png"
+                                                            height="25px"></a>
+                                                </td>
                                                 <td><a href="{{ route('camp_category', ['id' => $dl->id]) }}"
                                                         onclick="return !window.open(this.href, '','top=50 left=50 height=1150 width=750')"><img
-                                                            src="{{ asset('admin') }}/img/icons/edit.png" height="25">
+                                                            src="{{ asset('admin') }}/img/icons/category.png" height="20">
                                                     </a>
                                                 </td>
                                                 <td><a href="{{ route('admin_edit_camp', ['id' => $dl->id]) }}"
