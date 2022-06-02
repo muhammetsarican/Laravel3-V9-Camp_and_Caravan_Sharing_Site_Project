@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Camp;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -24,9 +27,16 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('user.index');
+        $datalist=Camp::all();
+        return view('user.index',['datalist'=>$datalist]);
     }
 
+    public function campdetail($id)
+    {
+        $data=Camp::find($id);
+        $datalist=DB::table('images')->where('camp_id', $id)->get();
+        return view('user.camp_detail',['data'=>$data,'datalist'=>$datalist]);
+    }
     /**
      * Show the form for creating a new resource.
      *

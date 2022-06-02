@@ -41,6 +41,9 @@ Route::get('/admin/add/editor', function () {
     return view('admin.add_editor');
 })->name('add_editor');
 
+Route::get('/camp/detail/{id}', [\App\Http\Controllers\HomeController::class, 'campdetail'])->name('camp_detail');
+
+
 
 Route::middleware('auth')->prefix('admin')->group(function () {
     // Route::middleware('admin')->group(function () {

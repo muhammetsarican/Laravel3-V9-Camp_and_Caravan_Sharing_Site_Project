@@ -13,4 +13,9 @@ class Camp extends Model
     {
         return $this->hasMany(Camp_category::class);
     }
+
+    public function images()
+    {
+        return $this->belongsTo(Image::class);
+    }
 }

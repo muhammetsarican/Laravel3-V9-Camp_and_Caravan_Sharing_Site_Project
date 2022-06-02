@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form role="form" action="{{ route('admin_create_camp') }}" method="post">
+                        <form role="form" action="{{ route('admin_create_camp') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
