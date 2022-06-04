@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->integer('user_id');
-            $table->integer('treatment_id');
+            $table->integer('camp_id');
             $table->string('subject',150)->nullable();
             $table->string('review')->nullable();
             $table->string('IP',150)->nullable();

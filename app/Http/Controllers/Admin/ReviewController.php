@@ -16,6 +16,8 @@ class ReviewController extends Controller
     public function index()
     {
         //
+        $datalist=Review::all();
+        return view('admin.show_review',['datalist'=>$datalist]);
     }
 
     /**
@@ -56,9 +58,11 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function edit(Review $review)
+    public function edit(Review $review, $id)
     {
         //
+        $data=Review::find($id);
+        return view('admin.edit_review',['data'=>$data]);
     }
 
     /**
@@ -68,9 +72,13 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Review $review)
+    public function update(Request $request, Review $review, $id)
     {
         //
+        $data=Review::find($id);
+        $data->status=$request->input('status');
+        $data->save();
+        return redirect()->back()->with('success','Kayıt Başarıyla Güncellendi.');
     }
 
     /**

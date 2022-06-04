@@ -114,6 +114,16 @@ Route::middleware('auth')->prefix('admin')->group(function () {
             Route::post('update/{id}', [\App\Http\Controllers\Admin\MessageController::class, 'update'])->name('admin_message_update');
             Route::get('delete/{id}', [\App\Http\Controllers\Admin\MessageController::class, 'destroy'])->name('admin_message_delete');
         });
+                //Review
+        Route::prefix('review')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Admin\ReviewController::class, 'index'])->name('admin_review');
+            Route::get('create', [\App\Http\Controllers\Admin\ReviewController::class, 'create'])->name('admin_add_review');
+            Route::post('store', [\App\Http\Controllers\Admin\ReviewController::class, 'store'])->name('admin_store_review');
+            Route::get('edit/{id}', [\App\Http\Controllers\Admin\ReviewController::class, 'edit'])->name('admin_edit_review');
+            Route::post('update/{id}', [\App\Http\Controllers\Admin\ReviewController::class, 'update'])->name('admin_update_review');
+            Route::get('delete/{id}', [\App\Http\Controllers\Admin\ReviewController::class, 'destroy'])->name('admin_delete_review');
+            Route::get('show', [\App\Http\Controllers\Admin\ReviewController::class, 'show'])->name('admin_show_review');
+        });
     // });
 });
 

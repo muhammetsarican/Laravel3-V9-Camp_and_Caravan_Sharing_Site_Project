@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Camp;
 use App\Models\Image;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -34,8 +35,14 @@ class HomeController extends Controller
     public function campdetail($id)
     {
         $data=Camp::find($id);
-        $datalist=DB::table('images')->where('camp_id', $id)->get();
-        return view('user.camp_detail',['data'=>$data,'datalist'=>$datalist]);
+        $review=Review::where('camp_id',$id)->get();
+        $images=Image::where('camp_id',$id)->get();
+        $data=[
+            'review'=>$review,
+            'data'=>$data,
+            'image'=>$images,
+        ];
+        return view('user.camp_detail',$data);
     }
     /**
      * Show the form for creating a new resource.
