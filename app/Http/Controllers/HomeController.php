@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Camp;
 use App\Models\Image;
 use App\Models\Review;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,18 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+    // public static function get_role($id)
+    // {
+    //     $user=User::find($id);
+
+    //     if ($user->roles->where('name','admin')->exists())
+    //     {
+    //         print_r('TRUE');
+    //         exit();
+    //     }
+    // }
+
     public function userLogin()
     {
         return view('user.login');

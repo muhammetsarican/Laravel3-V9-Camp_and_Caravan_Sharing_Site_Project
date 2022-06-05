@@ -1,28 +1,40 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <link rel="shortcut icon" href="{{ asset('admin/icons/user.png') }}" type="image/x-icon">
+    <!--
+    More Templates Visit ==> ProBootstrap.com
+    Free Template by ProBootstrap.com under the License Creative Commons 3.0 ==> (probootstrap.com/license)
 
-    <!-- Custom fonts for this template-->
-    <link href="{{ asset('admin') }}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="{{ asset('admin') }}/stylesheet">
+    IMPORTANT: You can do whatever you want with this template but you need to keep the footer link back to ProBootstrap.com
+    -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Custom styles for this template-->
-    <link href="{{ asset('admin') }}/css/sb-admin-2.min.css" rel="stylesheet">
-    <!--Scripts-->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
+    <title>Places &mdash; Free HTML5 Bootstrap 4 Theme by ProBootstrap.com</title>
+    <meta name="description" content="Free Bootstrap 4 Theme by ProBootstrap.com">
+    <meta name="keywords"
+        content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
 
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('user') }}/css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="{{ asset('user') }}/css/animate.css">
+    <link rel="stylesheet" href="{{ asset('user') }}/fonts/ionicons/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="{{ asset('user') }}/css/owl.carousel.min.css">
+
+    <link rel="stylesheet" href="{{ asset('user') }}/fonts/flaticon/font/flaticon.css">
+
+    <link rel="stylesheet" href="{{ asset('user') }}/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('user') }}/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="{{ asset('user') }}/css/select2.css">
+
+
+    <link rel="stylesheet" href="{{ asset('user') }}/css/helpers.css">
+    <link rel="stylesheet" href="{{ asset('user') }}/css/style.css">
+
 </head>
 
 <body>
@@ -35,7 +47,7 @@
                 </div>
                 <div class="card-body">
                     @include('user.message')
-                    <form role="form" action="{{ route('admin_update_camp', ['id' => $data->id]) }}" method="post"
+                    <form role="form" action="{{ route('user_update_camp', ['id' => $data->id]) }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
@@ -51,14 +63,20 @@
                             <div class="row form-group">
                                 <div class="col-md-6 mb-3 mb-md-0">
                                     <label>Daha önce bulundunuz mu?</label><br>
-                                    <input type="radio" name="have_you_been" value="Evet">&nbsp;Evet<br>
-                                    <input type="radio" name="have_you_been" value="Hayır">&nbsp;Hayır
+                                    <input type="radio" name="have_you_been"
+                                        @if ($data->have_you_been == 'Evet') checked @endif value="Evet">&nbsp;Evet<br>
+                                    <input type="radio" name="have_you_been"
+                                        @if ($data->have_you_been == 'Hayır') checked @endif value="Hayır">&nbsp;Hayır
                                 </div>
                                 <div class="col-md-6">
                                     <label>İşletme Tipi</label><br>
-                                    <input type="radio" name="operating_type" value="Kamu İşletmesi">&nbsp;Kamu
+                                    <input type="radio" name="operating_type"
+                                        @if ($data->operating_type == 'Kamu İşletmesi') checked @endif
+                                        value="Kamu İşletmesi">&nbsp;Kamu
                                     İşletmesi<br>
-                                    <input type="radio" name="operating_type" value="Özel İşletme">&nbsp;Özel İşletme
+                                    <input type="radio" name="operating_type"
+                                        @if ($data->operating_type == 'Özel İşletme') checked @endif value="Özel İşletme">&nbsp;Özel
+                                    İşletme
                                 </div>
                             </div>
                             <hr>
@@ -119,7 +137,6 @@
             </div>
         </div>
     </div>
-
 </body>
 
 </html>

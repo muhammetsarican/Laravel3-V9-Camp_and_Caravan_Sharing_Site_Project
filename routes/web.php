@@ -43,7 +43,63 @@ Route::get('/admin/add/editor', function () {
 
 Route::get('/camp/detail/{id}', [\App\Http\Controllers\HomeController::class, 'campdetail'])->name('camp_detail');
 
+Route::middleware('auth')->prefix('camper')->namespace('camper')->group(function () {
+    //Route::get('/profile', [\App\Http\Controllers\admin\HomeController::class, 'index'])->name('admin_home');
 
+    //Camp
+    Route::prefix('camp')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Camper\CampController::class, 'index'])->name('user_camp');
+        Route::get('create', [\App\Http\Controllers\Camper\CampController::class, 'create'])->name('user_add_camp');
+        Route::post('store', [\App\Http\Controllers\Camper\CampController::class, 'store'])->name('user_store_camp');
+        Route::get('edit/{id}', [\App\Http\Controllers\Camper\CampController::class, 'edit'])->name('user_edit_camp');
+        Route::post('update/{id}', [\App\Http\Controllers\Camper\CampController::class, 'update'])->name('user_update_camp');
+        Route::get('delete/{id}', [\App\Http\Controllers\Camper\CampController::class, 'destroy'])->name('user_delete_camp');
+        Route::get('show', [\App\Http\Controllers\Camper\CampController::class, 'show'])->name('user_show_camp');
+    });
+    //Image
+    Route::prefix('image')->group(function () {
+        //  Route::get('/',[\App\Http\Controllers\ImageController::class,'index'])->name('user_treatments');
+        Route::get('create/{treatment_id}', [\App\Http\Controllers\ImageController::class, 'create'])->name('user_image_add');
+        Route::post('store/{treatment_id}', [\App\Http\Controllers\ImageController::class, 'store'])->name('user_image_store');
+        Route::get('delete/{id},{treatment_id}', [\App\Http\Controllers\ImageController::class, 'destroy'])->name('user_image_delete');
+        Route::get('show', [\App\Http\Controllers\ImageController::class, 'show'])->name('user_image_show');
+    });
+    //Order
+    Route::prefix('order')->group(function () {
+        Route::get('/', [\App\Http\Controllers\OrderController::class, 'index'])->name('user_orders');
+        Route::get('create/{id}', [\App\Http\Controllers\OrderController::class, 'create'])->name('user_order_add');
+        Route::post('store/{id}', [\App\Http\Controllers\OrderController::class, 'store'])->name('user_order_store');
+        Route::get('edit/{id}', [\App\Http\Controllers\OrderController::class, 'edit'])->name('user_order_edit');
+        Route::post('update/{id}', [\App\Http\Controllers\OrderController::class, 'update'])->name('user_order_update');
+        Route::get('delete/{id}', [\App\Http\Controllers\OrderController::class, 'destroy'])->name('user_order_delete');
+        Route::get('show', [\App\Http\Controllers\OrderController::class, 'show'])->name('user_order_show');
+    });
+    //Appointment
+    Route::prefix('appointment')->group(function () {
+        Route::get('/', [\App\Http\Controllers\AppointmentController::class, 'index'])->name('user_appointments');
+        Route::get('create', [\App\Http\Controllers\AppointmentController::class, 'create'])->name('user_appointment_add');
+        Route::post('store', [\App\Http\Controllers\AppointmentController::class, 'store'])->name('user_appointment_store');
+        Route::get('edit/{id}', [\App\Http\Controllers\AppointmentController::class, 'edit'])->name('user_appointment_edit');
+        Route::post('update/{id}', [\App\Http\Controllers\AppointmentController::class, 'update'])->name('user_appointment_update');
+        Route::get('delete/{id}', [\App\Http\Controllers\AppointmentController::class, 'destroy'])->name('user_appointment_delete');
+        Route::get('show', [\App\Http\Controllers\AppointmentController::class, 'show'])->name('user_appointment_show');
+    });
+    //Process
+    Route::prefix('process')->group(function () {
+        Route::get('/', [\App\Http\Controllers\ProcessController::class, 'index'])->name('user_processes');
+        Route::get('create', [\App\Http\Controllers\ProcessController::class, 'create'])->name('user_process_add');
+        Route::post('store', [\App\Http\Controllers\ProcessController::class, 'store'])->name('user_process_store');
+        Route::get('edit/{id}', [\App\Http\Controllers\ProcessController::class, 'edit'])->name('user_process_edit');
+        Route::post('update/{id}', [\App\Http\Controllers\ProcessController::class, 'update'])->name('user_process_update');
+        Route::get('delete/{id}', [\App\Http\Controllers\ProcessController::class, 'destroy'])->name('user_process_delete');
+        Route::get('show', [\App\Http\Controllers\ProcessController::class, 'show'])->name('user_process_show');
+
+        Route::get('/user/', [\App\Http\Controllers\ProcessController::class, 'indexuser'])->name('user_processes_user');
+        Route::get('edit/user/{id}', [\App\Http\Controllers\ProcessController::class, 'edituser'])->name('user_process_user_edit');
+        Route::post('update/user/{id}', [\App\Http\Controllers\ProcessController::class, 'updateuser'])->name('user_process_user_update');
+    });
+
+});
 
 Route::middleware('auth')->prefix('admin')->group(function () {
     // Route::middleware('admin')->group(function () {
@@ -114,7 +170,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
             Route::post('update/{id}', [\App\Http\Controllers\Admin\MessageController::class, 'update'])->name('admin_message_update');
             Route::get('delete/{id}', [\App\Http\Controllers\Admin\MessageController::class, 'destroy'])->name('admin_message_delete');
         });
-                //Review
+        //Review
         Route::prefix('review')->group(function () {
             Route::get('/', [\App\Http\Controllers\Admin\ReviewController::class, 'index'])->name('admin_review');
             Route::get('create', [\App\Http\Controllers\Admin\ReviewController::class, 'create'])->name('admin_add_review');
@@ -126,6 +182,8 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         });
     // });
 });
+
+
 
 
 

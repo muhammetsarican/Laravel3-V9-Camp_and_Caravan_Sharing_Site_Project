@@ -22,5 +22,6 @@ class CheckAdmin
         {
             return redirect(route('admin_login'))->with('error','Yetkiniz Bulunmamaktadır.');
         }
-        return $next($request);    }
+        return $next($request);    
+    }
 }
