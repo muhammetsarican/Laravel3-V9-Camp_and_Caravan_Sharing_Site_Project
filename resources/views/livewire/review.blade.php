@@ -7,22 +7,56 @@
 <form wire:submit.prevent="store">
     @csrf
     <div class="row form-group">
-        <div class="col-md-6 mb-3 mb-md-0">
-            <label class="text-black" for="review">Your Rating</label>
-            <div class="rating col-md-6">
+        <div class="col-md-4 mb-3 mb-md-0">
+            <label class="text-black" for="cleaning_rate">Temizlik</label>
+            <div class="rating col-md-12">
 
-                <input type="radio" wire:model="rate" value="5" id="5">
-                <label for="5">☆</label>
-                <input type="radio" wire:model="rate" value="4" id="4">
-                <label for="4">☆</label>
-                <input type="radio" wire:model="rate" value="3" id="3">
-                <label for="3">☆</label>
-                <input type="radio" wire:model="rate" value="2" id="2">
-                <label for="2">☆</label>
-                <input type="radio" wire:model="rate" value="1" id="1">
-                <label for="1">☆</label>
+                <input type="radio" wire:model="cleaning_rate" value="5" id="cleaning_rate_5">
+                <label for="cleaning_rate_5">☆</label>
+                <input type="radio" wire:model="cleaning_rate" value="4" id="cleaning_rate_4">
+                <label for="cleaning_rate_4">☆</label>
+                <input type="radio" wire:model="cleaning_rate" value="3" id="cleaning_rate_3">
+                <label for="cleaning_rate_3">☆</label>
+                <input type="radio" wire:model="cleaning_rate" value="2" id="cleaning_rate_2">
+                <label for="cleaning_rate_2">☆</label>
+                <input type="radio" wire:model="cleaning_rate" value="1" id="cleaning_rate_1">
+                <label for="cleaning_rate_1">☆</label>
             </div>
-            @error('rate')<span class="text-danger">{{$message}}</span>@enderror
+            @error('cleaning_rate')<span class="text-danger">{{$message}}</span>@enderror
+        </div>
+        <div class="col-md-4 mb-3 mb-md-0">
+            <label class="text-black" for="service_rate">Hizmet Kalitesi</label>
+            <div class="rating col-md-12">
+
+                <input type="radio" wire:model="service_rate" value="5" id="service_rate_5">
+                <label for="service_rate_5">☆</label>
+                <input type="radio" wire:model="service_rate" value="4" id="service_rate_4">
+                <label for="service_rate_4">☆</label>
+                <input type="radio" wire:model="service_rate" value="3" id="service_rate_3">
+                <label for="service_rate_3">☆</label>
+                <input type="radio" wire:model="service_rate" value="2" id="service_rate_2">
+                <label for="service_rate_2">☆</label>
+                <input type="radio" wire:model="service_rate" value="1" id="service_rate_1">
+                <label for="service_rate_1">☆</label>
+            </div>
+            @error('service_rate')<span class="text-danger">{{$message}}</span>@enderror
+        </div>
+        <div class="col-md-4 mb-3 mb-md-0">
+            <label class="text-black" for="price_performance_rate">Fiyat&Performans</label>
+            <div class="rating col-md-12">
+
+                <input type="radio" wire:model="price_performance_rate" value="5" id="price_performance_rate_5">
+                <label for="price_performance_rate_5">☆</label>
+                <input type="radio" wire:model="price_performance_rate" value="4" id="price_performance_rate_4">
+                <label for="price_performance_rate_4">☆</label>
+                <input type="radio" wire:model="price_performance_rate" value="3" id="price_performance_rate_3">
+                <label for="price_performance_rate_3">☆</label>
+                <input type="radio" wire:model="price_performance_rate" value="2" id="price_performance_rate_2">
+                <label for="price_performance_rate_2">☆</label>
+                <input type="radio" wire:model="price_performance_rate" value="1" id="price_performance_rate_1">
+                <label for="price_performance_rate_1">☆</label>
+            </div>
+            @error('price_performance_rate')<span class="text-danger">{{$message}}</span>@enderror
         </div>
         <div class="col-md-6">
             <label class="text-black" for="subject">Subject</label>

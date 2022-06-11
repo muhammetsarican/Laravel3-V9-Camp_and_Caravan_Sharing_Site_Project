@@ -1,3 +1,7 @@
+<?php
+$parentCategories = \App\Http\Controllers\HomeController::categorylist();
+// $setting = \App\Http\Controllers\HomeController::getsetting();
+?>
 <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar scrolled awake" id="probootstrap-navbar">
     <div class="container">
         <a class="navbar-brand" href="/">Kamp & Karavan</a>
@@ -12,6 +16,26 @@
                 <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
                 <li class="nav-item"><a class="nav-link" href="travel.html">Travel With Us</a></li>
                 <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                <ul class="main-menu">
+                    <li class="active-menu nav-item">
+                        <a href="#" class="nav-link">Kategoriler</a>
+                        {{-- {{\App\Http\Controllers\HomeController::get_role(\Illuminate\Support\Facades\Auth::user()->id)}} --}}
+                        <ul class="sub-menu">
+                            @foreach($parentCategories as $rs)
+                            <li>
+                              <a href="#" class="nav-link">
+                                {{$rs->title}}
+                              </a>
+                              <ul class="dropdown">
+                                @if(count($rs->children))
+                                    @include('user.category_tree',['children'=>$rs->children])
+                                @endif
+                            </ul>
+                          </li>
+                          @endforeach
+                        </ul>
+                    </li>
+                </ul>
                 @auth
                     <ul class="main-menu">
                         <li class="active-menu nav-item">

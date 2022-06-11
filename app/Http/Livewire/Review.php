@@ -10,7 +10,7 @@ use test\Mockery\MockClassWithIterableReturnTypeTest;
 
 class Review extends Component
 {
-    public $record, $subject, $review, $camp_id, $rate;
+    public $record, $subject, $review, $camp_id, $cleaning_rate, $service_rate, $price_performance_rate, $rate;
     public function mount($id)
     {
         $this->record=Camp::findOrFail($id);
@@ -27,21 +27,28 @@ class Review extends Component
         $this->IP=null;
         $this->review=null;
         $this->camp_id=null;
-        $this->rate=null;
+        $this->cleaning_rate=null;
+        $this->service_rate=null;
+        $this->price_performance_rate=null;
     }
     public function store()
     {
         $this->validate([
             'subject'=>'required|min:5',
             'review'=>'required|min:10',
-            'rate'=>'required',
+            'cleaning_rate'=>'required',
+            'service_rate'=>'required',
+            'price_performance_rate'=>'required',
         ]);
 
         \App\Models\Review::create([
             'camp_id'=>$this->camp_id,
             'user_id'=>Auth::id(),
             'IP'=>$_SERVER['REMOTE_ADDR'],
-            'rate'=>$this->rate,
+            'rate'=>($this->cleaning_rate+$this->service_rate+$this->price_performance_rate)/3,
+            'cleaning_rate'=>$this->cleaning_rate,
+            'service_rate'=>$this->service_rate,
+            'price_performance_rate'=>$this->price_performance_rate,
             'subject'=>$this->subject,
             'review'=>$this->review,
         ]);

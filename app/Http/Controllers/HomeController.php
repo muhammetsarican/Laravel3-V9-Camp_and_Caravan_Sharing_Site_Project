@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Camp;
+use App\Models\Category;
 use App\Models\Image;
 use App\Models\Review;
 use App\Models\User;
@@ -28,7 +29,11 @@ class HomeController extends Controller
     //         exit();
     //     }
     // }
-
+    public static function categorylist()
+    {
+        return Category::where('parent_id','=',0)->with('children')->get();
+    }
+    
     public function userLogin()
     {
         return view('user.login');

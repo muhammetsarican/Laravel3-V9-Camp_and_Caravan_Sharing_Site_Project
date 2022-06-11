@@ -55,48 +55,17 @@ Route::middleware('auth')->prefix('camper')->namespace('camper')->group(function
         Route::post('update/{id}', [\App\Http\Controllers\Camper\CampController::class, 'update'])->name('user_update_camp');
         Route::get('delete/{id}', [\App\Http\Controllers\Camper\CampController::class, 'destroy'])->name('user_delete_camp');
         Route::get('show', [\App\Http\Controllers\Camper\CampController::class, 'show'])->name('user_show_camp');
+
+        Route::get('category/{id}', [\App\Http\Controllers\Camper\CampController::class, 'campcategory'])->name('user_camp_category');
+        Route::post('category/store/{id}', [\App\Http\Controllers\Camper\CampController::class, 'campcategorystore'])->name('user_camp_category_add');
+        Route::get('category/delete/{id}', [\App\Http\Controllers\Camper\CampController::class, 'campcategorydelete'])->name('user_camp_category_delete');
     });
     //Image
     Route::prefix('image')->group(function () {
-        //  Route::get('/',[\App\Http\Controllers\ImageController::class,'index'])->name('user_treatments');
-        Route::get('create/{treatment_id}', [\App\Http\Controllers\ImageController::class, 'create'])->name('user_image_add');
-        Route::post('store/{treatment_id}', [\App\Http\Controllers\ImageController::class, 'store'])->name('user_image_store');
-        Route::get('delete/{id},{treatment_id}', [\App\Http\Controllers\ImageController::class, 'destroy'])->name('user_image_delete');
-        Route::get('show', [\App\Http\Controllers\ImageController::class, 'show'])->name('user_image_show');
-    });
-    //Order
-    Route::prefix('order')->group(function () {
-        Route::get('/', [\App\Http\Controllers\OrderController::class, 'index'])->name('user_orders');
-        Route::get('create/{id}', [\App\Http\Controllers\OrderController::class, 'create'])->name('user_order_add');
-        Route::post('store/{id}', [\App\Http\Controllers\OrderController::class, 'store'])->name('user_order_store');
-        Route::get('edit/{id}', [\App\Http\Controllers\OrderController::class, 'edit'])->name('user_order_edit');
-        Route::post('update/{id}', [\App\Http\Controllers\OrderController::class, 'update'])->name('user_order_update');
-        Route::get('delete/{id}', [\App\Http\Controllers\OrderController::class, 'destroy'])->name('user_order_delete');
-        Route::get('show', [\App\Http\Controllers\OrderController::class, 'show'])->name('user_order_show');
-    });
-    //Appointment
-    Route::prefix('appointment')->group(function () {
-        Route::get('/', [\App\Http\Controllers\AppointmentController::class, 'index'])->name('user_appointments');
-        Route::get('create', [\App\Http\Controllers\AppointmentController::class, 'create'])->name('user_appointment_add');
-        Route::post('store', [\App\Http\Controllers\AppointmentController::class, 'store'])->name('user_appointment_store');
-        Route::get('edit/{id}', [\App\Http\Controllers\AppointmentController::class, 'edit'])->name('user_appointment_edit');
-        Route::post('update/{id}', [\App\Http\Controllers\AppointmentController::class, 'update'])->name('user_appointment_update');
-        Route::get('delete/{id}', [\App\Http\Controllers\AppointmentController::class, 'destroy'])->name('user_appointment_delete');
-        Route::get('show', [\App\Http\Controllers\AppointmentController::class, 'show'])->name('user_appointment_show');
-    });
-    //Process
-    Route::prefix('process')->group(function () {
-        Route::get('/', [\App\Http\Controllers\ProcessController::class, 'index'])->name('user_processes');
-        Route::get('create', [\App\Http\Controllers\ProcessController::class, 'create'])->name('user_process_add');
-        Route::post('store', [\App\Http\Controllers\ProcessController::class, 'store'])->name('user_process_store');
-        Route::get('edit/{id}', [\App\Http\Controllers\ProcessController::class, 'edit'])->name('user_process_edit');
-        Route::post('update/{id}', [\App\Http\Controllers\ProcessController::class, 'update'])->name('user_process_update');
-        Route::get('delete/{id}', [\App\Http\Controllers\ProcessController::class, 'destroy'])->name('user_process_delete');
-        Route::get('show', [\App\Http\Controllers\ProcessController::class, 'show'])->name('user_process_show');
-
-        Route::get('/user/', [\App\Http\Controllers\ProcessController::class, 'indexuser'])->name('user_processes_user');
-        Route::get('edit/user/{id}', [\App\Http\Controllers\ProcessController::class, 'edituser'])->name('user_process_user_edit');
-        Route::post('update/user/{id}', [\App\Http\Controllers\ProcessController::class, 'updateuser'])->name('user_process_user_update');
+        Route::get('create/{camp_id}', [\App\Http\Controllers\Camper\ImageController::class, 'create'])->name('user_image_add');
+        Route::post('store/{camp_id}', [\App\Http\Controllers\Camper\ImageController::class, 'store'])->name('user_image_store');
+        Route::get('delete/{id},{camp_id}', [\App\Http\Controllers\Camper\ImageController::class, 'destroy'])->name('user_image_delete');
+        Route::get('show', [\App\Http\Controllers\Camper\ImageController::class, 'show'])->name('user_image_show');
     });
 
 });

@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Camper;
 
 use App\Http\Controllers\Controller;
 use App\Models\Camp;
+use App\Models\Camp_category;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 
 class CampController extends Controller
 {
@@ -41,6 +45,25 @@ class CampController extends Controller
     public function store(Request $request)
     {
         //
+        if ($request->input('camp_phone') != $request->input('camp_phone_validation')) {
+            return redirect()->back()->with('error', 'Telefon Numaraları Eşleşmiyor.');
+        } else {
+            $data = new Camp;
+            $data->name = $request->input('name');
+            $data->user_id = \Illuminate\Support\Facades\Auth::user()->id;
+            $data->have_you_been = $request->input('have_you_been');
+            $data->information_from = $request->input('information_from');
+            $data->operating_type = $request->input('operating_type');
+            $data->camp_phone = $request->input('camp_phone');
+            $data->address = $request->input('address');
+            $data->web_address = $request->input('web_address');
+            $data->location = $request->input('location');
+            $data->about_camp = $request->input('about_camp');
+            $data->status = $request->input('status');
+            $data->image=Storage::putFile('image',$request->file('image'));
+            $data->save();
+            return redirect()->route('user_camp')->with('success', 'Kayıt Başarıyla Eklendi.');
+        }
     }
 
     /**
@@ -52,6 +75,29 @@ class CampController extends Controller
     public function show(Camp $camp)
     {
         //
+    }
+
+    public function campcategory(Camp $camp, $id)
+    {
+        $data = Camp::find($id);
+        $datalist = Camp_category::all()->sortBy('category_id');
+        $category=Category::all();
+        return view('user.camp_categories', ['data' => $data, 'datalist' => $datalist, 'category'=>$category]);
+    }
+
+    public function campcategorystore(Request $request, Camp $camp, $id)
+    {
+        $data = new Camp_category();
+        $data->camp_id=$request->input('camp_id');
+        $data->category_id=$request->input('category_id');
+        $data->save();
+        return redirect()->back()->with('success', 'Kategori Başarıyla Eklendi.');
+    }
+
+    public function campcategorydelete($id)
+    {
+        Camp_category::destroy($id);
+        return redirect()->back()->with('success', 'Kategori Başarıyla Silindi.');
     }
 
     /**
@@ -74,9 +120,30 @@ class CampController extends Controller
      * @param  \App\Models\Camp  $camp
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Camp $camp)
+    public function update(Request $request, Camp $camp, $id)
     {
         //
+        if ($request->input('camp_phone') != $request->input('camp_phone_validation')) {
+            return redirect()->back()->with('error', 'Telefon Numaraları Eşleşmiyor.');
+        } else {
+            $data=Camp::find($id);
+            $data->name = $request->input('name');
+            $data->user_id = \Illuminate\Support\Facades\Auth::user()->id;
+            $data->have_you_been = $request->input('have_you_been');
+            $data->information_from = $request->input('information_from');
+            $data->operating_type = $request->input('operating_type');
+            $data->camp_phone = $request->input('camp_phone');
+            $data->address = $request->input('address');
+            $data->web_address = $request->input('web_address');
+            $data->location = $request->input('location');
+            $data->about_camp = $request->input('about_camp');
+            $data->status = $request->input('status');
+            if ($request->file('image') != null) {
+                $data->image = Storage::putFile('public/image', $request->file('image'));
+            }
+            $data->save();
+            return redirect()->back()->with('success','Kayıt Başarıyla Güncellendi.');
+        }
     }
 
     /**
@@ -85,8 +152,10 @@ class CampController extends Controller
      * @param  \App\Models\Camp  $camp
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Camp $camp)
+    public function destroy(Camp $camp, $id)
     {
         //
+        Camp::destroy($id);
+        return redirect()->back()->with('success','Kayıt Başarıyla Silindi.');
     }
 }
