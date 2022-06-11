@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('subject',150)->nullable();
             $table->string('review')->nullable();
             $table->string('IP',150)->nullable();
-            $table->integer('rate')->default('0');
+            $table->double('rate')->default('0');
             $table->string('status',150)->default('False');
             $table->timestamps();
         });

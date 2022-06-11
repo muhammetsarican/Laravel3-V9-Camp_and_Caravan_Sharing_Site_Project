@@ -18,7 +18,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+
     // public static function get_role($id)
     // {
     //     $user=User::find($id);
@@ -29,11 +29,34 @@ class HomeController extends Controller
     //         exit();
     //     }
     // }
+
+    public function getcamp(Request $request)
+    {
+        $search = $request->input('search');
+        $count = Camp::where('name', 'like', '%' . $search . '%')->get()->count();
+        if (empty($search)) {
+            return back();
+        } else {
+            if ($count == 1) {
+                $data = Camp::where('name', 'like', '%' . $search . '%')->first();
+                return redirect()->route('camp_detail', ['id' => $data->id]);
+            } else {
+                return redirect()->route('camplist', ['search' => $search]);
+            }
+        }
+    }
+
+    public function camplist($search)
+    {
+        $datalist = Camp::where('name', 'like', '%' . $search . '%')->get();
+        return view('user.search_camps', ['search' => $search, 'datalist' => $datalist]);
+    }
+
     public static function categorylist()
     {
-        return Category::where('parent_id','=',0)->with('children')->get();
+        return Category::where('parent_id', '=', 0)->with('children')->get();
     }
-    
+
     public function userLogin()
     {
         return view('user.login');
@@ -46,21 +69,21 @@ class HomeController extends Controller
 
     public function index()
     {
-        $datalist=Camp::all();
-        return view('user.index',['datalist'=>$datalist]);
+        $datalist = Camp::all();
+        return view('user.index', ['datalist' => $datalist]);
     }
 
     public function campdetail($id)
     {
-        $data=Camp::find($id);
-        $review=Review::where('camp_id',$id)->get();
-        $images=Image::where('camp_id',$id)->get();
-        $data=[
-            'review'=>$review,
-            'data'=>$data,
-            'image'=>$images,
+        $data = Camp::find($id);
+        $review = Review::where('camp_id', $id)->get();
+        $images = Image::where('camp_id', $id)->get();
+        $data = [
+            'review' => $review,
+            'data' => $data,
+            'image' => $images,
         ];
-        return view('user.camp_detail',$data);
+        return view('user.camp_detail', $data);
     }
     /**
      * Show the form for creating a new resource.
@@ -126,38 +149,39 @@ class HomeController extends Controller
     public function destroy($id)
     {
         //
-    }    
+    }
 
     public function editor()
     {
         return view('user.editors');
     }
 
-    public function adminlogin(){
+    public function adminlogin()
+    {
         return view('admin.login');
     }
     public function logincheck(Request $request)
     {
-        if($request->isMethod('post'))
-        {
-            $kullanici=$request->only('email','password');
-            if(Auth::attempt($kullanici)){
+        if ($request->isMethod('post')) {
+            $kullanici = $request->only('email', 'password');
+            if (Auth::attempt($kullanici)) {
                 $request->session()->regenerate();
                 return redirect()->route('admin_home')/*->intended('admin')*/;
             }
-            return back()->withErrors(['email'=>'The provided credentials do not match our records']);
-        }
-        else {
+            return back()->withErrors(['email' => 'The provided credentials do not match our records']);
+        } else {
             return view('admin/login');
         }
     }
-    public function adminlogout(Request $veri){
+    public function adminlogout(Request $veri)
+    {
         Auth::logout();
         $veri->session()->invalidate();
         $veri->session()->regenerateToken();
         return redirect()->route('admin_login');
     }
-    public function userlogout(Request $veri){
+    public function userlogout(Request $veri)
+    {
         Auth::logout();
         $veri->session()->invalidate();
         $veri->session()->regenerateToken();

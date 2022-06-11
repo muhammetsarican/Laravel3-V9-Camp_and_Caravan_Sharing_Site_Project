@@ -32,6 +32,9 @@ Route::get('/admin/logout', [\App\Http\Controllers\HomeController::class, 'admin
 
 
 Route::get('/editörlerimiz', [\App\Http\Controllers\HomeController::class, 'editor'])->name('editors');
+Route::post('/getcamp', [\App\Http\Controllers\HomeController::class, 'getcamp'])->name('getcamp');
+Route::get('/camplist/{search}', [\App\Http\Controllers\HomeController::class, 'camplist'])->name('camplist');
+
 
 Route::get('/admin/show/editor', function () {
     return view('admin.show_editors');

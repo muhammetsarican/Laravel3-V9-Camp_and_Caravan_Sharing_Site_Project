@@ -742,7 +742,8 @@ a {
     right: 0 !important;
 }
 
-.owl-carousel .owl-dots {
+
+/* .owl-carousel .owl-dots {
     text-align: center;
 }
 
@@ -756,7 +757,7 @@ a {
 
 .owl-carousel .owl-dots .owl-dot.active {
     background: #00CA4C;
-}
+} */
 
 .probootstrap-date-wrap {
     position: relative;
@@ -961,4 +962,94 @@ ul {
     p {
         font-size: 12px
     }
+}
+
+
+/*---------------------------------------------*/
+
+.alt-menu {
+    width: 10%;
+    position: relative;
+    float: left;
+}
+
+#acilirmenu {
+    display: hidden;
+    /* Chech boxumuzu buradan görünmez kılıyoruz. */
+}
+
+#menum {
+    display: none;
+    position: absolute;
+    width: 100%;
+}
+
+#acilirmenu:checked+#menum {
+    display: block;
+}
+
+
+/* */
+
+#acilirmenu2 {
+    display: none;
+    /* Chech boxumuzu buradan görünmez kılıyoruz. */
+}
+
+#menum2 {
+    display: none;
+}
+
+#acilirmenu2:checked+#menum2 {
+    display: block;
+}
+
+
+/*---------------------------------------------*/
+
+.show-search .icon-search,
+.show-filter .icon-filter {
+    display: none;
+}
+
+.show-search .icon-close-search,
+.show-filter .icon-close-filter {
+    display: unset;
+}
+
+.show-search,
+.show-filter {
+    background-color: #f2f2f2;
+    border-color: #e7e7e7;
+    position: relative;
+}
+
+.show-search::after,
+.show-filter::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 14px;
+    height: 14px;
+    background-color: #f2f2f2;
+    border-left: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+    transform-origin: center center;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    left: calc(50% - 7px);
+    bottom: -8px;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.show-search:hover:after,
+.show-filter:hover:after {
+    background-color: #717fe0;
+    border-color: #717fe0;
 }

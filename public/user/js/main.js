@@ -160,9 +160,9 @@ $(document).ready(function($) {
 
         $('.js-owl-carousel-3').owlCarousel({
             loop: false,
-            margin: 20,
+            margin: 5,
             nav: true,
-            stagePadding: 0,
+            stagePadding: 25,
             navText: ["<span class='ion-chevron-left probootstrap_color-light-opacity-9'></span>", "<span class='ion-chevron-right probootstrap_color-light-opacity-9'></span>"],
             responsive: {
                 0: {
