@@ -70,88 +70,90 @@ Route::middleware('auth')->prefix('camper')->namespace('camper')->group(function
         Route::get('delete/{id},{camp_id}', [\App\Http\Controllers\Camper\ImageController::class, 'destroy'])->name('user_image_delete');
         Route::get('show', [\App\Http\Controllers\Camper\ImageController::class, 'show'])->name('user_image_show');
     });
-
 });
 
 Route::middleware('auth')->prefix('admin')->group(function () {
     // Route::middleware('admin')->group(function () {
 
-        Route::get('/', [\App\Http\Controllers\admin\HomeController::class, 'index'])->name('admin_home');
-        //Category
-        Route::prefix('category')->group(function () {
-            Route::get('/', [\App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('admin_category');
-            Route::get('add', [\App\Http\Controllers\Admin\CategoryController::class, 'add'])->name('admin_add_category');
-            Route::post('create', [\App\Http\Controllers\Admin\CategoryController::class, 'create'])->name('admin_create_category');
-            Route::get('edit/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('admin_edit_category');
-            Route::post('update/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('admin_update_category');
-            Route::get('delete/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'destroy'])->name('admin_delete_category');
-            Route::get('show', [\App\Http\Controllers\Admin\CategoryController::class, 'show'])->name('admin_category_show');
-        });
-        //Camp
-        Route::prefix('camp')->group(function () {
-            Route::get('/', [\App\Http\Controllers\Admin\CampController::class, 'index'])->name('admin_camp');
-            Route::get('add', [\App\Http\Controllers\Admin\CampController::class, 'add'])->name('admin_add_camp');
-            Route::post('create', [\App\Http\Controllers\Admin\CampController::class, 'create'])->name('admin_create_camp');
-            Route::post('store', [\App\Http\Controllers\Admin\CampController::class, 'store'])->name('admin_camp_store');
-            Route::get('edit/{id}', [\App\Http\Controllers\Admin\CampController::class, 'edit'])->name('admin_edit_camp');
-            Route::post('update/{id}', [\App\Http\Controllers\Admin\CampController::class, 'update'])->name('admin_update_camp');
-            Route::get('delete/{id}', [\App\Http\Controllers\Admin\CampController::class, 'destroy'])->name('admin_delete_camp');
-            Route::get('show', [\App\Http\Controllers\Admin\CampController::class, 'show'])->name('admin_camp_show');
+    Route::get('/', [\App\Http\Controllers\admin\HomeController::class, 'index'])->name('admin_home');
+    //Category
+    Route::prefix('category')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('admin_category');
+        Route::get('add', [\App\Http\Controllers\Admin\CategoryController::class, 'add'])->name('admin_add_category');
+        Route::post('create', [\App\Http\Controllers\Admin\CategoryController::class, 'create'])->name('admin_create_category');
+        Route::get('edit/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('admin_edit_category');
+        Route::post('update/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('admin_update_category');
+        Route::get('delete/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'destroy'])->name('admin_delete_category');
+        Route::get('show', [\App\Http\Controllers\Admin\CategoryController::class, 'show'])->name('admin_category_show');
+    });
+    //Camp
+    Route::prefix('camp')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\CampController::class, 'index'])->name('admin_camp');
+        Route::get('add', [\App\Http\Controllers\Admin\CampController::class, 'add'])->name('admin_add_camp');
+        Route::post('create', [\App\Http\Controllers\Admin\CampController::class, 'create'])->name('admin_create_camp');
+        Route::post('store', [\App\Http\Controllers\Admin\CampController::class, 'store'])->name('admin_camp_store');
+        Route::get('edit/{id}', [\App\Http\Controllers\Admin\CampController::class, 'edit'])->name('admin_edit_camp');
+        Route::post('update/{id}', [\App\Http\Controllers\Admin\CampController::class, 'update'])->name('admin_update_camp');
+        Route::get('delete/{id}', [\App\Http\Controllers\Admin\CampController::class, 'destroy'])->name('admin_delete_camp');
+        Route::get('show', [\App\Http\Controllers\Admin\CampController::class, 'show'])->name('admin_camp_show');
 
 
-            Route::get('category/{id}', [\App\Http\Controllers\Admin\CampController::class, 'campcategory'])->name('camp_category');
-            Route::post('category/store/{id}', [\App\Http\Controllers\Admin\CampController::class, 'campcategorystore'])->name('camp_category_add');
-            Route::get('category/delete/{id}', [\App\Http\Controllers\Admin\CampController::class, 'campcategorydelete'])->name('camp_category_delete');
-        });
-        //Editor
-        Route::prefix('editor')->group(function () {
-            Route::get('/', [\App\Http\Controllers\Admin\EditorController::class, 'index'])->name('admin_editor');
-            Route::get('add', [\App\Http\Controllers\Admin\EditorController::class, 'add'])->name('admin_add_editor');
-            Route::post('create', [\App\Http\Controllers\Admin\EditorController::class, 'create'])->name('admin_create_editor');
-            Route::post('store/{id}', [\App\Http\Controllers\Admin\EditorController::class, 'store'])->name('admin_editor_store');
-            Route::get('edit/{id}', [\App\Http\Controllers\Admin\EditorController::class, 'edit'])->name('admin_edit_editor');
-            Route::post('update/{id}', [\App\Http\Controllers\Admin\EditorController::class, 'update'])->name('admin_update_editor');
-            Route::get('delete/{id}', [\App\Http\Controllers\Admin\EditorController::class, 'destroy'])->name('admin_delete_editor');
-            Route::get('show', [\App\Http\Controllers\Admin\EditorController::class, 'show'])->name('admin_editor_show');
-        });
-        //User
-        Route::prefix('user')->group(function () {
-            Route::get('/', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin_user');
-            Route::get('create/{id}', [\App\Http\Controllers\Admin\UserController::class, 'create'])->name('admin_user_add');
-            Route::post('store/{id}', [\App\Http\Controllers\Admin\UserController::class, 'store'])->name('admin_user_store');
-            Route::get('edit/{id}', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('admin_edit_user');
-            Route::post('update/{id}', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin_update_user');
-            Route::get('delete/{id}', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('admin_delete_user');
-            Route::get('show/{id}', [\App\Http\Controllers\Admin\UserController::class, 'show'])->name('admin_user_show');
+        Route::get('category/{id}', [\App\Http\Controllers\Admin\CampController::class, 'campcategory'])->name('camp_category');
+        Route::post('category/store/{id}', [\App\Http\Controllers\Admin\CampController::class, 'campcategorystore'])->name('camp_category_add');
+        Route::get('category/delete/{id}', [\App\Http\Controllers\Admin\CampController::class, 'campcategorydelete'])->name('camp_category_delete');
+    });
+    //Editor
+    Route::prefix('editor')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\EditorController::class, 'index'])->name('admin_editor');
+        Route::get('add', [\App\Http\Controllers\Admin\EditorController::class, 'add'])->name('admin_add_editor');
+        Route::post('create', [\App\Http\Controllers\Admin\EditorController::class, 'create'])->name('admin_create_editor');
+        Route::post('store/{id}', [\App\Http\Controllers\Admin\EditorController::class, 'store'])->name('admin_editor_store');
+        Route::get('edit/{id}', [\App\Http\Controllers\Admin\EditorController::class, 'edit'])->name('admin_edit_editor');
+        Route::post('update/{id}', [\App\Http\Controllers\Admin\EditorController::class, 'update'])->name('admin_update_editor');
+        Route::get('delete/{id}', [\App\Http\Controllers\Admin\EditorController::class, 'destroy'])->name('admin_delete_editor');
+        Route::get('show', [\App\Http\Controllers\Admin\EditorController::class, 'show'])->name('admin_editor_show');
+    });
+    //User
+    Route::prefix('user')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin_user');
+        Route::get('create/{id}', [\App\Http\Controllers\Admin\UserController::class, 'create'])->name('admin_user_add');
+        Route::post('store/{id}', [\App\Http\Controllers\Admin\UserController::class, 'store'])->name('admin_user_store');
+        Route::get('edit/{id}', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('admin_edit_user');
+        Route::post('update/{id}', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin_update_user');
+        Route::get('delete/{id}', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('admin_delete_user');
+        Route::get('show/{id}', [\App\Http\Controllers\Admin\UserController::class, 'show'])->name('admin_user_show');
 
-            Route::get('role/{id}', [\App\Http\Controllers\Admin\UserController::class, 'userrole'])->name('user_role');
-            Route::post('role/store/{id}', [\App\Http\Controllers\Admin\UserController::class, 'userrolesstore'])->name('user_role_add');
-            Route::get('role/delete/{userid}/{roleid}', [\App\Http\Controllers\Admin\UserController::class, 'userrolesdelete'])->name('user_role_delete');
-        });
-        //Image
-        Route::prefix('image')->group(function () {
-            Route::get('create/{camp_id}', [\App\Http\Controllers\Admin\ImageController::class, 'create'])->name('admin_image_add');
-            Route::post('store/{camp_id}', [\App\Http\Controllers\Admin\ImageController::class, 'store'])->name('admin_image_store');
-            Route::get('delete/{id},{camp_id}', [\App\Http\Controllers\Admin\ImageController::class, 'destroy'])->name('admin_image_delete');
-            Route::get('show', [\App\Http\Controllers\Admin\ImageController::class, 'show'])->name('admin_image_show');
-        });
-        //Message
-        Route::prefix('messages')->group(function () {
-            Route::get('/{status}', [\App\Http\Controllers\Admin\MessageController::class, 'index'])->name('admin_message');
-            Route::get('edit/{id}', [\App\Http\Controllers\Admin\MessageController::class, 'edit'])->name('admin_message_edit');
-            Route::post('update/{id}', [\App\Http\Controllers\Admin\MessageController::class, 'update'])->name('admin_message_update');
-            Route::get('delete/{id}', [\App\Http\Controllers\Admin\MessageController::class, 'destroy'])->name('admin_message_delete');
-        });
-        //Review
-        Route::prefix('review')->group(function () {
-            Route::get('/', [\App\Http\Controllers\Admin\ReviewController::class, 'index'])->name('admin_review');
-            Route::get('create', [\App\Http\Controllers\Admin\ReviewController::class, 'create'])->name('admin_add_review');
-            Route::post('store', [\App\Http\Controllers\Admin\ReviewController::class, 'store'])->name('admin_store_review');
-            Route::get('edit/{id}', [\App\Http\Controllers\Admin\ReviewController::class, 'edit'])->name('admin_edit_review');
-            Route::post('update/{id}', [\App\Http\Controllers\Admin\ReviewController::class, 'update'])->name('admin_update_review');
-            Route::get('delete/{id}', [\App\Http\Controllers\Admin\ReviewController::class, 'destroy'])->name('admin_delete_review');
-            Route::get('show', [\App\Http\Controllers\Admin\ReviewController::class, 'show'])->name('admin_show_review');
-        });
+        Route::get('role/{id}', [\App\Http\Controllers\Admin\UserController::class, 'userrole'])->name('user_role');
+        Route::post('role/store/{id}', [\App\Http\Controllers\Admin\UserController::class, 'userrolesstore'])->name('user_role_add');
+        Route::get('role/delete/{userid}/{roleid}', [\App\Http\Controllers\Admin\UserController::class, 'userrolesdelete'])->name('user_role_delete');
+    });
+    //Image
+    Route::prefix('image')->group(function () {
+        Route::get('create/{camp_id}', [\App\Http\Controllers\Admin\ImageController::class, 'create'])->name('admin_image_add');
+        Route::post('store/{camp_id}', [\App\Http\Controllers\Admin\ImageController::class, 'store'])->name('admin_image_store');
+        Route::get('delete/{id},{camp_id}', [\App\Http\Controllers\Admin\ImageController::class, 'destroy'])->name('admin_image_delete');
+        Route::get('show', [\App\Http\Controllers\Admin\ImageController::class, 'show'])->name('admin_image_show');
+    });
+    //Blog
+    Route::prefix('blog')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\BlogController::class, 'index'])->name('admin_blog');
+        Route::get('create', [\App\Http\Controllers\Admin\BlogController::class, 'create'])->name('admin_add_blog');
+        Route::post('store', [\App\Http\Controllers\Admin\BlogController::class, 'store'])->name('admin_store_blog');
+        Route::get('edit/{id}', [\App\Http\Controllers\Admin\BlogController::class, 'edit'])->name('admin_edit_blog');
+        Route::post('update/{id}', [\App\Http\Controllers\Admin\BlogController::class, 'update'])->name('admin_update_blog');
+        Route::get('delete/{id}', [\App\Http\Controllers\Admin\BlogController::class, 'destroy'])->name('admin_delete_blog');
+        Route::get('show/{id}', [\App\Http\Controllers\Admin\BlogController::class, 'show'])->name('admin_show_blog');
+    });
+    //Review
+    Route::prefix('review')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\ReviewController::class, 'index'])->name('admin_review');
+        Route::get('create', [\App\Http\Controllers\Admin\ReviewController::class, 'create'])->name('admin_add_review');
+        Route::post('store', [\App\Http\Controllers\Admin\ReviewController::class, 'store'])->name('admin_store_review');
+        Route::get('edit/{id}', [\App\Http\Controllers\Admin\ReviewController::class, 'edit'])->name('admin_edit_review');
+        Route::post('update/{id}', [\App\Http\Controllers\Admin\ReviewController::class, 'update'])->name('admin_update_review');
+        Route::get('delete/{id}', [\App\Http\Controllers\Admin\ReviewController::class, 'destroy'])->name('admin_delete_review');
+        Route::get('show', [\App\Http\Controllers\Admin\ReviewController::class, 'show'])->name('admin_show_review');
+    });
     // });
 });
 
@@ -166,6 +168,6 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return redirect()->back();
+        return redirect()->route('user_home');
     })->name('dashboard');
 });

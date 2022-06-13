@@ -23,4 +23,9 @@ class Camp extends Model
     {
         return $this->hasMany(Review::class);
     }
+    
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class);
+    }
 }

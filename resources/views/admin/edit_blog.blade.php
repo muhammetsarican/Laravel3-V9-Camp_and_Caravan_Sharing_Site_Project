@@ -35,7 +35,7 @@
                 </div>
                 <div class="card-body">
                     @include('user.message')
-                    <form role="form" action="{{ route('admin_update_camp', ['id' => $data->id]) }}" method="post"
+                    <form role="form" action="{{ route('admin_update_blog', ['id' => $data->id]) }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
@@ -44,57 +44,36 @@
                                 <p class="form-control">{{ $data->id }}</p>
                             </div>
                             <div class="form-group">
-                                <label>İsim</label>
-                                <input type="text" name="name" class="form-control" value="{{ $data->name }}">
+                                <label>Kamp</label>
+                                <select class="form-control select2" name="camp_id" style="width: 100%">
+                                    <option value="0">Seçiniz...</option>
+                                    @foreach ($datalist as $rs)
+                                        <option @if($data->camp_id==$rs->id)selected="selected"@endif value="{{ $rs->id }}">
+                                            {{ $rs->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <hr>
-                            <div class="row form-group">
-                                <div class="col-md-6 mb-3 mb-md-0">
-                                    <label>Daha önce bulundunuz mu?</label><br>
-                                    <input type="radio" name="have_you_been" value="Evet">&nbsp;Evet<br>
-                                    <input type="radio" name="have_you_been" value="Hayır">&nbsp;Hayır
-                                </div>
-                                <div class="col-md-6">
-                                    <label>İşletme Tipi</label><br>
-                                    <input type="radio" name="operating_type" value="Kamu İşletmesi">&nbsp;Kamu
-                                    İşletmesi<br>
-                                    <input type="radio" name="operating_type" value="Özel İşletme">&nbsp;Özel İşletme
-                                </div>
-                            </div>
-                            <hr>
                             <div class="form-group">
-                                <label>Kamp hakkında bilgiyi nasıl edindiniz?</label>
-                                <textarea type="text" name="information_from" class="form-control"> {{ $data->information_from }}</textarea>
+                                <label>Başlık</label>
+                                <input type="text" name="title" class="form-control" value="{{ $data->title }}">
                             </div>
-                            <div class="row form-group">
-                                <div class="col-md-6 mb-3 mb-md-0">
-                                    <label class="text-black" for="fname">Kamp Telefonu</label>
-                                    <input type="text" id="fname" class="form-control" name="camp_phone"
-                                        value="{{ $data->camp_phone }}">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="text-black" for="lname">Kamp Telefonu Tekrar</label>
-                                    <input type="text" id="lname" class="form-control" name="camp_phone_validation"
-                                        value="{{ $data->camp_phone }}">
-                                </div>
+                            <div class="form-group">
+                                <label>Blog Yazısı</label>
+                                <textarea type="text" name="post" class="form-control"> {{ $data->post }}</textarea>
                             </div>
 
                             <div class="form-group">
-                                <label>Adres</label>
-                                <textarea type="text" name="address" class="form-control">{{ $data->address }}</textarea>
+                                <label>Anahtar Kelimeler</label>
+                                <input type="text" name="keywords" class="form-control" value="{{ $data->keywords }}">
                             </div>
                             <div class="form-group">
-                                <label>İnternet Adresi</label>
-                                <input type="text" name="web_address" class="form-control"
-                                    value="{{ $data->web_address }}">
+                                <label>Tanım</label>
+                                <input type="text" name="description" class="form-control" value="{{ $data->description }}">
                             </div>
                             <div class="form-group">
-                                <label>Konum</label>
-                                <textarea type="text" name="location" class="form-control">{{ $data->location }}</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Kamp Hakkında</label>
-                                <textarea type="text" name="about_camp" class="form-control">{{ $data->about_camp }}</textarea>
+                                <label>Detay</label>
+                                <textarea type="text" name="detail" class="form-control"> {{ $data->detail }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Resim</label>

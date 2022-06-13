@@ -1,46 +1,52 @@
 @extends('layouts.home')
 @section('content')
-
-    <section class="probootstrap_section" id="section-city-guides" style="background-image: url('{{asset('user')}}/images/bg_1.jpg');">
-        <div class="container">
-            <div class="row text-center mb-10 probootstrap-animate fadeInUp probootstrap-animated">
-                <div class="col-md-12">
-                    <h2 class="display-4 border-bottom probootstrap-section-heading">Editörlerimiz</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6 probootstrap-animate mb-3 fadeInUp probootstrap-animated">
-                    <a href="#" class="probootstrap-thumbnail">
-                        <img src="{{ asset('user') }}/images/img_1.jpg" alt="Free Template by ProBootstrap.com"
-                            class="img-fluid">
-                        <div class="probootstrap-text">
-                            <h3>Buena</h3>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-6 probootstrap-animate mb-3 fadeInUp probootstrap-animated">
-                    <a href="#" class="probootstrap-thumbnail">
-                        <img src="{{ asset('user') }}/images/img_2.jpg" alt="Free Template by ProBootstrap.com"
-                            class="img-fluid">
-                        <h3>Road</h3>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-6 probootstrap-animate mb-3 fadeInUp probootstrap-animated">
-                    <a href="#" class="probootstrap-thumbnail">
-                        <img src="{{ asset('user') }}/images/img_3.jpg" alt="Free Template by ProBootstrap.com"
-                            class="img-fluid">
-                        <h3>Australia</h3>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-6 probootstrap-animate mb-3 fadeInUp probootstrap-animated">
-                    <a href="#" class="probootstrap-thumbnail">
-                        <img src="{{ asset('user') }}/images/img_4.jpg" alt="Free Template by ProBootstrap.com"
-                            class="img-fluid">
-                        <h3>Japan</h3>
-                    </a>
-                </div>
+    <section class="probootstrap-cover overflow-hidden relative"
+        style="background-image: url('http://127.0.0.1:8000/user/images/bg_1.jpg');" data-stellar-background-ratio="0.5"
+        id="section-user">
+        <div class="overlay"></div>
+        <div class="row align-items-center text-center">
+            <div class="col-md">
+                <h2 class="heading mb-2 display-4 font-light probootstrap-animate fadeInUp probootstrap-animated">
+                    Editörlerimiz
+                </h2>
 
             </div>
         </div>
+
+
+    </section>
+
+    <section class="probootstrap_section">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8">
+                    @foreach ($datalist as $dl)
+                        <div class="col-md-4 probootstrap-animate mb-3 fadeInUp probootstrap-animated">
+                            <a href="#" class="probootstrap-thumbnail">
+                                <img src="{{ \Illuminate\Support\Facades\Storage::url($dl->photo) }}" alt=""
+                                    class="img-fluid">
+                                <div class="probootstrap-text text-center">
+                                    <h6>{{ $dl->name }}</h6>
+
+                                    <h6>Katkı Sayısı: {{ $dl->number_of_contributions }}</h6>
+
+                                    <a href="{{ $dl->instagram }}"><img
+                                            src="{{ asset('admin') }}/img/icons/instagram.png" height="25">
+                                    </a>
+                                    <a href="{{ $dl->youtube }}"><img src="{{ asset('admin') }}/img/icons/youtube.png"
+                                            height="25">
+                                    </a>
+                                </div>
+
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>
     </section>
 @endsection

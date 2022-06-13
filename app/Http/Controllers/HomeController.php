@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Camp;
 use App\Models\Category;
+use App\Models\Editors;
 use App\Models\Image;
 use App\Models\Review;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PDO;
 
 class HomeController extends Controller
 {
@@ -18,17 +21,29 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public static function get_city($title)
+    {  
+        $parent=Category::where('title',$title)->get();
+        $cities=array('city_id'=>array(),'city_title'=>array());
+        foreach($parent as $pr){
+            $category=Category::where('parent_id', $pr->id)->get();
+            foreach($category as $ct){
+                array_push($cities['city_title'], $ct->title);
+                array_push($cities['city_id'], $ct->id);
+                // print_r($ct->title);
+                // exit();
+            }
 
-    // public static function get_role($id)
-    // {
-    //     $user=User::find($id);
+        }
+        return $cities;
+    }
 
-    //     if ($user->roles->where('name','admin')->exists())
-    //     {
-    //         print_r('TRUE');
-    //         exit();
-    //     }
-    // }
+    public static function get_parent($title)
+    {  
+        $parent=Category::where('title',$title)->first();
+ 
+        return Category::where('parent_id', $parent->id)->get();
+    }
 
     public function getcamp(Request $request)
     {
@@ -69,8 +84,10 @@ class HomeController extends Controller
 
     public function index()
     {
+        $blog=Blog::all();
+        $review=Review::all();
         $datalist = Camp::all();
-        return view('user.index', ['datalist' => $datalist]);
+        return view('user.index', ['datalist' => $datalist,'review'=>$review,'blog'=>$blog]);
     }
 
     public function campdetail($id)
@@ -153,7 +170,8 @@ class HomeController extends Controller
 
     public function editor()
     {
-        return view('user.editors');
+        $datalist=Editors::all();
+        return view('user.editors',['datalist'=>$datalist]);
     }
 
     public function adminlogin()
