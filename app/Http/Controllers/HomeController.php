@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Camp;
+use App\Models\Camp_category;
 use App\Models\Category;
 use App\Models\Editors;
+use App\Models\Filter;
 use App\Models\Image;
 use App\Models\Review;
 use App\Models\User;
@@ -21,28 +23,64 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public static function get_city($title)
-    {  
-        $parent=Category::where('title',$title)->get();
-        $cities=array('city_id'=>array(),'city_title'=>array());
-        foreach($parent as $pr){
-            $category=Category::where('parent_id', $pr->id)->get();
-            foreach($category as $ct){
+    {
+        $parent = Category::where('title', $title)->get();
+        $cities = array('city_id' => array(), 'city_title' => array());
+        foreach ($parent as $pr) {
+            $category = Category::where('parent_id', $pr->id)->get();
+            foreach ($category as $ct) {
                 array_push($cities['city_title'], $ct->title);
                 array_push($cities['city_id'], $ct->id);
                 // print_r($ct->title);
                 // exit();
             }
-
         }
         return $cities;
     }
 
     public static function get_parent($title)
-    {  
-        $parent=Category::where('title',$title)->first();
- 
+    {
+        $parent = Category::where('title', $title)->first();
+
         return Category::where('parent_id', $parent->id)->get();
+    }
+
+    public function filter(Request $request)
+    {
+        // $data_bool = 'false';
+        // $data = DB::table('camp_categories')
+        //     ->select('category_id')
+        //     ->orWhere([
+        //         ['camp_id', 1],
+        //     ])
+        //     ->get();
+        // foreach ($data as $dt) {
+        //     for ($i = 0; $i <= 6; $i++) {
+        //         if ($request->input('filter_' . $i) != 0) {
+        //             if ($dt->category_id == $request->input('filter_' . $i)) {
+        //                 $data_bool = 'true';
+        //                 continue;
+        //             } else {
+        //                 $data_bool = 'false';
+        //             }
+        //         }
+        //     }
+        // }
+        // print_r($data_bool);
+        // exit();
+
+        for ($i = 0; $i <= 6; $i++) {
+            if ($request->input('filter_' . $i) != 0) {
+                $data = new Filter;
+                $data->IP = $_SERVER["REMOTE_ADDR"];
+                $data->category_id = $request->input('filter_' . $i);
+                $data->save();
+            }
+        }
+        print_r('Saved');
+        exit();
     }
 
     public function getcamp(Request $request)
@@ -84,10 +122,10 @@ class HomeController extends Controller
 
     public function index()
     {
-        $blog=Blog::all();
-        $review=Review::all();
+        $blog = Blog::all();
+        $review = Review::all();
         $datalist = Camp::all();
-        return view('user.index', ['datalist' => $datalist,'review'=>$review,'blog'=>$blog]);
+        return view('user.index', ['datalist' => $datalist, 'review' => $review, 'blog' => $blog]);
     }
 
     public function campdetail($id)
@@ -170,8 +208,14 @@ class HomeController extends Controller
 
     public function editor()
     {
-        $datalist=Editors::all();
-        return view('user.editors',['datalist'=>$datalist]);
+        $datalist = Editors::all();
+        return view('user.editors', ['datalist' => $datalist]);
+    }
+
+    public function blog()
+    {
+        $datalist = Blog::all();
+        return view('user.blog', ['datalist' => $datalist]);
     }
 
     public function adminlogin()

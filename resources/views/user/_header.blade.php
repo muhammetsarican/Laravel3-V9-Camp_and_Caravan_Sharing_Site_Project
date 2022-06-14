@@ -14,7 +14,7 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
                 <li class="nav-item active"><a class="nav-link" href="{{ route('user_home') }}">Anasayfa</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('editors') }}">Editörlerimiz</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('editors') }}">Blog</a>
+                <li class="nav-item"><a class="nav-link" href="{{ route('blog') }}">Blog</a>
                 </li>
                 {{-- <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
                 <li class="nav-item"><a class="nav-link" href="travel.html">Travel With Us</a></li>

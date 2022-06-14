@@ -32,6 +32,9 @@ Route::get('/admin/logout', [\App\Http\Controllers\HomeController::class, 'admin
 
 
 Route::get('/editörlerimiz', [\App\Http\Controllers\HomeController::class, 'editor'])->name('editors');
+Route::get('/blog', [\App\Http\Controllers\HomeController::class, 'blog'])->name('blog');
+Route::post('/filter', [\App\Http\Controllers\HomeController::class, 'filter'])->name('filter');
+
 Route::post('/getcamp', [\App\Http\Controllers\HomeController::class, 'getcamp'])->name('getcamp');
 Route::get('/camplist/{search}', [\App\Http\Controllers\HomeController::class, 'camplist'])->name('camplist');
 
@@ -69,6 +72,16 @@ Route::middleware('auth')->prefix('camper')->namespace('camper')->group(function
         Route::post('store/{camp_id}', [\App\Http\Controllers\Camper\ImageController::class, 'store'])->name('user_image_store');
         Route::get('delete/{id},{camp_id}', [\App\Http\Controllers\Camper\ImageController::class, 'destroy'])->name('user_image_delete');
         Route::get('show', [\App\Http\Controllers\Camper\ImageController::class, 'show'])->name('user_image_show');
+    });
+    //Blog
+    Route::prefix('blog')->group(function () {
+        Route::get('/', [\App\Http\Controllers\BlogController::class, 'index'])->name('user_blog');
+        Route::get('create', [\App\Http\Controllers\BlogController::class, 'create'])->name('user_add_blog');
+        Route::post('store', [\App\Http\Controllers\BlogController::class, 'store'])->name('user_store_blog');
+        Route::get('edit/{id}', [\App\Http\Controllers\BlogController::class, 'edit'])->name('user_edit_blog');
+        Route::post('update/{id}', [\App\Http\Controllers\BlogController::class, 'update'])->name('user_update_blog');
+        Route::get('delete/{id}', [\App\Http\Controllers\BlogController::class, 'destroy'])->name('user_delete_blog');
+        Route::get('show/{id}', [\App\Http\Controllers\BlogController::class, 'show'])->name('user_show_blog');
     });
 });
 

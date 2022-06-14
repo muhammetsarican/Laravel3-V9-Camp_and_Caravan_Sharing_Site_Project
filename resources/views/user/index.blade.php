@@ -144,13 +144,13 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
             <div class="row">
                 <div class="col-md-3">
                     <h3>Filtreler</h3>
-                    <form role="form" action="{{ route('user_store_camp') }}" method="post" enctype="multipart/form-data">
+                    <form role="form" action="{{ route('filter') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
 
                             <div class="form-group">
                                 <label>Bölge</label>
-                                <select class="form-control select2" name="parent_id" style="width: 100%">
+                                <select class="form-control select2" name="filter_0" style="width: 100%">
                                     <option value="0" selected="selected">Seçiniz...</option>
                                     <?php
                                     $bölge = \App\Http\Controllers\HomeController::get_parent('Bölge');
@@ -164,7 +164,7 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
                             </div>
                             <div class="form-group">
                                 <label>Şehir</label>
-                                <select class="form-control select2" name="parent_id" style="width: 100%">
+                                <select class="form-control select2" name="filter_1" style="width: 100%">
                                     <option value="0" selected="selected">Seçiniz...</option>
                                     <?php
                                     $sehir = \App\Http\Controllers\HomeController::get_city('Şehir');
@@ -178,7 +178,7 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
                             </div>
                             <div class="form-group">
                                 <label>Kamp Tipi</label>
-                                <select class="form-control select2" name="parent_id" style="width: 100%">
+                                <select class="form-control select2" name="filter_2" style="width: 100%">
                                     <option value="0" selected="selected">Seçiniz...</option>
                                     <?php
                                     $kamp_tipi = \App\Http\Controllers\HomeController::get_parent('Kamp Tipi');
@@ -192,7 +192,7 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
                             </div>
                             <div class="form-group">
                                 <label>Konaklama İmkanı</label>
-                                <select class="form-control select2" name="parent_id" style="width: 100%">
+                                <select class="form-control select2" name="filter_3" style="width: 100%">
                                     <option value="0" selected="selected">Seçiniz...</option>
                                     <?php
                                     $konaklama_imkani = \App\Http\Controllers\HomeController::get_parent('Konaklama İmkanı');
@@ -206,7 +206,7 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
                             </div>
                             <div class="form-group">
                                 <label>Minimum Konaklama Süresi</label>
-                                <select class="form-control select2" name="parent_id" style="width: 100%">
+                                <select class="form-control select2" name="filter_4" style="width: 100%">
                                     <option value="0" selected="selected">Seçiniz...</option>
                                     <?php
                                     $min_konaklama_suresi = \App\Http\Controllers\HomeController::get_parent('Minimum Konaklama Süresi');
@@ -220,7 +220,7 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
                             </div>
                             <div class="form-group">
                                 <label>Konum</label>
-                                <select class="form-control select2" name="parent_id" style="width: 100%">
+                                <select class="form-control select2" name="filter_5" style="width: 100%">
                                     <option value="0" selected="selected">Seçiniz...</option>
                                     <?php
                                     $konum = \App\Http\Controllers\HomeController::get_parent('Konum');
@@ -234,7 +234,7 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
                             </div>
                             <div class="form-group">
                                 <label>Plaj Tipi</label>
-                                <select class="form-control select2" name="parent_id" style="width: 100%">
+                                <select class="form-control select2" name="filter_6" style="width: 100%">
                                     <option value="0" selected="selected">Seçiniz...</option>
                                     <?php
                                     $plaj_tipi = \App\Http\Controllers\HomeController::get_parent('Plaj Tipi');
