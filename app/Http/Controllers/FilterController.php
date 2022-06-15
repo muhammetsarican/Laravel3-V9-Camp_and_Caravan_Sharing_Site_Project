@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Filter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+use function GuzzleHttp\Promise\all;
 
 class FilterController extends Controller
 {
@@ -36,6 +39,16 @@ class FilterController extends Controller
     public function store(Request $request)
     {
         //
+        FilterController::all_destroy();
+        for ($i = 0; $i <= 6; $i++) {
+            if ($request->input('filter_' . $i) != 0) {
+                $data = new Filter;
+                $data->IP = $_SERVER["REMOTE_ADDR"];
+                $data->category_id = $request->input('filter_' . $i);
+                $data->save();
+            }
+        }
+        return redirect()->route('filter');
     }
 
     /**
@@ -78,8 +91,16 @@ class FilterController extends Controller
      * @param  \App\Models\Filter  $filter
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Filter $filter)
+    public  function all_destroy()
     {
         //
+        DB::table('filters')->where('IP', $_SERVER["REMOTE_ADDR"])->delete();
+    }
+
+    public function destroy($id)
+    {
+        //
+        Filter::destroy($id);
+        return redirect()->back();
     }
 }

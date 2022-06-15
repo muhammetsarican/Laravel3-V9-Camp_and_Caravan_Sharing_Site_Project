@@ -144,7 +144,7 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
             <div class="row">
                 <div class="col-md-3">
                     <h3>Filtreler</h3>
-                    <form role="form" action="{{ route('filter') }}" method="post" enctype="multipart/form-data">
+                    <form role="form" action="{{ route('filter_store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
 

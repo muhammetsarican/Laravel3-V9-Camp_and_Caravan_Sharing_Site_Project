@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('filters', function (Blueprint $table) {
+            $table->id()->autoIncrement();
             $table->string('IP',255);
             $table->integer('category_id');
             $table->timestamps();

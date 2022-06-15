@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Filter extends Model
 {
     use HasFactory;
+
+    public function camp()
+    {
+        return $this->belongsTo(Camp::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

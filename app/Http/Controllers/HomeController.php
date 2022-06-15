@@ -15,6 +15,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use PDO;
+use PhpParser\Node\Expr\Cast\Array_;
+
+use function PHPSTORM_META\type;
 
 class HomeController extends Controller
 {
@@ -47,41 +50,51 @@ class HomeController extends Controller
         return Category::where('parent_id', $parent->id)->get();
     }
 
-    public function filter(Request $request)
+    public function filter()
     {
-        // $data_bool = 'false';
-        // $data = DB::table('camp_categories')
-        //     ->select('category_id')
-        //     ->orWhere([
-        //         ['camp_id', 1],
-        //     ])
-        //     ->get();
-        // foreach ($data as $dt) {
-        //     for ($i = 0; $i <= 6; $i++) {
-        //         if ($request->input('filter_' . $i) != 0) {
-        //             if ($dt->category_id == $request->input('filter_' . $i)) {
-        //                 $data_bool = 'true';
-        //                 continue;
-        //             } else {
-        //                 $data_bool = 'false';
-        //             }
-        //         }
-        //     }
-        // }
-        // print_r($data_bool);
-        // exit();
+        $data_bool = 0;
+        $camp_id_array = array();
 
-        for ($i = 0; $i <= 6; $i++) {
-            if ($request->input('filter_' . $i) != 0) {
-                $data = new Filter;
-                $data->IP = $_SERVER["REMOTE_ADDR"];
-                $data->category_id = $request->input('filter_' . $i);
-                $data->save();
+        $data = DB::table('camp_categories')
+            ->get();
+        $data2 = DB::table('filters')
+            ->select('category_id')
+            ->Where([
+                ['IP', $_SERVER["REMOTE_ADDR"]],
+            ])
+            ->get();
+        $camp_id = $data[0]->camp_id;
+
+        for ($i = 0; $i < count($data); $i++) {
+            for ($j = 0; $j < count($data2); $j += 1) {
+                if ($camp_id != $data[$i]->camp_id) {
+                    $data_bool = 0;
+                    $camp_id = $data[$i]->camp_id;
+                }
+                if ($data[$i]->category_id == $data2[$j]->category_id) {
+                    $data_bool += 1;
+                }
+            }
+            if ($data_bool == count($data2)) {
+                if (in_array($data[$i]->camp_id, $camp_id_array)) {
+                } else {
+                    array_push($camp_id_array, $data[$i]->camp_id);
+                }
             }
         }
-        print_r('Saved');
-        exit();
+        return HomeController::get_filter_camp_id($camp_id_array);
     }
+
+    public function get_filter_camp_id($camp_id_array)
+    {
+        $merged_array=Array();
+        for($i=0;$i<count($camp_id_array);$i++){
+            $merged_array=array_merge($merged_array,DB::select('select * from camps where id= '.$camp_id_array[$i]));
+        }
+        $filter=Filter::all();
+        return view('user.filtered_camp',['datalist'=>$merged_array,'data'=>$filter]);
+    }
+
 
     public function getcamp(Request $request)
     {

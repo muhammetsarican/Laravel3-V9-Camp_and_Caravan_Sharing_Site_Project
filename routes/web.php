@@ -33,7 +33,8 @@ Route::get('/admin/logout', [\App\Http\Controllers\HomeController::class, 'admin
 
 Route::get('/editörlerimiz', [\App\Http\Controllers\HomeController::class, 'editor'])->name('editors');
 Route::get('/blog', [\App\Http\Controllers\HomeController::class, 'blog'])->name('blog');
-Route::post('/filter', [\App\Http\Controllers\HomeController::class, 'filter'])->name('filter');
+Route::get('/filter', [\App\Http\Controllers\HomeController::class, 'filter'])->name('filter');
+Route::get('/filtered/camp/{datalist}', [\App\Http\Controllers\HomeController::class, 'filtered_camp'])->name('filtered_camp');
 
 Route::post('/getcamp', [\App\Http\Controllers\HomeController::class, 'getcamp'])->name('getcamp');
 Route::get('/camplist/{search}', [\App\Http\Controllers\HomeController::class, 'camplist'])->name('camplist');
@@ -48,6 +49,9 @@ Route::get('/admin/add/editor', function () {
 })->name('add_editor');
 
 Route::get('/camp/detail/{id}', [\App\Http\Controllers\HomeController::class, 'campdetail'])->name('camp_detail');
+Route::post('/filter/store', [\App\Http\Controllers\FilterController::class, 'store'])->name('filter_store');
+Route::get('/filter/destroy/{id}', [\App\Http\Controllers\FilterController::class, 'destroy'])->name('filter_destroy');
+
 
 Route::middleware('auth')->prefix('camper')->namespace('camper')->group(function () {
     //Route::get('/profile', [\App\Http\Controllers\admin\HomeController::class, 'index'])->name('admin_home');

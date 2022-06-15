@@ -27,4 +27,9 @@ class Category extends Model
     {
         return $this->hasMany(Camp_category::class);
     }
+
+    public function filter()
+    {
+        return $this->hasMany(Filter::class);
+    }
 }

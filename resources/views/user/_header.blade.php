@@ -122,6 +122,13 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
                     title="Türkçe" class="nturl selected"><img src="http://www.websanati.com/images/turkish.png"
                         height="18" width="22" alt="turkish" /></a>
             </ul>
+            <script>
+                var tarih=new Date();
+                var yil=tarih.getFullYear();
+                var ay=tarih.getMonth();
+                var gun=tarih.getDay();
+                document.write(gun+"/"+ay+"/"+yil+"<br>");
+            </script>
         </div>
     </div>
 </nav>

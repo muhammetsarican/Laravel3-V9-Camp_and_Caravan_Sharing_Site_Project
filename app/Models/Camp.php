@@ -28,4 +28,9 @@ class Camp extends Model
     {
         return $this->hasMany(Blog::class);
     }
+
+    public function filter()
+    {
+        return $this->hasMany(Filter::class);
+    }
 }
