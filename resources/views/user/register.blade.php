@@ -66,7 +66,7 @@
       </div>
     </div>
     <div class="col-md-8 probootstrap-animate fadeInUp probootstrap-animated">
-      <form action="{{ route('register') }}" method="POST" class="probootstrap-form probootstrap-form-box mb60">
+      <form action="{{ route('register') }}" method="post" enctype="multipart/form-data" class="probootstrap-form probootstrap-form-box mb60">
         @csrf
         <div class="form-group">
             <label for="fname" class="sr-only sr-only-focusable">Ad</label>

@@ -26,6 +26,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public static function getcountreview(){
+        return Review::where('id','>',0)->count();
+    }
+    
 
     public static function get_city($title)
     {

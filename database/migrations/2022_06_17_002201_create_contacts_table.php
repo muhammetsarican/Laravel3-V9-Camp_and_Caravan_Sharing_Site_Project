@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('email',255)->nullable();
             $table->text('message')->nullable();
             $table->string('note',255)->nullable();
-            $table->string('status',5)->nullable()->default('False');
+            $table->string('status',10)->nullable()->default('New');
             $table->timestamps();
         });
     }

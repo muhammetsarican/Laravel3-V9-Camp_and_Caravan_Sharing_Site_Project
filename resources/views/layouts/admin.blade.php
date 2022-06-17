@@ -38,7 +38,9 @@
                 @include('admin._footer')
             </div>
         </div>
+        @section('javascript')
         @include('admin._javascripts')
+        @show
     </div>
     <!-- End of Page Wrapper -->
 </body>

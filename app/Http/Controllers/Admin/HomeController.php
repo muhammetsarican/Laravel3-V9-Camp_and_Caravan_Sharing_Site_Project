@@ -14,7 +14,11 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public static function getmessage(){
-        return Contact::where('status','False')->get();
+        return Contact::where('status','New')->get();
+    }
+
+    public static function getcountmessage(){
+        return Contact::where('status','New')->count();
     }
 
     public function index()

@@ -16,6 +16,8 @@ class ContactController extends Controller
     public function index()
     {
         //
+        $datalist=Contact::all();
+        return view('admin.show_contact_messages',['datalist'=>$datalist]);
     }
 
     /**
@@ -64,9 +66,13 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function edit(Contact $contact)
+    public function edit(Contact $contact, $id)
     {
         //
+        $data=Contact::find($id);
+        $data->status='Okundu';
+        $data->save();
+        return view('admin.edit_contact_messages',['data'=>$data]);
     }
 
     /**
@@ -76,9 +82,13 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Contact $contact)
+    public function update(Request $request, Contact $contact, $id)
     {
         //
+        $data=Contact::find($id);
+        $data->note=$request->input('note');
+        $data->save();
+        return redirect()->back()->with('success','Kayıt Başarıyla Güncellendi.');
     }
 
     /**

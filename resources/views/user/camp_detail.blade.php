@@ -1,3 +1,6 @@
+<?php
+$count_review = \App\Http\Controllers\HomeController::getcountreview();
+?>
 @extends('layouts.home')
 @section('content')
     <section class="probootstrap-cover overflow-hidden relative"
@@ -43,18 +46,12 @@
                                         </div>
                                     </div>
                                 @endforeach
-                                <iframe width="914" height="514"
-                                    src="https://www.youtube.com/embed{{$data->video_url}}"
-                                    title="{{$data->title}}"
-                                    frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen></iframe>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
+
             <div class="col-md-4">
                 <div class="probootstrap-inner probootstrap-animate fadeInLeft probootstrap-animated"
                     data-animate-effect="fadeInLeft">
@@ -70,11 +67,27 @@
                 </div>
             </div>
         </div>
-    </section>
 
+    </section>
     <section>
-
     </section>
+    @if ($data->video_url != null)
+        <section>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1 class="border-bottom probootstrap-section-heading">Video</h1>
+                </div>
+                <div class="col-md-12 text-center">
+                    <iframe width="914" height="514" src="https://www.youtube.com/embed{{ $data->video_url }}"
+                        title="{{ $data->title }}" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </section>
+    @endif
+
 
     <section class="probootstrap_section" id="section-contact">
         <div class="container">
@@ -84,46 +97,52 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 probootstrap-animate fadeInUp probootstrap-animated">
+                <div class="col-md-6 probootstrap-animate fadeInUp probootstrap-animated" style="max-height: 100px">
+                    Yorum Sayısı: {{ $count_review }}
                     <div class="row probootstrap-form probootstrap-form-box mb60">
                         @if ($review == '[]')
-                            No Reviews Yet...
+                            Henüz yorum yapılmamış...
                         @endif
                         @foreach ($review as $rew)
                             {{-- {{$rew->user->name}} --}}
-                            <hr>
-                            <div class="col-md-6 ">
-                                <p class="text-left text-danger">{{ $rew->subject }}</p>
-                            </div>
-                            <div class="col-md-6">
-                                @if ($rew->rate)
-                                    <div class="rating">
+                            <div class="row bg-light"
+                                style="  margin: 5px;
+                                   border-radius:10px;
+                            border-style:dotted;
+                            border-width: 1px">
+                                <div class="col-md-6 ">
+                                    <p class="text-left text-danger">{{ $rew->subject }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    @if ($rew->rate)
+                                        <div class="rating">
+                                            @for ($i = 0; $i < $rew->rate; $i++)
+                                                <input type="radio" value="{{ $i }}" id="{{ $i }}"
+                                                    checked>
+                                                <label for="{{ $i }}">☆</label>
+                                            @endfor
+                                        </div>
+                                    @endif
+                                </div>
+                                {{-- @foreach ($countrew as $avg) --}}
+                                {{-- {{$avg}} --}}
+                                {{-- @endforeach --}}
 
-                                        @for ($i = 0; $i < $rew->rate; $i++)
-                                            <input type="radio" value="{{ $i }}" id="{{ $i }}"
-                                                checked>
-                                            <label for="{{ $i }}">☆</label>
-                                        @endfor
-                                    </div>
-                                @endif
-                            </div>
-                            {{-- @foreach ($countrew as $avg) --}}
-                            {{-- {{$avg}} --}}
-                            {{-- @endforeach --}}
+                                <div class="col-md-12 ">
+                                    <p class="text-black font-italic" style="height: auto">“{{ $rew->review }}”
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="text-secondary ">{{ $rew->user->name }}</label>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <p class="text-right text-secondary font-italic" style="font-size: 12px">
+                                        {{ $rew->created_at }}
+                                    </p>
+                                </div>
 
-                            <div class="col-md-12 ">
-                                <p class="text-black font-italic bg-light" style="height: auto">“{{ $rew->review }}”</p>
+                                <hr>
                             </div>
-                            <div class="col-md-6">
-                                <label class="text-secondary ">{{ $rew->user->name }}</label>
-                            </div>
-                            <div class="col-md-6 ">
-                                <p class="text-right text-secondary font-italic" style="font-size: 12px">
-                                    {{ $rew->created_at }}
-                                </p>
-                            </div>
-
-                            <hr>
                         @endforeach
 
                     </div>

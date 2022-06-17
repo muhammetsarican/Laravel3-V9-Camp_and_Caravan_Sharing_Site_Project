@@ -175,6 +175,16 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         Route::get('delete/{id}', [\App\Http\Controllers\Admin\ReviewController::class, 'destroy'])->name('admin_delete_review');
         Route::get('show', [\App\Http\Controllers\Admin\ReviewController::class, 'show'])->name('admin_show_review');
     });
+    //Contact Message
+    Route::prefix('messages')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\ContactController::class, 'index'])->name('admin_message');
+        Route::get('edit/{id}', [\App\Http\Controllers\Admin\ContactController::class, 'edit'])->name('admin_edit_message');
+        Route::post('update/{id}', [\App\Http\Controllers\Admin\ContactController::class, 'update'])->name('admin_update_message');
+        Route::get('delete/{id}', [\App\Http\Controllers\Admin\ContactController::class, 'destroy'])->name('admin_delete_message');
+    });
+    //Setting
+    Route::get('setting', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('admin_setting');
+    Route::post('setting/update', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('admin_update_setting');
     // });
 });
 
