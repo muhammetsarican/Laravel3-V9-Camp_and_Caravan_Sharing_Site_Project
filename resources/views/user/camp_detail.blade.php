@@ -4,7 +4,7 @@
         style="background-image: url('{{ asset('user') }}/images/bg_1.jpg');" data-stellar-background-ratio="0.5"
         id="section-user">
         <div class="overlay"></div>
-   </section>
+    </section>
 
 
 
@@ -43,6 +43,12 @@
                                         </div>
                                     </div>
                                 @endforeach
+                                <iframe width="914" height="514"
+                                    src="https://www.youtube.com/embed{{$data->video_url}}"
+                                    title="{{$data->title}}"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
                             </div>
                         </div>
                     </div>

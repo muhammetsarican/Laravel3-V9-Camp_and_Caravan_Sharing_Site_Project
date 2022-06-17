@@ -33,6 +33,10 @@ Route::get('/admin/logout', [\App\Http\Controllers\HomeController::class, 'admin
 
 Route::get('/editörlerimiz', [\App\Http\Controllers\HomeController::class, 'editor'])->name('editors');
 Route::get('/blog', [\App\Http\Controllers\HomeController::class, 'blog'])->name('blog');
+Route::get('/contact', [\App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
+Route::post('/contact/store', [\App\Http\Controllers\Admin\ContactController::class, 'store'])->name('contact_store');
+
+
 Route::get('/filter', [\App\Http\Controllers\HomeController::class, 'filter'])->name('filter');
 Route::get('/filtered/camp/{datalist}', [\App\Http\Controllers\HomeController::class, 'filtered_camp'])->name('filtered_camp');
 

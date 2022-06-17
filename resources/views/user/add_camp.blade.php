@@ -87,6 +87,10 @@
                                     <input type="file" name="image" class="form-control">
                                 </div>
                                 <div class="form-group">
+                                    <label>Youtube Video Url</label>
+                                    <input type="text" name="video_url" class="form-control" placeholder="https://youtu.be/">
+                                </div>
+                                <div class="form-group">
                                     <label>Durum</label>
                                     <select class="form-control select2" name="status" style="width: 100%">
                                         <option selected="selected">Pasif</option>

@@ -61,6 +61,7 @@ class CampController extends Controller
             $data->about_camp = $request->input('about_camp');
             $data->status = $request->input('status');
             $data->image=Storage::putFile('image',$request->file('image'));
+            $data->video_url = substr($request->input('video_url'),strrpos($request->input('video_url'),'/'));
             $data->save();
             return redirect()->route('user_camp')->with('success', 'Kayıt Başarıyla Eklendi.');
         }
@@ -141,6 +142,7 @@ class CampController extends Controller
             if ($request->file('image') != null) {
                 $data->image = Storage::putFile('public/image', $request->file('image'));
             }
+            $data->video_url = substr($request->input('video_url'),strrpos($request->input('video_url'),'/'));
             $data->save();
             return redirect()->back()->with('success','Kayıt Başarıyla Güncellendi.');
         }

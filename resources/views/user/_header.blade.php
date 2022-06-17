@@ -3,22 +3,58 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
 // $setting = \App\Http\Controllers\HomeController::getsetting();
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar scrolled awake" id="probootstrap-navbar">
+
     <div class="container">
-        <a class="navbar-brand" href="/">Kamp & Karavan</a>
+        <div class="row">
+            <div class="col-md-12">
+                <a href="#"
+                    onclick="doGTranslate('tr|en');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;"
+                    title="English" class="nturl"><img src="http://www.websanati.com/images/english.png"
+                        height="18" width="22" alt="english" /></a>
+                {{-- <a href="#"
+    onclick="doGTranslate('tr|de');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;"
+    title="Deutsch" class="nturl"><img src="http://www.websanati.com/images/german.png"
+        height="18" width="22" alt="german" /></a>
+<a href="#"
+    onclick="doGTranslate('tr|ar');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;"
+    title="Arabic" class="nturl selected"><img src="http://www.websanati.com/images/arabic.png"
+        height="18" width="22" alt="arabic" /></a> --}}
+                <a href="#"
+                    onclick="doGTranslate('tr|tr');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;"
+                    title="Türkçe" class="nturl selected"><img src="http://www.websanati.com/images/turkish.png"
+                        height="18" width="22" alt="turkish" /></a>
+
+            </div>
+            <script>
+                var tarih = new Date();
+                var yil = tarih.getFullYear();
+                var ay = tarih.getMonth();
+                var gun = tarih.getDay();
+                document.write(gun + "/" + ay + "/" + yil + "<br>");
+            </script>
+        </div>
+
+
+        <a class="navbar-brand" href="{{ route('user_home') }}">Kamp & Karavan</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-menu"
             aria-controls="probootstrap-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span><i class="ion-navicon"></i></span>
         </button>
+
         <div class="collapse navbar-collapse" id="probootstrap-menu">
+            <div class="" style="height: 10px; width: 150px">
+                <form action="{{ route('getcamp') }}" method="post">
+                    @csrf
+                    <div class="">
+                        @livewire('search')
+                    </div>
+                </form>
+
+                @livewireScripts
+            </div>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a class="nav-link" href="{{ route('user_home') }}">Anasayfa</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('editors') }}">Editörlerimiz</a>
+                <li class="nav-item active"><a class="nav-link" href="{{ route('user_home') }}">Anasayfa</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('blog') }}">Blog</a>
-                </li>
-                {{-- <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-                <li class="nav-item"><a class="nav-link" href="travel.html">Travel With Us</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li> --}}
 
                 <ul class="main-menu navbar-nav ml-auto">
                     <li class="active-menu nav-item">
@@ -40,6 +76,17 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
                         </ul>
                     </li>
                 </ul>
+
+                <li class="nav-item"><a class="nav-link" href="{{ route('editors') }}">Editörlerimiz</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('blog') }}">Blog</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Bize Ulaşın</a>
+                </li>
+                {{-- <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="travel.html">Travel With Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li> --}}
+
 
                 @auth
                     <ul class="main-menu">
@@ -94,44 +141,22 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
                         </li>
                     </ul>
                 @endguest
-                <!-- Search product -->
-                <div class="" style="height: 10px">
-                    <form action="{{ route('getcamp') }}" method="post" class="nav-link">
-                        @csrf
-                        <div class="">
-                            @livewire('search')
-                        </div>
-                    </form>
-
-                    @livewireScripts
-                </div>
-                <a href="#"
-                    onclick="doGTranslate('tr|en');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;"
-                    title="English" class="nturl"><img src="http://www.websanati.com/images/english.png"
-                        height="18" width="22" alt="english" /></a>
-                {{-- <a href="#"
-                    onclick="doGTranslate('tr|de');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;"
-                    title="Deutsch" class="nturl"><img src="http://www.websanati.com/images/german.png"
-                        height="18" width="22" alt="german" /></a>
-                <a href="#"
-                    onclick="doGTranslate('tr|ar');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;"
-                    title="Arabic" class="nturl selected"><img src="http://www.websanati.com/images/arabic.png"
-                        height="18" width="22" alt="arabic" /></a> --}}
-                <a href="#"
-                    onclick="doGTranslate('tr|tr');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;"
-                    title="Türkçe" class="nturl selected"><img src="http://www.websanati.com/images/turkish.png"
-                        height="18" width="22" alt="turkish" /></a>
             </ul>
-            <script>
-                var tarih=new Date();
-                var yil=tarih.getFullYear();
-                var ay=tarih.getMonth();
-                var gun=tarih.getDay();
-                document.write(gun+"/"+ay+"/"+yil+"<br>");
-            </script>
+
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- weather widget start --><a target="_blank" href="https://bookeder.com/weather/istanbul-18319"><img
+                    src="https://w.bookcdn.com/weather/picture/21_18319_1_21_34495e_250_2c3e50_ffffff_ffffff_1_2071c9_ffffff_0_6.png?scode=2&domid=&anc_id=98568"
+                    alt="booked.net" /></a><!-- weather widget end -->
+        </div>
+    </div>
+
 </nav>
+
+
 <script type="text/javascript">
     jQuery('.switcher .selected').click(function() {
         if (!(jQuery('.switcher .option').is(':visible'))) {
@@ -210,3 +235,36 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
             GTranslateGetCurrentLang() + '"]').parent().html());
     });
 </script>
+
+<!--Weather Widget-->
+<script type="text/javascript">
+    var css_file = document.createElement("link");
+    var widgetUrl = location.href;
+    css_file.setAttribute("rel", "stylesheet");
+    css_file.setAttribute("type", "text/css");
+    css_file.setAttribute("href", 'https://s.bookcdn.com/css/w/bw-160-36.css?v=0.0.1');
+    document.getElementsByTagName("head")[0].appendChild(css_file);
+
+    function setWidgetData_56993(data) {
+        if (typeof(data) != 'undefined' && data.results.length > 0) {
+            for (var i = 0; i < data.results.length; ++i) {
+                var objMainBlock = document.getElementById('m-booked-small-t3-56993');
+                if (objMainBlock !== null) {
+                    var copyBlock = document.getElementById('m-bookew-weather-copy-' + data.results[i].widget_type);
+                    objMainBlock.innerHTML = data.results[i].html_code;
+                    if (copyBlock !== null) objMainBlock.appendChild(copyBlock);
+                }
+            }
+        } else {
+            alert('data=undefined||data.results is empty');
+        }
+    }
+    var widgetSrc =
+        "https://widgets.booked.net/weather/info?action=get_weather_info;ver=7;cityID=18319;type=13;scode=2;ltid=3457;domid=;anc_id=89756;countday=undefined;cmetric=1;wlangID=21;color=fff5d9;wwidth=158;header_color=fff5d9;text_color=333333;link_color=08488D;border_form=3;footer_color=fff5d9;footer_text_color=333333;transparent=1;v=0.0.1";
+    widgetSrc += ';ref=' + widgetUrl;
+    widgetSrc += ';rand_id=56993';
+    var weatherBookedScript = document.createElement("script");
+    weatherBookedScript.setAttribute("type", "text/javascript");
+    weatherBookedScript.src = widgetSrc;
+    document.body.appendChild(weatherBookedScript)
+</script><!-- weather widget end -->

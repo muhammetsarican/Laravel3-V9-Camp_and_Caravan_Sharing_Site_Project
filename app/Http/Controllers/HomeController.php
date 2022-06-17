@@ -231,6 +231,11 @@ class HomeController extends Controller
         return view('user.blog', ['datalist' => $datalist]);
     }
 
+    public function contact()
+    {
+        return view('user.contact');
+    }
+
     public function adminlogin()
     {
         return view('admin.login');
