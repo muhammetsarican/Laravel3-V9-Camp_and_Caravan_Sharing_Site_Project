@@ -13,6 +13,9 @@ class SettingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public static function getsetting(){
+        return Setting::first();
+    }
     public function index()
     {
         //

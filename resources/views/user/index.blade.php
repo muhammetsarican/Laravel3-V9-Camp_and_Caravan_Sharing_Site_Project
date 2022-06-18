@@ -1,136 +1,144 @@
 <?php
 $parentCategories = \App\Http\Controllers\HomeController::categorylist();
-// $setting = \App\Http\Controllers\HomeController::getsetting();
+$setting = \App\Http\Controllers\Admin\SettingController::getsetting();
 ?>
 @extends('layouts.home')
+@section('title', $setting->title)
+
+@section('description')
+    {{ $setting->description }}
+@endsection
+
+@section('keywords', $setting->keywords)
+
 @section('content')
     <section class="probootstrap-cover overflow-hidden relative"
         style="background-image: url('{{ asset('user') }}/images/bg_1.jpg');" data-stellar-background-ratio="0.5"
         id="section-user">
         <div class="overlay"></div>
         <!-- <div class="container">
-                                                                    <div class="row align-items-center">
-                                                                      <div class="col-md">
-                                                                        <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Explore The World With Ease</h2>
-                                                                        <p class="lead mb-5 probootstrap-animate">
-                                                                          
+                                                                                        <div class="row align-items-center">
+                                                                                          <div class="col-md">
+                                                                                            <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Explore The World With Ease</h2>
+                                                                                            <p class="lead mb-5 probootstrap-animate">
+                                                                                              
 
-                                                                        </p>
-                                                                          <a href="onepage.html" role="button" class="btn btn-primary p-3 mr-3 pl-5 pr-5 text-uppercase d-lg-inline d-md-inline d-sm-block d-block mb-3">See OnePage Verion</a>
-                                                                        </p>
-                                                                      </div>
-                                                                      <div class="col-md probootstrap-animate">
-                                                                        <form action="#" class="probootstrap-form">
-                                                                          <div class="form-group">
-                                                                            <div class="row mb-3">
-                                                                              <div class="col-md">
-                                                                                <div class="form-group">
-                                                                                  <label for="id_label_single">From</label>
+                                                                                            </p>
+                                                                                              <a href="onepage.html" role="button" class="btn btn-primary p-3 mr-3 pl-5 pr-5 text-uppercase d-lg-inline d-md-inline d-sm-block d-block mb-3">See OnePage Verion</a>
+                                                                                            </p>
+                                                                                          </div>
+                                                                                          <div class="col-md probootstrap-animate">
+                                                                                            <form action="#" class="probootstrap-form">
+                                                                                              <div class="form-group">
+                                                                                                <div class="row mb-3">
+                                                                                                  <div class="col-md">
+                                                                                                    <div class="form-group">
+                                                                                                      <label for="id_label_single">From</label>
 
-                                                                                  <label for="id_label_single" style="width: 100%;">
-                                                                                    <select class="js-example-basic-single js-states form-control" id="id_label_single" style="width: 100%;">
-                                                                                      <option value="Australia">Australia</option>
-                                                                                      <option value="Japan">Japan</option>
-                                                                                      <option value="United States">United States</option>
-                                                                                      <option value="Brazil">Brazil</option>
-                                                                                      <option value="China">China</option>
-                                                                                      <option value="Israel">Israel</option>
-                                                                                      <option value="Philippines">Philippines</option>
-                                                                                      <option value="Malaysia">Malaysia</option>
-                                                                                      <option value="Canada">Canada</option>
-                                                                                      <option value="Chile">Chile</option>
-                                                                                      <option value="Chile">Zimbabwe</option>
-                                                                                    </select>
-                                                                                  </label>
+                                                                                                      <label for="id_label_single" style="width: 100%;">
+                                                                                                        <select class="js-example-basic-single js-states form-control" id="id_label_single" style="width: 100%;">
+                                                                                                          <option value="Australia">Australia</option>
+                                                                                                          <option value="Japan">Japan</option>
+                                                                                                          <option value="United States">United States</option>
+                                                                                                          <option value="Brazil">Brazil</option>
+                                                                                                          <option value="China">China</option>
+                                                                                                          <option value="Israel">Israel</option>
+                                                                                                          <option value="Philippines">Philippines</option>
+                                                                                                          <option value="Malaysia">Malaysia</option>
+                                                                                                          <option value="Canada">Canada</option>
+                                                                                                          <option value="Chile">Chile</option>
+                                                                                                          <option value="Chile">Zimbabwe</option>
+                                                                                                        </select>
+                                                                                                      </label>
 
 
-                                                                                </div>
-                                                                              </div>
-                                                                              <div class="col-md">
-                                                                                <div class="form-group">
-                                                                                  <label for="id_label_single2">To</label>
-                                                                                  <div class="probootstrap_select-wrap">
-                                                                                    <label for="id_label_single2" style="width: 100%;">
-                                                                                    <select class="js-example-basic-single js-states form-control" id="id_label_single2" style="width: 100%;">
-                                                                                      <option value="Australia">Australia</option>
-                                                                                      <option value="Japan">Japan</option>
-                                                                                      <option value="United States">United States</option>
-                                                                                      <option value="Brazil">Brazil</option>
-                                                                                      <option value="China">China</option>
-                                                                                      <option value="Israel">Israel</option>
-                                                                                      <option value="Philippines">Philippines</option>
-                                                                                      <option value="Malaysia">Malaysia</option>
-                                                                                      <option value="Canada">Canada</option>
-                                                                                      <option value="Chile">Chile</option>
-                                                                                      <option value="Chile">Zimbabwe</option>
-                                                                                    </select>
-                                                                                  </label>
-                                                                                  </div>
-                                                                                </div>
-                                                                              </div>
-                                                                            </div>-->
+                                                                                                    </div>
+                                                                                                  </div>
+                                                                                                  <div class="col-md">
+                                                                                                    <div class="form-group">
+                                                                                                      <label for="id_label_single2">To</label>
+                                                                                                      <div class="probootstrap_select-wrap">
+                                                                                                        <label for="id_label_single2" style="width: 100%;">
+                                                                                                        <select class="js-example-basic-single js-states form-control" id="id_label_single2" style="width: 100%;">
+                                                                                                          <option value="Australia">Australia</option>
+                                                                                                          <option value="Japan">Japan</option>
+                                                                                                          <option value="United States">United States</option>
+                                                                                                          <option value="Brazil">Brazil</option>
+                                                                                                          <option value="China">China</option>
+                                                                                                          <option value="Israel">Israel</option>
+                                                                                                          <option value="Philippines">Philippines</option>
+                                                                                                          <option value="Malaysia">Malaysia</option>
+                                                                                                          <option value="Canada">Canada</option>
+                                                                                                          <option value="Chile">Chile</option>
+                                                                                                          <option value="Chile">Zimbabwe</option>
+                                                                                                        </select>
+                                                                                                      </label>
+                                                                                                      </div>
+                                                                                                    </div>
+                                                                                                  </div>
+                                                                                                </div>-->
         <!-- END row -->
         <!--<div class="row mb-5">
-                                                                              <div class="col-md">
-                                                                                <div class="form-group">
-                                                                                  <label for="probootstrap-date-departure">Departure</label>
-                                                                                  <div class="probootstrap-date-wrap">
-                                                                                    <span class="icon ion-calendar"></span>
-                                                                                    <input type="text" id="probootstrap-date-departure" class="form-control" placeholder="">
-                                                                                  </div>
-                                                                                </div>
-                                                                              </div>
-                                                                              <div class="col-md">
-                                                                                <div class="form-group">
-                                                                                  <label for="probootstrap-date-arrival">Arrival</label>
-                                                                                  <div class="probootstrap-date-wrap">
-                                                                                    <span class="icon ion-calendar"></span>
-                                                                                    <input type="text" id="probootstrap-date-arrival" class="form-control" placeholder="">
-                                                                                  </div>
-                                                                                </div>
-                                                                              </div>
-                                                                            </div>-->
+                                                                                                  <div class="col-md">
+                                                                                                    <div class="form-group">
+                                                                                                      <label for="probootstrap-date-departure">Departure</label>
+                                                                                                      <div class="probootstrap-date-wrap">
+                                                                                                        <span class="icon ion-calendar"></span>
+                                                                                                        <input type="text" id="probootstrap-date-departure" class="form-control" placeholder="">
+                                                                                                      </div>
+                                                                                                    </div>
+                                                                                                  </div>
+                                                                                                  <div class="col-md">
+                                                                                                    <div class="form-group">
+                                                                                                      <label for="probootstrap-date-arrival">Arrival</label>
+                                                                                                      <div class="probootstrap-date-wrap">
+                                                                                                        <span class="icon ion-calendar"></span>
+                                                                                                        <input type="text" id="probootstrap-date-arrival" class="form-control" placeholder="">
+                                                                                                      </div>
+                                                                                                    </div>
+                                                                                                  </div>
+                                                                                                </div>-->
         <!-- END row -->
         <!--<div class="row">
-                                                                              <div class="col-md">
-                                                                                <label for="round" class="mr-5"><input type="radio" id="round" name="direction">  Round</label>
-                                                                                <label for="oneway"><input type="radio" id="oneway" name="direction">  Oneway</label>
-                                                                              </div>
-                                                                              <div class="col-md">
-                                                                                <input type="submit" value="Submit" class="btn btn-primary btn-block">
-                                                                              </div>
-                                                                            </div>
-                                                                          </div>
-                                                                        </form>
-                                                                      </div>
-                                                                    </div>
-                                                                  </div> -->
+                                                                                                  <div class="col-md">
+                                                                                                    <label for="round" class="mr-5"><input type="radio" id="round" name="direction">  Round</label>
+                                                                                                    <label for="oneway"><input type="radio" id="oneway" name="direction">  Oneway</label>
+                                                                                                  </div>
+                                                                                                  <div class="col-md">
+                                                                                                    <input type="submit" value="Submit" class="btn btn-primary btn-block">
+                                                                                                  </div>
+                                                                                                </div>
+                                                                                              </div>
+                                                                                            </form>
+                                                                                          </div>
+                                                                                        </div>
+                                                                                      </div> -->
 
     </section>
     <!-- END section -->
 
 
     <!-- <section class="probootstrap_section" id="section-feature-testimonial">
-                                                                  <div class="container">
-                                                                    <div class="row justify-content-center mb-5">
-                                                                      <div class="col-md-12 text-center mb-5 probootstrap-animate">
-                                                                        <h2 class="display-4 border-bottom probootstrap-section-heading">Why we Love Places</h2>
-                                                                        <blockquote class="">
-                                                                          <p class="lead mb-4"><em>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</em></p>
-                                                                          <p class="probootstrap-author">
-                                                                            <a href="https://probootstrap.com/" target="_blank">
-                                                                              <img src="{{ asset('user') }}/  images/person_1.jpg" alt="Free Template by ProBootstrap.com" class="rounded-circle">
-                                                                              <span class="probootstrap-name">James Smith</span>
-                                                                              <span class="probootstrap-title">Chief Executive Officer</span>
-                                                                            </a>
-                                                                          </p>
-                                                                        </blockquote>
+                                                                                      <div class="container">
+                                                                                        <div class="row justify-content-center mb-5">
+                                                                                          <div class="col-md-12 text-center mb-5 probootstrap-animate">
+                                                                                            <h2 class="display-4 border-bottom probootstrap-section-heading">Why we Love Places</h2>
+                                                                                            <blockquote class="">
+                                                                                              <p class="lead mb-4"><em>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</em></p>
+                                                                                              <p class="probootstrap-author">
+                                                                                                <a href="https://probootstrap.com/" target="_blank">
+                                                                                                  <img src="{{ asset('user') }}/  images/person_1.jpg" alt="Free Template by ProBootstrap.com" class="rounded-circle">
+                                                                                                  <span class="probootstrap-name">James Smith</span>
+                                                                                                  <span class="probootstrap-title">Chief Executive Officer</span>
+                                                                                                </a>
+                                                                                              </p>
+                                                                                            </blockquote>
 
-                                                                      </div>
-                                                                    </div>
-                                                                    
-                                                                  </div>
-                                                                </section> -->
+                                                                                          </div>
+                                                                                        </div>
+                                                                                        
+                                                                                      </div>
+                                                                                    </section> -->
     <!-- END section -->
 
 
@@ -144,7 +152,8 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
             <div class="row">
                 <div class="col-md-3">
                     <h3>Filtreler</h3>
-                    <form role="form" action="{{ route('filter_store') }}" method="post" enctype="multipart/form-data">
+                    <form role="form" action="{{ route('filter_store') }}" method="post"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
 
@@ -261,7 +270,8 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
                                     <div>
                                         <div
                                             class="media probootstrap-media d-block align-items-stretch probootstrap-animate">
-                                            <a href="
+                                            <a
+                                                href="
                                                         {{-- {{ route('camp_detail', ['id' => $bl->id]) }} --}}
                                                         ">
 
@@ -285,8 +295,7 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
                         <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
                             <a href="{{ route('camp_detail', ['id' => $dl->id]) }}" class="probootstrap-thumbnail">
                                 <img src="{{ \Illuminate\Support\Facades\Storage::url($dl->image) }}"
-                                    alt="{{ $dl->name }}" class="img-fluid"
-                                    style="height: 200px; object-fit:cover">
+                                    alt="{{ $dl->name }}" class="img-fluid" style="height: 200px; object-fit:cover">
                                 <div class="probootstrap-text">
                                     <h3>{{ $dl->name }}</h3>
                                 </div>
@@ -407,3 +416,15 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
     </section>
     <!-- END section -->
 @endsection
+<div style='position: fixed; bottom: 3%; right: 1%;'>
+    <table>
+        <tr>
+            <td>
+                <a href="{{ route('contact') }}" target="_blank">
+                    <img alt="Mesaj Atabilirsiniz" style='background:transparent;border:none;max-height: 65px'
+                        title='Bize Ulaşın' src="{{ asset('admin') }}/img/icons/contact.png" />
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>

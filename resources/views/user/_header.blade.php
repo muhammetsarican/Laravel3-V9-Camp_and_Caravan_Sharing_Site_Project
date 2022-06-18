@@ -42,24 +42,25 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
         </button>
 
         <div class="collapse navbar-collapse" id="probootstrap-menu">
-            <div class="" style="height: 10px; width: 150px">
-                <form action="{{ route('getcamp') }}" method="post">
-                    @csrf
-                    <div class="">
-                        @livewire('search')
-                    </div>
-                </form>
 
-                @livewireScripts
-            </div>
             <ul class="navbar-nav ml-auto">
+                <div class="nav-item" style="min-height: 25px; width: 250px; right-align: 25px">
+                    <form action="{{ route('getcamp') }}" method="post">
+                        @csrf
+                        <div class="">
+                            @livewire('search')
+                        </div>
+                    </form>
+    
+                    @livewireScripts
+                </div>
+
                 <li class="nav-item active"><a class="nav-link" href="{{ route('user_home') }}">Anasayfa</a>
                 </li>
 
-                <ul class="main-menu navbar-nav ml-auto">
+                {{-- <ul class="main-menu navbar-nav ml-auto">
                     <li class="active-menu nav-item">
                         <a href="#" class="nav-link">Kategoriler</a>
-                        {{-- {{\App\Http\Controllers\HomeController::get_role(\Illuminate\Support\Facades\Auth::user()->id)}} --}}
                         <ul class="sub-menu">
                             @foreach ($parentCategories as $rs)
                                 <li>
@@ -75,13 +76,12 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
                             @endforeach
                         </ul>
                     </li>
-                </ul>
+                </ul> --}}
 
                 <li class="nav-item"><a class="nav-link" href="{{ route('editors') }}">Editörlerimiz</a>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('blog') }}">Blog</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Bize Ulaşın</a>
                 </li>
                 {{-- <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
                 <li class="nav-item"><a class="nav-link" href="travel.html">Travel With Us</a></li>

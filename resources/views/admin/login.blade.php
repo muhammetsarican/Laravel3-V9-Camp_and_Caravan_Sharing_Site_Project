@@ -1,3 +1,6 @@
+<?php
+$getsetting = \App\Http\Controllers\Admin\SettingController::getsetting();
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -55,11 +58,11 @@
           <ul class="probootstrap-contact-details">
             <li>
               <span class="text-uppercase"><span class="ion-paper-airplane"></span> E-Posta</span>
-              you_mail@gmail.com
+              {{$getsetting->email}}
             </li>
             <li>
                 <span class="text-uppercase"><span class="ion-ios-telephone"></span> Telefon</span>
-                +30 976 1382 9922
+                {{$getsetting->phone}}
               </li>
           </ul>
         </div>

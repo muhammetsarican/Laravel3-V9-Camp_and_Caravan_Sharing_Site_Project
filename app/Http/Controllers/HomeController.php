@@ -26,8 +26,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public static function getcountreview(){
-        return Review::where('id','>',0)->count();
+    public static function getcountreview($camp_id){
+        return Review::where([
+            ['camp_id',$camp_id],
+            ['status','Aktif'],
+            ])->count();
     }
     
 
@@ -148,7 +151,10 @@ class HomeController extends Controller
     public function campdetail($id)
     {
         $data = Camp::find($id);
-        $review = Review::where('camp_id', $id)->get();
+        $review = Review::where([
+            ['camp_id', $id],
+            ['status','Aktif'],
+            ])->get();
         $images = Image::where('camp_id', $id)->get();
         $data = [
             'review' => $review,

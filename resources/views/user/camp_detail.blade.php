@@ -1,5 +1,5 @@
 <?php
-$count_review = \App\Http\Controllers\HomeController::getcountreview();
+$count_review = \App\Http\Controllers\HomeController::getcountreview($data->id);
 ?>
 @extends('layouts.home')
 @section('content')
@@ -61,7 +61,7 @@ $count_review = \App\Http\Controllers\HomeController::getcountreview();
                     <h4>Kategoriler:</h4>
                     <p>
                         @foreach ($data->camp_category as $camp_cat)
-                            {{ $camp_cat->category->title }};
+                            *{{ $camp_cat->category->title }}&nbsp;
                         @endforeach.
                     </p>
                 </div>
@@ -69,6 +69,7 @@ $count_review = \App\Http\Controllers\HomeController::getcountreview();
         </div>
 
     </section>
+    <a class="btn btn-danger text-white">Eğer işletme size aitse düzeltme talebinde bulunun</a>
     <section>
     </section>
     @if ($data->video_url != null)
@@ -98,7 +99,7 @@ $count_review = \App\Http\Controllers\HomeController::getcountreview();
             </div>
             <div class="row">
                 <div class="col-md-6 probootstrap-animate fadeInUp probootstrap-animated" style="max-height: 100px">
-                    Yorum Sayısı: {{ $count_review }}
+                    Aktif Yorum Sayısı: {{ $count_review }}
                     <div class="row probootstrap-form probootstrap-form-box mb60">
                         @if ($review == '[]')
                             Henüz yorum yapılmamış...

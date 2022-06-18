@@ -6,10 +6,9 @@
         <div class="overlay"></div>
         <div class="row align-items-center text-center">
             <div class="col-md">
-                <h2 class="heading mb-2 display-4 font-light probootstrap-animate fadeInUp probootstrap-animated">Found
-                    About:
+                <h2 class="heading mb-2 font-light probootstrap-animate fadeInUp probootstrap-animated">Hakkında Bulundu:
                 </h2>
-                <p class="heading mb-5 text-white">"{{ $search }}"</p>
+                <h3 class="heading mb-5 text-white">" {{ $search }}&nbsp;"</h3>
             </div>
         </div>
 
@@ -22,7 +21,7 @@
             <div class="row">
                     @if ($datalist == '[]')
                         <div class="col-6 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-3">
-                            Nothing to Show for "{{ $search }}".
+                            Aranan " {{ $search }}&nbsp;" için gösterilecek bir şey yok.
                         </div>
                     @else
                     @foreach ($datalist as $dl)
