@@ -86,6 +86,10 @@
                                 <div class="form-group">
                                     <label>Youtube Video Url</label>
                                     <input type="text" name="video_url" class="form-control" placeholder="https://youtu.be/">
+                                </div>                            
+                                <div class="form-group">
+                                    <label>Yorumunuz</label>
+                                    <textarea type="text" name="user_review" class="form-control"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>Durum</label>

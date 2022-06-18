@@ -28,7 +28,11 @@
                         <div class="media-body">
                             <span class="text-uppercase text-right">{{ $dl->camp->name }}</span>
                             <h5 class="mb-3">{{ $dl->title }}</h5>
-                            <p>{{ $dl->post }} </p>
+                            <p style="overflow: hidden;
+                                text-overflow: ellipsis;
+                                display: -webkit-box;
+                                -webkit-line-clamp: 2;
+                                -webkit-box-orient: vertical">{{ $dl->post }} </p>
                             <p><a href="{{route('user_show_blog',['id'=>$dl->id])}}">Devamını Oku</a></p>
                             <p>{{ $dl->created_at }}</p>
 

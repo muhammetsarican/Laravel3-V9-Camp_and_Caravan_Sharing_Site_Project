@@ -12,50 +12,60 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// ->middleware([\App\Http\Middleware\Authenticate::class]);
 Route::get('/welcome', function () {
     return view('welcome');
 });
-
-Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('user_home');
-Route::get('/user/login', [\App\Http\Controllers\HomeController::class, 'userLogin'])->name('user_login');
-Route::get('/user/register', [\App\Http\Controllers\HomeController::class, 'userRegister'])->name('user_register');
-Route::get('/logout', [\App\Http\Controllers\HomeController::class, 'userlogout'])->name('user_logout');
-
-Route::get('/adminhome', function () {
-    return view('admin.index');
-})->name('admin_home')->middleware([\App\Http\Middleware\Authenticate::class]);
-
-Route::get('/admin/login', [\App\Http\Controllers\HomeController::class, 'adminlogin'])->name('admin_login');
-Route::post('/admin/logincheck', [\App\Http\Controllers\HomeController::class, 'logincheck'])->name('admin_logincheck');
-Route::get('/admin/logout', [\App\Http\Controllers\HomeController::class, 'adminlogout'])->name('admin_logout');
-
-
-Route::get('/editörlerimiz', [\App\Http\Controllers\HomeController::class, 'editor'])->name('editors');
-Route::get('/blog', [\App\Http\Controllers\HomeController::class, 'blog'])->name('blog');
-Route::get('/contact', [\App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
-Route::post('/contact/store', [\App\Http\Controllers\Admin\ContactController::class, 'store'])->name('contact_store');
-
-
-Route::get('/filter', [\App\Http\Controllers\HomeController::class, 'filter'])->name('filter');
-Route::get('/filtered/camp/{datalist}', [\App\Http\Controllers\HomeController::class, 'filtered_camp'])->name('filtered_camp');
-
-Route::post('/getcamp', [\App\Http\Controllers\HomeController::class, 'getcamp'])->name('getcamp');
-Route::get('/camplist/{search}', [\App\Http\Controllers\HomeController::class, 'camplist'])->name('camplist');
-
-
 Route::get('/admin/show/editor', function () {
     return view('admin.show_editors');
 })->name('show_editors');
-
 Route::get('/admin/add/editor', function () {
     return view('admin.add_editor');
 })->name('add_editor');
+Route::get('/aboutus', function () {
+    return view('user.about_us');
+})->name('aboutus');
 
-Route::get('/camp/detail/{id}', [\App\Http\Controllers\HomeController::class, 'campdetail'])->name('camp_detail');
-Route::post('/filter/store', [\App\Http\Controllers\FilterController::class, 'store'])->name('filter_store');
-Route::get('/filter/destroy/{id}', [\App\Http\Controllers\FilterController::class, 'destroy'])->name('filter_destroy');
 
+Route::get('/editörlerimiz', [\App\Http\Controllers\HomeController::class, 'editor'])->name('editors');
+
+//User
+Route::prefix('home')->group(function () {
+    Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('user_home');
+    Route::get('/login', [\App\Http\Controllers\HomeController::class, 'userLogin'])->name('user_login');
+    Route::get('/register', [\App\Http\Controllers\HomeController::class, 'userRegister'])->name('user_register');
+    Route::get('/profile', [\App\Http\Controllers\HomeController::class, 'userProfile'])->name('user_profile');
+    Route::get('/logout', [\App\Http\Controllers\HomeController::class, 'userlogout'])->name('user_logout');
+});
+//Admin
+Route::prefix('admin')->group(function () {
+    Route::get('/login', [\App\Http\Controllers\HomeController::class, 'adminlogin'])->name('admin_login');
+    Route::post('/logincheck', [\App\Http\Controllers\HomeController::class, 'logincheck'])->name('admin_logincheck');
+    Route::get('/logout', [\App\Http\Controllers\HomeController::class, 'adminlogout'])->name('admin_logout');
+});
+//Contact
+Route::prefix('contact')->group(function () {
+    Route::get('/', [\App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
+    Route::post('/store', [\App\Http\Controllers\Admin\ContactController::class, 'store'])->name('contact_store');
+});
+//Camp
+Route::prefix('camp')->group(function () {
+    Route::post('/getcamp', [\App\Http\Controllers\HomeController::class, 'getcamp'])->name('getcamp');
+    Route::get('/{search}', [\App\Http\Controllers\HomeController::class, 'camplist'])->name('camplist');
+    Route::get('/detail/{id}', [\App\Http\Controllers\HomeController::class, 'campdetail'])->name('camp_detail');
+    Route::get('/filtered/{datalist}', [\App\Http\Controllers\HomeController::class, 'filtered_camp'])->name('filtered_camp');
+});
+//Filter
+Route::prefix('filter')->group(function () {
+    Route::get('/', [\App\Http\Controllers\HomeController::class, 'filter'])->name('filter');
+    Route::post('/store', [\App\Http\Controllers\FilterController::class, 'store'])->name('filter_store');
+    Route::get('/destroy/{id}', [\App\Http\Controllers\FilterController::class, 'destroy'])->name('filter_destroy');
+});
+//Blog
+Route::prefix('blog')->group(function () {
+    Route::get('/', [\App\Http\Controllers\HomeController::class, 'blog'])->name('blog');
+    Route::get('show/{id}', [\App\Http\Controllers\BlogController::class, 'show'])->name('user_show_blog');
+});
 
 Route::middleware('auth')->prefix('camper')->namespace('camper')->group(function () {
     //Route::get('/profile', [\App\Http\Controllers\admin\HomeController::class, 'index'])->name('admin_home');
@@ -81,20 +91,10 @@ Route::middleware('auth')->prefix('camper')->namespace('camper')->group(function
         Route::get('delete/{id},{camp_id}', [\App\Http\Controllers\Camper\ImageController::class, 'destroy'])->name('user_image_delete');
         Route::get('show', [\App\Http\Controllers\Camper\ImageController::class, 'show'])->name('user_image_show');
     });
-    //Blog
-    Route::prefix('blog')->group(function () {
-        Route::get('/', [\App\Http\Controllers\BlogController::class, 'index'])->name('user_blog');
-        Route::get('create', [\App\Http\Controllers\BlogController::class, 'create'])->name('user_add_blog');
-        Route::post('store', [\App\Http\Controllers\BlogController::class, 'store'])->name('user_store_blog');
-        Route::get('edit/{id}', [\App\Http\Controllers\BlogController::class, 'edit'])->name('user_edit_blog');
-        Route::post('update/{id}', [\App\Http\Controllers\BlogController::class, 'update'])->name('user_update_blog');
-        Route::get('delete/{id}', [\App\Http\Controllers\BlogController::class, 'destroy'])->name('user_delete_blog');
-        Route::get('show/{id}', [\App\Http\Controllers\BlogController::class, 'show'])->name('user_show_blog');
-    });
 });
 
-Route::middleware('auth')->prefix('admin')->group(function () {
-    // Route::middleware('admin')->group(function () {
+Route::middleware('auth')->prefix('adminhome')->group(function () {
+    Route::middleware('admin')->group(function () {
 
     Route::get('/', [\App\Http\Controllers\admin\HomeController::class, 'index'])->name('admin_home');
     //Category
@@ -185,7 +185,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     //Setting
     Route::get('setting', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('admin_setting');
     Route::post('setting/update', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('admin_update_setting');
-    // });
+    });
 });
 
 

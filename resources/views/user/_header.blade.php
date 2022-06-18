@@ -1,38 +1,18 @@
 <?php
 $parentCategories = \App\Http\Controllers\HomeController::categorylist();
-// $setting = \App\Http\Controllers\HomeController::getsetting();
+$date = \App\Http\Controllers\Admin\HomeController::getdate();
 ?>
+
 <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar scrolled awake" id="probootstrap-navbar">
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <a href="#"
-                    onclick="doGTranslate('tr|en');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;"
-                    title="English" class="nturl"><img src="http://www.websanati.com/images/english.png"
-                        height="18" width="22" alt="english" /></a>
-                {{-- <a href="#"
-    onclick="doGTranslate('tr|de');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;"
-    title="Deutsch" class="nturl"><img src="http://www.websanati.com/images/german.png"
-        height="18" width="22" alt="german" /></a>
-<a href="#"
-    onclick="doGTranslate('tr|ar');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;"
-    title="Arabic" class="nturl selected"><img src="http://www.websanati.com/images/arabic.png"
-        height="18" width="22" alt="arabic" /></a> --}}
-                <a href="#"
-                    onclick="doGTranslate('tr|tr');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;"
-                    title="Türkçe" class="nturl selected"><img src="http://www.websanati.com/images/turkish.png"
-                        height="18" width="22" alt="turkish" /></a>
-
-            </div>
-            <script>
-                var tarih = new Date();
-                var yil = tarih.getFullYear();
-                var ay = tarih.getMonth();
-                var gun = tarih.getDay();
-                document.write(gun + "/" + ay + "/" + yil + "<br>");
-            </script>
+    <div class="row">
+        <div class="col-md-12">
+            <!-- weather widget start --><a target="_blank" href="https://bookeder.com/weather/istanbul-18319"><img
+                    src="https://w.bookcdn.com/weather/picture/21_18319_1_21_34495e_250_2c3e50_ffffff_ffffff_1_2071c9_ffffff_0_6.png?scode=2&domid=&anc_id=98568"
+                    alt="booked.net" /></a><!-- weather widget end -->
         </div>
+    </div>
+    <div class="container">
+
 
 
         <a class="navbar-brand" href="{{ route('user_home') }}">Kamp & Karavan</a>
@@ -44,16 +24,16 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
         <div class="collapse navbar-collapse" id="probootstrap-menu">
 
             <ul class="navbar-nav ml-auto">
-                <div class="nav-item" style="min-height: 25px; width: 250px; right-align: 25px">
+                {{-- <div class="nav-item" style="min-height: 25px; width: 250px; right-align: 25px">
                     <form action="{{ route('getcamp') }}" method="post">
                         @csrf
                         <div class="">
                             @livewire('search')
                         </div>
                     </form>
-    
+
                     @livewireScripts
-                </div>
+                </div> --}}
 
                 <li class="nav-item active"><a class="nav-link" href="{{ route('user_home') }}">Anasayfa</a>
                 </li>
@@ -78,13 +58,13 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
                     </li>
                 </ul> --}}
 
-                <li class="nav-item"><a class="nav-link" href="{{ route('editors') }}">Editörlerimiz</a>
-                </li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('blog') }}">Blog</a>
                 </li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('editors') }}">Editörlerimiz</a>
                 </li>
-                {{-- <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-                <li class="nav-item"><a class="nav-link" href="travel.html">Travel With Us</a></li>
+
+                <li class="nav-item"><a class="nav-link" href="{{ route('aboutus') }}">Hakkımızda</a></li>
+                {{-- <li class="nav-item"><a class="nav-link" href="travel.html">Travel With Us</a></li>
                 <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li> --}}
 
 
@@ -95,6 +75,11 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
                             {{-- {{\App\Http\Controllers\HomeController::get_role(\Illuminate\Support\Facades\Auth::user()->id)}} --}}
 
                             <ul class="sub-menu">
+                                <li>
+                                    <a href="{{route('user_profile')}}" class="nav-link">
+                                        Profilim
+                                    </a>
+                                </li>
                                 @if (\Illuminate\Support\Facades\Auth::user()->roles()->where('name', 'admin')->exists())
                                     <li>
                                         <a href="{{ route('user_camp') }}" class="nav-link">
@@ -145,14 +130,22 @@ $parentCategories = \App\Http\Controllers\HomeController::categorylist();
 
         </div>
     </div>
-
     <div class="row">
-        <div class="col-md-12">
-            <!-- weather widget start --><a target="_blank" href="https://bookeder.com/weather/istanbul-18319"><img
-                    src="https://w.bookcdn.com/weather/picture/21_18319_1_21_34495e_250_2c3e50_ffffff_ffffff_1_2071c9_ffffff_0_6.png?scode=2&domid=&anc_id=98568"
-                    alt="booked.net" /></a><!-- weather widget end -->
+        <div class="col-md-12 ">
+            <div class="row text-center text-white">
+                {{ $date }}
+            </div>
+            <div class="row text-center">
+                <a href="#"
+                    onclick="doGTranslate('tr|en');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;"
+                    title="English" class="nturl">EN</a>|
+                <a href="#"
+                    onclick="doGTranslate('tr|tr');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;"
+                    title="Türkçe" class="nturl selected">TR</a>
+            </div>
         </div>
     </div>
+
 
 </nav>
 

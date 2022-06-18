@@ -56,7 +56,7 @@
                                                 style="width: auto;">Ekleyen IP'si</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Start date: activate to sort column ascending"
-                                                style="width: auto;">Yıldız Sayısı</th>
+                                                style="width: auto;">Puan Ortalaması</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Start date: activate to sort column ascending"
                                                 style="width: auto;">Durum</th>
@@ -77,7 +77,7 @@
                                                 <td>{{ $dl->camp->name }}</td>
                                                 <td>{{ $dl->subject }}</td>
                                                 <td>{{ $dl->IP }}</td>
-                                                <td>{{ $dl->rate }}</td>
+                                                <td>{{ number_format($dl->rate,2) }}</td>
                                                 <td>{{ $dl->status }}</td>
                                                 <td><a href="{{ route('admin_edit_review', ['id' => $dl->id]) }}"
                                                         onclick="return !window.open(this.href, '','top=50 left=50 height=1150 width=750')"><img

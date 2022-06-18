@@ -73,14 +73,114 @@
                         </div>
                         <hr>
                         <div class="card-body">
-                            <label>Kategori Ekle</label>
-                            <select class="form-control select2" name="category_id" style="width: 100%">
+                            <h3>Kategori Ekle</h3><hr>
+                            {{-- <select class="form-control select2" name="category_id" style="width: 100%">
                                 @foreach ($category as $rs)
                                     <option value="{{ $rs->id }}">
                                         {{ \App\Http\Controllers\Admin\CategoryController::getParentsTree($rs, $rs->title) }}
                                     </option>
                                 @endforeach
-                            </select>
+                            </select> --}}
+                            
+
+                            <div class="form-group">
+                                <label>Bölge</label>
+                                <select class="form-control select2" name="category_id_0" style="width: 100%">
+                                    <option value="0" selected="selected">Seçiniz...</option>
+                                    <?php
+                                    $bölge = \App\Http\Controllers\HomeController::get_parent('Bölge');
+                                    ?>
+                                    @foreach ($bölge as $rs)
+                                        <option value="{{ $rs->id }}">
+                                            {{ $rs->title }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Şehir</label>
+                                <select class="form-control select2" name="category_id_1" style="width: 100%">
+                                    <option value="0" selected="selected">Seçiniz...</option>
+                                    <?php
+                                    $sehir = \App\Http\Controllers\HomeController::get_city('Şehir');
+                                    ?>
+                                    @for ($i = 0; $i < count($sehir, 1) / 2 - 1; $i++)
+                                        <option value="{{ $sehir['city_id'][$i] }}">
+                                            {{ $sehir['city_title'][$i] }}
+                                        </option>
+                                    @endfor
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Kamp Tipi</label>
+                                <select class="form-control select2" name="category_id_2" style="width: 100%">
+                                    <option value="0" selected="selected">Seçiniz...</option>
+                                    <?php
+                                    $kamp_tipi = \App\Http\Controllers\HomeController::get_parent('Kamp Tipi');
+                                    ?>
+                                    @foreach ($kamp_tipi as $rs)
+                                        <option value="{{ $rs->id }}">
+                                            {{ $rs->title }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Konaklama İmkanı</label>
+                                <select class="form-control select2" name="category_id_3" style="width: 100%">
+                                    <option value="0" selected="selected">Seçiniz...</option>
+                                    <?php
+                                    $konaklama_imkani = \App\Http\Controllers\HomeController::get_parent('Konaklama İmkanı');
+                                    ?>
+                                    @foreach ($konaklama_imkani as $rs)
+                                        <option value="{{ $rs->id }}">
+                                            {{ $rs->title }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Minimum Konaklama Süresi</label>
+                                <select class="form-control select2" name="category_id_4" style="width: 100%">
+                                    <option value="0" selected="selected">Seçiniz...</option>
+                                    <?php
+                                    $min_konaklama_suresi = \App\Http\Controllers\HomeController::get_parent('Minimum Konaklama Süresi');
+                                    ?>
+                                    @foreach ($min_konaklama_suresi as $rs)
+                                        <option value="{{ $rs->id }}">
+                                            {{ $rs->title }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Konum</label>
+                                <select class="form-control select2" name="category_id_5" style="width: 100%">
+                                    <option value="0" selected="selected">Seçiniz...</option>
+                                    <?php
+                                    $konum = \App\Http\Controllers\HomeController::get_parent('Konum');
+                                    ?>
+                                    @foreach ($konum as $rs)
+                                        <option value="{{ $rs->id }}">
+                                            {{ $rs->title }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Plaj Tipi</label>
+                                <select class="form-control select2" name="category_id_6" style="width: 100%">
+                                    <option value="0" selected="selected">Seçiniz...</option>
+                                    <?php
+                                    $plaj_tipi = \App\Http\Controllers\HomeController::get_parent('Plaj Tipi');
+                                    ?>
+                                    @foreach ($plaj_tipi as $rs)
+                                        <option value="{{ $rs->id }}">
+                                            {{ $rs->title }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Ekle</button>
                             </div>

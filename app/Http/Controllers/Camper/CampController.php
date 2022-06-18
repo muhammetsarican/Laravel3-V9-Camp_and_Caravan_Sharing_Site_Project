@@ -62,6 +62,7 @@ class CampController extends Controller
             $data->status = $request->input('status');
             $data->image=Storage::putFile('image',$request->file('image'));
             $data->video_url = substr($request->input('video_url'),strrpos($request->input('video_url'),'/'));
+            $data->user_review = $request->input('user_review');
             $data->save();
             return redirect()->route('user_camp')->with('success', 'Kayıt Başarıyla Eklendi.');
         }
@@ -88,10 +89,14 @@ class CampController extends Controller
 
     public function campcategorystore(Request $request, Camp $camp, $id)
     {
-        $data = new Camp_category();
-        $data->camp_id=$request->input('camp_id');
-        $data->category_id=$request->input('category_id');
-        $data->save();
+        for ($i = 0; $i <= 6; $i++) {
+            if ($request->input('category_id_' . $i) != 0) {
+                $data = new Camp_category();
+                $data->camp_id = $request->input('camp_id');
+                $data->category_id = $request->input('category_id_' . $i);
+                $data->save();
+            }
+        }
         return redirect()->back()->with('success', 'Kategori Başarıyla Eklendi.');
     }
 
@@ -143,6 +148,7 @@ class CampController extends Controller
                 $data->image = Storage::putFile('public/image', $request->file('image'));
             }
             $data->video_url = substr($request->input('video_url'),strrpos($request->input('video_url'),'/'));
+            $data->user_review = $request->input('user_review');
             $data->save();
             return redirect()->back()->with('success','Kayıt Başarıyla Güncellendi.');
         }

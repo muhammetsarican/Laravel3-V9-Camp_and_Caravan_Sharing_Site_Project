@@ -64,10 +64,13 @@
                                         @foreach ($datalist as $dl)
                                             <tr class="odd">
                                                 <td>
-                                                    @if ($dl->profile_photo_path)
-                                                        <img src="{{ \Illuminate\Support\Facades\Storage::url($dl->profile_photo_path) }}"
-                                                            height="50" style="border-radius: 10px" alt="">
-                                                    @endif
+                                                    <img src="
+                                                        @if ($dl->profile_photo_path != null) {{ \Illuminate\Support\Facades\Storage::url($dl->profile_photo_path) }}
+                                                            
+                                                        @else
+                                                        {{ asset('admin') }}/img/undraw_profile.png @endif
+                                                        "
+                                                        height="50" style="border-radius: 10px" alt="">
                                                 </td>
                                                 <td>{{ $dl->name }}</td>
                                                 <td>{{ $dl->email }}</td>
@@ -87,7 +90,7 @@
                                                         onclick="return !window.open(this.href, '','top=50 left=50 height=1150 width=750')"><img
                                                             src="{{ asset('admin') }}/img/icons/edit.png"
                                                             height="25px"></a></td>
-                                                @if ($dl->id != 1)
+                                                @if ($dl->id != \Illuminate\Support\Facades\Auth::user()->id)
                                                     <td><a href="{{ route('admin_delete_user', ['id' => $dl->id]) }}"
                                                             onclick="return confirm('Delete! Are you sure ?')"><img
                                                                 src="{{ asset('admin') }}/img/icons/delete.png"

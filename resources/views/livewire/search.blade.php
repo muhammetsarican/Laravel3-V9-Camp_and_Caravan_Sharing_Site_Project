@@ -1,6 +1,5 @@
 <div style="padding-top: 0px">
     <input style="padding-top: 0px" wire:model="search" name="search" type="text" class="form-control" list="mylist" placeholder="Kamplarda Ara..."/>
-
     @if(!empty($query))
         <datalist id="mylist">
             @foreach($datalist as $rs)

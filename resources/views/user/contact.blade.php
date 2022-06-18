@@ -1,3 +1,6 @@
+<?php
+$setting = \App\Http\Controllers\Admin\SettingController::getsetting();
+?>
 @extends('layouts.home')
 @section('content')
     <section class="probootstrap-cover overflow-hidden relative"
@@ -29,23 +32,19 @@
                         <br>
                         <div class="row">
                             <div class="col-md-3 probootstrap-animate fadeInUp probootstrap-animated">
-                                <p class="mb-5">Far far away, behind the word mountains, far from the countries
-                                    Vokalia and
-                                    Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at
-                                    the coast of
-                                    the Semantics, a large language ocean.</p>
+                                <h4 class="mb-5">İrtibat Adreslerimiz:</h4>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <ul class="probootstrap-contact-details">
                                             <li>
                                                 <span class="text-uppercase"><span class="ion-paper-airplane"></span>
                                                     Email</span>
-                                                you_mail@gmail.com
+                                                {{$setting->email}}
                                             </li>
                                             <li>
                                                 <span class="text-uppercase"><span class="ion-ios-telephone"></span>
                                                     Phone</span>
-                                                +30 976 1382 9921
+                                                    {{$setting->phone}}
                                             </li>
                                         </ul>
                                     </div>
@@ -54,14 +53,12 @@
                                             <li>
                                                 <span class="text-uppercase"><span class="ion-ios-telephone"></span>
                                                     Fax</span>
-                                                +30 976 1382 9922
+                                                    {{$setting->fax}}
                                             </li>
                                             <li>
                                                 <span class="text-uppercase"><span class="ion-location"></span>
                                                     Address</span>
-                                                San Francisco, CA <br>
-                                                4th Floor8 Lower <br>
-                                                San Francisco street, M1 50F
+                                                    {{$setting->address}} <br>
                                             </li>
                                         </ul>
                                     </div>

@@ -120,12 +120,14 @@
                                     alt="">
                                 <input type="file" name="image" class="form-control">
                             </div>
-                            
                             <div class="form-group">
                                 <label>Youtube Video Url</label>
                                 <input type="text" name="video_url" class="form-control" placeholder="https://youtu.be/" value="https://youtu.be{{ $data->video_url }}">
                             </div>
-
+                            <div class="form-group">
+                                <label>Yorumunuz</label>
+                                <textarea type="text" name="user_review" class="form-control">{{ $data->user_review }}</textarea>
+                            </div>
                             <div class="form-group">
                                 <label>Durum</label>
                                 <select class="form-control select2" name="status" style="width: 100%">

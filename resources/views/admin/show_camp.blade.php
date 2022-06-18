@@ -23,7 +23,7 @@
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
                             <div class="col-sm-12 col-md-2">
-                                <a href="{{ route('admin_add_category') }}" class="btn btn-black--hover breadcrumb">Kamp
+                                <a href="{{ route('admin_add_camp') }}" class="btn btn-black--hover breadcrumb">Kamp
                                     Ekle</a>
                             </div>
                             <div class="col-sm-12 col-md-10">
@@ -88,7 +88,7 @@
                                                         <img src="{{ asset('admin') }}/img/icons/gallery.png"
                                                             height="25px"></a>
                                                 </td>
-                                                <td><a href="{{ route('user_camp_category', ['id' => $dl->id]) }}"
+                                                <td><a href="{{ route('camp_category', ['id' => $dl->id]) }}"
                                                         onclick="return !window.open(this.href, '','top=50 left=50 height=1150 width=750')"><img
                                                             src="{{ asset('admin') }}/img/icons/category.png" height="20">
                                                     </a>

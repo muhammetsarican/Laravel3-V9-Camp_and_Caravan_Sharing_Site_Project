@@ -140,6 +140,10 @@ class HomeController extends Controller
         return view('user.register');
     }
 
+    public function userProfile(){
+        return view('user.user_profile');
+    }
+
     public function index()
     {
         $blog = Blog::all();

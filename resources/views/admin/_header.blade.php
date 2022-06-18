@@ -94,7 +94,14 @@ $count = \App\Http\Controllers\Admin\HomeController::getcountmessage();
                 aria-haspopup="true" aria-expanded="false">
                 <span
                     class="mr-2 d-none d-lg-inline text-gray-600 small">{{ \Illuminate\Support\Facades\Auth::user()->name }}</span>
-                <img class="img-profile rounded-circle" src="{{ asset('admin') }}/img/undraw_profile.svg">
+                <img class="img-profile rounded-circle" src="
+                @if (\Illuminate\Support\Facades\Auth::user()->profile_photo_path!=null)
+                {{ \Illuminate\Support\Facades\Storage::url(\Illuminate\Support\Facades\Auth::user()->profile_photo_path) }}
+                    
+                @else
+                {{ asset('admin') }}/img/undraw_profile.png     
+                @endif
+                ">
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

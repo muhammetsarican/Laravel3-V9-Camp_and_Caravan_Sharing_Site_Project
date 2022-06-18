@@ -51,14 +51,20 @@
                             <div class="row form-group">
                                 <div class="col-md-6 mb-3 mb-md-0">
                                     <label>Daha önce bulundunuz mu?</label><br>
-                                    <input type="radio" name="have_you_been" value="Evet">&nbsp;Evet<br>
-                                    <input type="radio" name="have_you_been" value="Hayır">&nbsp;Hayır
+                                    <input type="radio" name="have_you_been"
+                                        @if ($data->have_you_been == 'Evet') checked @endif value="Evet">&nbsp;Evet<br>
+                                    <input type="radio" name="have_you_been"
+                                        @if ($data->have_you_been == 'Hayır') checked @endif value="Hayır">&nbsp;Hayır
                                 </div>
                                 <div class="col-md-6">
                                     <label>İşletme Tipi</label><br>
-                                    <input type="radio" name="operating_type" value="Kamu İşletmesi">&nbsp;Kamu
+                                    <input type="radio" name="operating_type"
+                                        @if ($data->operating_type == 'Kamu İşletmesi') checked @endif
+                                        value="Kamu İşletmesi">&nbsp;Kamu
                                     İşletmesi<br>
-                                    <input type="radio" name="operating_type" value="Özel İşletme">&nbsp;Özel İşletme
+                                    <input type="radio" name="operating_type"
+                                        @if ($data->operating_type == 'Özel İşletme') checked @endif value="Özel İşletme">&nbsp;Özel
+                                    İşletme
                                 </div>
                             </div>
                             <hr>
@@ -101,13 +107,15 @@
                                 <img src="{{ \Illuminate\Support\Facades\Storage::url($data->image) }}" height="50"
                                     alt="">
                                 <input type="file" name="image" class="form-control">
-                            </div>
-                                                     
+                            </div>                                                  
                             <div class="form-group">
                                 <label>Youtube Video Url</label>
                                 <input type="text" name="video_url" class="form-control" placeholder="https://youtu.be/" value="https://youtu.be{{ $data->video_url }}">
                             </div>
-
+                            <div class="form-group">
+                                <label>Yorumunuz</label>
+                                <textarea type="text" name="user_review" class="form-control">{{ $data->user_review }}</textarea>
+                            </div>
                             <div class="form-group">
                                 <label>Durum</label>
                                 <select class="form-control select2" name="status" style="width: 100%">

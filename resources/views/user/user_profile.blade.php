@@ -1,6 +1,3 @@
-<?php
-$setting = \App\Http\Controllers\Admin\SettingController::getsetting();
-?>
 @extends('layouts.home')
 @section('content')
     <section class="probootstrap-cover overflow-hidden relative"
@@ -10,7 +7,7 @@ $setting = \App\Http\Controllers\Admin\SettingController::getsetting();
         <div class="row align-items-center text-center">
             <div class="col-md">
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate fadeInUp probootstrap-animated">
-                    Hakkımızda
+                    Profilim
                 </h2>
 
             </div>
@@ -23,12 +20,12 @@ $setting = \App\Http\Controllers\Admin\SettingController::getsetting();
         <div class="container">
 
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-1">
                 </div>
-                <div class="col-md-8">
-                    {!!$setting->aboutus!!}
+                <div class="col-md-10">
+                    @include('profile.show')
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                 </div>
             </div>
     </section>

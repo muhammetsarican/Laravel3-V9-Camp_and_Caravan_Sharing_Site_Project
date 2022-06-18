@@ -30,17 +30,16 @@ class CampController extends Controller
         return view('admin.add_camp');
     }
 
-    protected $appends=[
+    protected $appends = [
         'get_categories'
     ];
-    public static function get_categories($id){
-        $data=Category::find($id);
-        if ($data->parent_id==0){
+    public static function get_categories($id)
+    {
+        $data = Category::find($id);
+        if ($data->parent_id == 0) {
             return $data->title;
         }
         CampController::get_categories($data->parent_id);
-        
-        
     }
     /**
      * Show the form for creating a new resource.
@@ -65,8 +64,9 @@ class CampController extends Controller
             $data->location = $request->input('location');
             $data->about_camp = $request->input('about_camp');
             $data->status = $request->input('status');
-            $data->image=Storage::putFile('image',$request->file('image'));
-            $data->video_url = substr($request->input('video_url'),strrpos($request->input('video_url'),'/'));
+            $data->image = Storage::putFile('image', $request->file('image'));
+            $data->video_url = substr($request->input('video_url'), strrpos($request->input('video_url'), '/'));
+            $data->user_review = $request->input('user_review');
             $data->save();
             return redirect()->route('admin_camp')->with('success', 'Kayıt Başarıyla Eklendi.');
         }
@@ -98,16 +98,20 @@ class CampController extends Controller
     {
         $data = Camp::find($id);
         $datalist = Camp_category::all()->sortBy('category_id');
-        $category=Category::all();
-        return view('admin.camp_categories', ['data' => $data, 'datalist' => $datalist, 'category'=>$category]);
+        $category = Category::all();
+        return view('admin.camp_categories', ['data' => $data, 'datalist' => $datalist, 'category' => $category]);
     }
 
-    public function campcategorystore(Request $request, Camp $camp, $id)
+    public function campcategorystore(Request $request)
     {
-        $data = new Camp_category();
-        $data->camp_id=$request->input('camp_id');
-        $data->category_id=$request->input('category_id');
-        $data->save();
+        for ($i = 0; $i <= 6; $i++) {
+            if ($request->input('category_id_' . $i) != 0) {
+                $data = new Camp_category();
+                $data->camp_id = $request->input('camp_id');
+                $data->category_id = $request->input('category_id_' . $i);
+                $data->save();
+            }
+        }
         return redirect()->back()->with('success', 'Kategori Başarıyla Eklendi.');
     }
 
@@ -126,8 +130,8 @@ class CampController extends Controller
     public function edit(Camp $camp, $id)
     {
         //
-        $data=Camp::find($id);
-        return view('admin.edit_camp',['data'=>$data]);
+        $data = Camp::find($id);
+        return view('admin.edit_camp', ['data' => $data]);
     }
 
     /**
@@ -143,7 +147,7 @@ class CampController extends Controller
         if ($request->input('camp_phone') != $request->input('camp_phone_validation')) {
             return redirect()->back()->with('error', 'Telefon Numaraları Eşleşmiyor.');
         } else {
-            $data=Camp::find($id);
+            $data = Camp::find($id);
             $data->name = $request->input('name');
             $data->user_id = \Illuminate\Support\Facades\Auth::user()->id;
             $data->have_you_been = $request->input('have_you_been');
@@ -158,9 +162,10 @@ class CampController extends Controller
             if ($request->file('image') != null) {
                 $data->image = Storage::putFile('public/image', $request->file('image'));
             }
-            $data->video_url = substr($request->input('video_url'),strrpos($request->input('video_url'),'/'));
+            $data->video_url = substr($request->input('video_url'), strrpos($request->input('video_url'), '/'));
+            $data->user_review = $request->input('user_review');
             $data->save();
-            return redirect()->back()->with('success','Kayıt Başarıyla Güncellendi.');
+            return redirect()->back()->with('success', 'Kayıt Başarıyla Güncellendi.');
         }
     }
 
@@ -174,6 +179,6 @@ class CampController extends Controller
     {
         //
         Camp::destroy($id);
-        return redirect()->back()->with('success','Kayıt Başarıyla Silindi.');
+        return redirect()->back()->with('success', 'Kayıt Başarıyla Silindi.');
     }
 }
