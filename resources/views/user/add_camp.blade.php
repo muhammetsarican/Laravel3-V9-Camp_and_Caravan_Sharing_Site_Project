@@ -1,4 +1,6 @@
 @extends('layouts.home')
+@section('title', 'Kamp Ekle')
+
 @section('content')
 <section class="probootstrap-cover overflow-hidden relative" style="background-image: url('http://127.0.0.1:8000/user/images/bg_1.jpg');" data-stellar-background-ratio="0.5" id="section-user">
     <div class="overlay"></div>
@@ -16,10 +18,7 @@
     <div class="container">
       
       <div class="row">
-        <div class="col-md-2 probootstrap-animate fadeInUp probootstrap-animated">
-            Resim Ekle
-        </div>
-        <div class="col-md-10 probootstrap-animate fadeInUp probootstrap-animated">
+        <div class="col-md-12 probootstrap-animate fadeInUp probootstrap-animated">
                     <!-- Main Content -->
         <div id="content">
             <div class="card">

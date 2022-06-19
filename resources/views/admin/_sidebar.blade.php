@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin_home')}}">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin_home') }}">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-cog"></i>
         </div>
@@ -12,7 +12,7 @@
     <hr class="sidebar-divider my-0">
 
     <li class="nav-item">
-        <a class="nav-link" href="{{route('admin_home')}}">
+        <a class="nav-link" href="{{ route('admin_home') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Panel</span></a>
     </li>
@@ -98,9 +98,22 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages6"
             aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Blog Yazıları</span>
+            <span>İşletme Talepleri</span>
         </a>
         <div id="collapsePages6" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('admin_request') }}">Listele</a>
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages7"
+            aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Blog Yazıları</span>
+        </a>
+        <div id="collapsePages7" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('admin_blog') }}">Listele</a>
                 <a class="collapse-item" href="{{ route('admin_add_blog') }}">Ekle</a>

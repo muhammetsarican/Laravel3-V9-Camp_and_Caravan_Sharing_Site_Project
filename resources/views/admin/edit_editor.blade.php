@@ -1,6 +1,8 @@
 <html>
 
 <head>
+    <title>Düzenle</title>
+
     <link rel="shortcut icon" href="{{ asset('admin/icons/user.png') }}" type="image/x-icon">
 
     <!-- Custom fonts for this template-->

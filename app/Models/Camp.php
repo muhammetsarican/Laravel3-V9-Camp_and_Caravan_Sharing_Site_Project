@@ -33,4 +33,9 @@ class Camp extends Model
     {
         return $this->hasMany(Filter::class);
     }
+
+    public function owner()
+    {
+        return $this->hasMany(Owner::class);
+    }
 }

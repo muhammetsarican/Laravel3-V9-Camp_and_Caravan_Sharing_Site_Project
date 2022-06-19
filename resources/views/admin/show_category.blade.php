@@ -1,4 +1,6 @@
 @extends('layouts.admin')
+@section('title', 'Kategoriler')
+
 @section('content')
 
 <div class="container-fluid">
@@ -67,7 +69,7 @@
                                         <td>Ana Kategori</td>
                                         @endif
                                         @if ($dl->parent_id!=0)
-                                            <td class="column-1">{{\App\Http\Controllers\Admin\CategoryController::getParentsTree($dl,$dl->title)}}</td>
+                                            <td class="column-1">{{\App\Http\Controllers\Admin\CategoryController::getParentsTree($dl,'')}}</td>
                                         @endif
                                         <td>{{$dl->title}}</td>
                                         <td>{{$dl->status}}</td>

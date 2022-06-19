@@ -1,4 +1,6 @@
 @extends('layouts.home')
+@section('title', 'Blog-'.$data->title)
+
 @section('content')
     <section class="probootstrap-cover overflow-hidden relative"
         style="background-image: url('{{ asset('user') }}/images/bg_1.jpg');" data-stellar-background-ratio="0.5"

@@ -1,28 +1,28 @@
 <x-jet-action-section>
     <x-slot name="title">
-        {{ __('İki Faktörlü Doğrulama') }}
+        {{ __('Two Factor Authentication') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ __('İki faktörlü kimlik doğrulamayı kullanarak hesabınıza ek güvenlik ekleyin.') }}
+        {{ __('Add additional security to your account using two factor authentication.') }}
     </x-slot>
 
     <x-slot name="content">
         <h3 class="text-lg font-medium text-gray-900">
             @if ($this->enabled)
                 @if ($showingConfirmation)
-                    {{ __('İki faktörlü doğrulamayı etkinleştirmeyi bitirin.') }}
+                    {{ __('Finish enabling two factor authentication.') }}
                 @else
-                    {{ __('İki faktörlü doğrulamayı etkinleştirdiniz.') }}
+                    {{ __('You have enabled two factor authentication.') }}
                 @endif
             @else
-                {{ __('Henüz iki faktörlü doğrulamayı etkinleştirmediniz.') }}
+                {{ __('You have not enabled two factor authentication.') }}
             @endif
         </h3>
 
         <div class="mt-3 max-w-xl text-sm text-gray-600">
             <p>
-                {{ __('İki faktörlü kimlik doğrulama etkinleştirildiğinde, kimlik doğrulama sırasında güvenli, rastgele bir jeton istenir. Bu jetonu telefonunuzun Google Authenticator uygulamasından alabilirsiniz.') }}
+                {{ __('When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone\'s Google Authenticator application.') }}
             </p>
         </div>
 
@@ -31,9 +31,9 @@
                 <div class="mt-4 max-w-xl text-sm text-gray-600">
                     <p class="font-semibold">
                         @if ($showingConfirmation)
-                            {{ __('İki faktörlü kimlik doğrulamayı etkinleştirmeyi tamamlamak için telefonunuzun kimlik doğrulama uygulamasını kullanarak aşağıdaki QR kodunu tarayın veya kurulum anahtarını girin ve oluşturulan OTP kodunu sağlayın.') }}
+                            {{ __('To finish enabling two factor authentication, scan the following QR code using your phone\'s authenticator application or enter the setup key and provide the generated OTP code.') }}
                         @else
-                            {{ __('İki faktörlü kimlik doğrulama şimdi etkinleştirildi. Telefonunuzun kimlik doğrulama uygulamasını kullanarak aşağıdaki QR kodunu tarayın veya kurulum anahtarını girin.') }}
+                            {{ __('Two factor authentication is now enabled. Scan the following QR code using your phone\'s authenticator application or enter the setup key.') }}
                         @endif
                     </p>
                 </div>
@@ -44,7 +44,7 @@
 
                 <div class="mt-4 max-w-xl text-sm text-gray-600">
                     <p class="font-semibold">
-                        {{ __('Kurulum Anahtarı') }}: {{ decrypt($this->user->two_factor_secret) }}
+                        {{ __('Setup Key') }}: {{ decrypt($this->user->two_factor_secret) }}
                     </p>
                 </div>
 
@@ -64,7 +64,7 @@
             @if ($showingRecoveryCodes)
                 <div class="mt-4 max-w-xl text-sm text-gray-600">
                     <p class="font-semibold">
-                        {{ __('Bu kurtarma kodlarını güvenli bir parola yöneticisinde saklayın. İki faktörlü kimlik doğrulama cihazınız kaybolursa, hesabınıza erişimi kurtarmak için kullanılabilirler.') }}
+                        {{ __('Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost.') }}
                     </p>
                 </div>
 
@@ -80,26 +80,26 @@
             @if (! $this->enabled)
                 <x-jet-confirms-password wire:then="enableTwoFactorAuthentication">
                     <x-jet-button type="button" wire:loading.attr="disabled">
-                        {{ __('Etkinleştir') }}
+                        {{ __('Enable') }}
                     </x-jet-button>
                 </x-jet-confirms-password>
             @else
                 @if ($showingRecoveryCodes)
                     <x-jet-confirms-password wire:then="regenerateRecoveryCodes">
                         <x-jet-secondary-button class="mr-3">
-                            {{ __('Kurtarma Kodlarını Tekrar Oluştur') }}
+                            {{ __('Regenerate Recovery Codes') }}
                         </x-jet-secondary-button>
                     </x-jet-confirms-password>
                 @elseif ($showingConfirmation)
                     <x-jet-confirms-password wire:then="confirmTwoFactorAuthentication">
                         <x-jet-button type="button" class="mr-3" wire:loading.attr="disabled">
-                            {{ __('Onayla') }}
+                            {{ __('Confirm') }}
                         </x-jet-button>
                     </x-jet-confirms-password>
                 @else
                     <x-jet-confirms-password wire:then="showRecoveryCodes">
                         <x-jet-secondary-button class="mr-3">
-                            {{ __('Kurtarma Kodlarını Göster') }}
+                            {{ __('Show Recovery Codes') }}
                         </x-jet-secondary-button>
                     </x-jet-confirms-password>
                 @endif
@@ -107,13 +107,13 @@
                 @if ($showingConfirmation)
                     <x-jet-confirms-password wire:then="disableTwoFactorAuthentication">
                         <x-jet-secondary-button wire:loading.attr="disabled">
-                            {{ __('İptal Et') }}
+                            {{ __('Cancel') }}
                         </x-jet-secondary-button>
                     </x-jet-confirms-password>
                 @else
                     <x-jet-confirms-password wire:then="disableTwoFactorAuthentication">
                         <x-jet-danger-button wire:loading.attr="disabled">
-                            {{ __('Devredışı Bırak') }}
+                            {{ __('Disable') }}
                         </x-jet-danger-button>
                     </x-jet-confirms-password>
                 @endif

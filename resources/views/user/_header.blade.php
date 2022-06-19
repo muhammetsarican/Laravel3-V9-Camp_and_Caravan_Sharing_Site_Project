@@ -1,6 +1,7 @@
 <?php
 $parentCategories = \App\Http\Controllers\HomeController::categorylist();
 $date = \App\Http\Controllers\Admin\HomeController::getdate();
+$setting = \App\Http\Controllers\Admin\SettingController::getsetting();
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar scrolled awake" id="probootstrap-navbar">
@@ -15,7 +16,7 @@ $date = \App\Http\Controllers\Admin\HomeController::getdate();
 
 
 
-        <a class="navbar-brand" href="{{ route('user_home') }}">Kamp & Karavan</a>
+        <a class="navbar-brand" href="{{ route('user_home') }}">{{$setting->title}}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-menu"
             aria-controls="probootstrap-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span><i class="ion-navicon"></i></span>

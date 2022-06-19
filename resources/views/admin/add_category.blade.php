@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','Category Add')
+@section('title','Kategori Ekle')
 @section('content')
 <div class="container-fluid">
 
@@ -56,8 +56,8 @@
                                     <div class="form-group">
                                         <label>Durum</label>
                                         <select class="form-control select2" name="status" style="width: 100%">
-                                            <option selected="selected">Pasif</option>
-                                            <option>Aktif</option>
+                                            <option selected="selected">Aktif</option>
+                                            <option>Pasif</option>
                                         </select>
                                     </div>
                                 </div>

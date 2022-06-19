@@ -1,4 +1,6 @@
 @extends('layouts.admin')
+@section('title', 'Yorumlar')
+
 @section('content')
     <div class="container-fluid">
 
@@ -91,7 +93,6 @@
                                 </table>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

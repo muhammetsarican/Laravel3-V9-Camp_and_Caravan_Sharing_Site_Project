@@ -37,38 +37,41 @@
                 </div>
                 <div class="card-body">
                     @include('user.message')
-                    <form role="form" action="{{ route('admin_update_category', ['id' => $data->id]) }}" method="post"
+                    <form role="form" action="{{ route('admin_update_request', ['id' => $data->id]) }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
-                                <label>Parent</label>
-                                <select class="form-control select2" name="parent_id" style="width: 100%">
-                                    <option value="0">Ana Kategori</option>
-                                    @foreach($datalist as $rs)
-                                    <option value="{{$rs->id}}" @if ($rs->id==$data->parent_id) selected="selected" @endif>
-                                        {{\App\Http\Controllers\Admin\CategoryController::getParentsTree($rs,$rs->title)}}
-                                    </option>
-                                    @endforeach
-                                </select>
+                                <label>Id</label>
+                                <p class="form-control">{{ $data->id }}</p>
                             </div>
                             <div class="form-group">
-                                <label>Başlık</label>
-                                <input type="text" name="title" class="form-control" value="{{$data->title}}">
+                                <label>Adı</label>
+                                <p  name="user_id" class="form-control" >{{ $data->name }}</p>
                             </div>
                             <div class="form-group">
-                                <label>Anahtar Kelimeler</label>
-                                <input type="text" name="keywords" class="form-control" value="{{$data->keywords}}">
+                                <label>Kamp Adı</label>
+                                <p  name="camp_id" class="form-control"
+                                    >{{ $data->camp->name }}</p>
                             </div>
                             <div class="form-group">
-                                <label>Tanım</label>
-                                <input type="text" name="description" class="form-control" value="{{$data->description}}">
+                                <label>E-Posta</label>
+                                <p  name="mail" class="form-control"
+                                    >{{ $data->mail }}</p>
+                            </div>
+                            <div class="form-group">
+                                <label>Talep</label>
+                                <p  name="request" class="form-control" >{{ $data->request }}</p>
+                            </div> 
+                            <div class="form-group">
+                                <label>Admin Notu</label>
+                                <textarea  name="admin_note" class="form-control" >{{ $data->admin_note }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Durum</label>
                                 <select class="form-control select2" name="status">
-                                    <option @if ($data->status=='Aktif') selected="selected" @endif>Aktif</option>
-                                    <option @if ($data->status=='Pasif') selected="selected" @endif>Pasif</option>
+                                    <option @if ($data->status=='Onaylandı') selected="selected" @endif>Onaylandı</option>
+                                    <option @if ($data->status=='Reddedildi') selected="selected" @endif>Reddedildi</option>
                                 </select>
                             </div>
                         </div>

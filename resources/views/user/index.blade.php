@@ -9,6 +9,7 @@ $setting = \App\Http\Controllers\Admin\SettingController::getsetting();
     {{ $setting->description }}
 @endsection
 
+
 @section('keywords', $setting->keywords)
 
 @section('content')
@@ -19,7 +20,7 @@ $setting = \App\Http\Controllers\Admin\SettingController::getsetting();
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md">
-                    <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Kamp & Karavan'a Hoşgeldiniz...</h2>
+                    <h2 class="heading mb-2 display-4 font-light probootstrap-animate">{{$setting->title}}'a Hoşgeldiniz...</h2>
                     <p class="lead mb-5 probootstrap-animate">
 
                     </p>
@@ -303,7 +304,7 @@ $setting = \App\Http\Controllers\Admin\SettingController::getsetting();
             </div>
             <div class="row justify-content-center mb-5">
                 @foreach ($review as $rw)
-                    <div class="col-md-4 text-center mb-5 probootstrap-animate">
+                    <div class="col-md-3 text-center mb-5 probootstrap-animate">
                         <blockquote class="">
                             <p class="probootstrap-author">
                                 <a href="https://probootstrap.com/" target="_blank">
@@ -330,7 +331,7 @@ $setting = \App\Http\Controllers\Admin\SettingController::getsetting();
     <table>
         <tr>
             <td>
-                <a href="{{ route('contact') }}" target="_blank">
+                <a href="{{ route('contact') }}">
                     <img alt="Mesaj Atabilirsiniz" style='background:transparent;border:none;max-height: 65px'
                         title='Bize Ulaşın' src="{{ asset('admin') }}/img/icons/contact.png" />
                 </a>

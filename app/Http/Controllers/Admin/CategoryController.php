@@ -25,7 +25,11 @@ class CategoryController extends Controller
             return $title;
         }
         $parent=Category::find($category->parent_id);
+        if($title==''){
+            $title=$parent->title ; 
+        }else{
         $title=$parent->title.' > '.$title;
+        }
         return CategoryController::getParentsTree($parent,$title);
     }
 
@@ -56,7 +60,7 @@ class CategoryController extends Controller
             'description'=>$request->input('description'),
             'status'=>$request->input('status')
         ]);
-        return redirect()->route('admin_category');
+        return redirect()->back()->with('success','Kayıt Başarıyla Eklendi.');
     }
 
     /**

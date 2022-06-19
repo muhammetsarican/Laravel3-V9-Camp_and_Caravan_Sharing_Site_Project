@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'İletişim Mesajları')
+@section('title', 'Talepler')
 
 @section('content')
     <div class="container-fluid">
@@ -8,13 +8,13 @@
 
         <div class="row">
             <div class="col-sm-12 col-md-6">
-                <h2 class="mb-2 text-gray-800">İletişim Mesajları</h2>
+                <h2 class="mb-2 text-gray-800">Talepler</h2>
             </div>
 
             <div class="col-sm-12 col-md-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item "><a href="{{ route('admin_home') }}">Anasayfa</a></li>
-                    <li class="breadcrumb-item active">İletişim Mesajları</li>
+                    <li class="breadcrumb-item active">Talepler </li>
                 </ol>
             </div>
         </div>
@@ -46,19 +46,13 @@
                                                 ID</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: auto;">Gönderen</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Start date: activate to sort column ascending"
-                                                style="width: auto;">Gönderen IP'si</th> 
+                                                style="width: auto;">Adı</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Office: activate to sort column ascending"
-                                                style="width: auto;">E-Posta</th>
+                                                style="width: auto;">Kamp Adı</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Age: activate to sort column ascending"
-                                                style="width: auto;">İletişim Sebebi</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Start date: activate to sort column ascending"
-                                                style="width: auto;">Admin Notu</th>
+                                                style="width: auto;">E-Posta</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Start date: activate to sort column ascending"
                                                 style="width: auto;">Durum</th>
@@ -76,12 +70,10 @@
                                             <tr class="odd">
                                                 <td>{{ $dl->id }}</td>
                                                 <td>{{ $dl->name }}</td>
-                                                <td>{{ $dl->ip }}</td>
-                                                <td>{{ $dl->email }}</td>
-                                                <td>{{ $dl->contact_reason }}</td>
-                                                <td>{{ $dl->note }}</td>
+                                                <td>{{ $dl->camp->name }}</td>
+                                                <td>{{ $dl->mail }}</td>
                                                 <td>{{ $dl->status }}</td>
-                                                <td><a href="{{ route('admin_edit_message', ['id' => $dl->id]) }}"
+                                                <td><a href="{{ route('admin_edit_request', ['id' => $dl->id]) }}"
                                                         onclick="return !window.open(this.href, '','top=50 left=50 height=1150 width=750')"><img
                                                             src="{{ asset('admin') }}/img/icons/edit.png" height="25">
                                                     </a>
@@ -93,7 +85,6 @@
                                 </table>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

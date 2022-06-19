@@ -1,4 +1,6 @@
 @extends('layouts.home')
+@section('title', 'Kamplarım')
+
 @section('content')
     <section class="probootstrap-cover overflow-hidden relative"
         style="background-image: url('http://127.0.0.1:8000/user/images/bg_1.jpg');" data-stellar-background-ratio="0.5"

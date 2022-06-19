@@ -2,6 +2,8 @@
 $count_review = \App\Http\Controllers\HomeController::getcountreview($data->id);
 ?>
 @extends('layouts.home')
+@section('title', 'Kamp-'.$data->name)
+
 @section('content')
     <section class="probootstrap-cover overflow-hidden relative"
         style="background-image: url('{{ asset('user') }}/images/bg_1.jpg');" data-stellar-background-ratio="0.5"
@@ -61,7 +63,15 @@ $count_review = \App\Http\Controllers\HomeController::getcountreview($data->id);
                     <h4>Kategoriler:</h4>
                     <p>
                         @foreach ($data->camp_category as $camp_cat)
-                            *{{ $camp_cat->category->title }}&nbsp;
+                            <ul class="main-menu">
+                                <li class="">
+                                    <a href="#" class="">*{{ $camp_cat->category->title }}&nbsp;</a>
+                                    <ul class="sub-menu-2">
+                                        {{ $camp_cat->category->description }}
+                                    </ul>
+                                </li>
+                            </ul>
+                            {{-- *{{ $camp_cat->category->title }}&nbsp; --}}
                         @endforeach.
                     </p>
                 </div>
@@ -69,7 +79,7 @@ $count_review = \App\Http\Controllers\HomeController::getcountreview($data->id);
         </div>
 
     </section>
-    <a class="btn btn-danger text-white">Eğer işletme size aitse düzeltme talebinde bulunun</a>
+    <a href="{{route('owner',$data->id)}}"class="btn btn-danger text-white">Eğer işletme size aitse düzeltme talebinde bulunun</a>
     <section>
     </section>
     @if ($data->video_url != null)

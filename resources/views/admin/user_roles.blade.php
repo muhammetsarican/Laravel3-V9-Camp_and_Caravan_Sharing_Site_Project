@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <title>Kullanıcı Rolleri</title>
     <link rel="shortcut icon" href="{{ asset('admin/icons/user.png') }}" type="image/x-icon">
 
     <!-- Custom fonts for this template-->

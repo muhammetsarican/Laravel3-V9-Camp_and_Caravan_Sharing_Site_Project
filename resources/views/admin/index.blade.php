@@ -1,4 +1,9 @@
+<?php
+$setting = \App\Http\Controllers\Admin\SettingController::getsetting();
+?>
 @extends('layouts.admin')
+@section('title', 'Admin-'.$setting->title)
+
 @section('content')
     <div class="container-fluid">
 
