@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // ->middleware([\App\Http\Middleware\Authenticate::class]);
+Route::get('/symlink', function() {
+    Artisan::call('storage:link');
+});
 Route::get('/welcome', function () {
     return view('welcome');
 });

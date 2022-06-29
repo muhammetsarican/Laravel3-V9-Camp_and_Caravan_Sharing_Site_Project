@@ -38,4 +38,10 @@ class Camp extends Model
     {
         return $this->hasMany(Owner::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

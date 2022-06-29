@@ -73,4 +73,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Blog::class);
     }
+
+    public function camps()
+    {
+        return $this->hasMany(Camp::class);
+    }
 }

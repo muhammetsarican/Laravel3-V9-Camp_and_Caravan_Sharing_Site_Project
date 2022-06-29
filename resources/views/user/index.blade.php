@@ -14,13 +14,25 @@ $setting = \App\Http\Controllers\Admin\SettingController::getsetting();
 
 @section('content')
     <section class="probootstrap-cover overflow-hidden relative"
-        style="background-image: url('{{ asset('user') }}/images/bg_1.jpg');height:300px"
+        style="background-image: url('{{ asset('user') }}/images/bg_1.jpg');min-height:1000px"
         data-stellar-background-ratio="0.5" id="section-user">
         <div class="overlay"></div>
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md">
-                    <h2 class="heading mb-2 display-4 font-light probootstrap-animate">{{$setting->title}}'a Hoşgeldiniz...</h2>
+                    <h2 class="heading mb-2 display-4 font-light probootstrap-animate">{{ $setting->title }}'a
+                        Hoşgeldiniz...
+                    </h2>
+                    <div class="" style="min-height: 25px; max-width: 300px;">
+                        <form action="{{ route('getcamp') }}" method="post">
+                            @csrf
+                            <div class="">
+                                @livewire('search')
+                            </div>
+                        </form>
+
+                        @livewireScripts
+                    </div>
                     <p class="lead mb-5 probootstrap-animate">
 
                     </p>
@@ -52,7 +64,7 @@ $setting = \App\Http\Controllers\Admin\SettingController::getsetting();
                         @csrf
                         <div class="card-body">
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label>Bölge</label>
                                 <select class="form-control select2" name="filter_0" style="width: 100%">
                                     <option value="0" selected="selected">Seçiniz...</option>
@@ -65,7 +77,7 @@ $setting = \App\Http\Controllers\Admin\SettingController::getsetting();
                                         </option>
                                     @endforeach
                                 </select>
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label>Şehir</label>
                                 <select class="form-control select2" name="filter_1" style="width: 100%">
@@ -158,142 +170,121 @@ $setting = \App\Http\Controllers\Admin\SettingController::getsetting();
                     </form>
                 </div>
                 <div class="col-md-9 row">
-                    <div class="" style="min-height: 25px; min-width: 100%;">
-                        <form action="{{ route('getcamp') }}" method="post">
-                            @csrf
-                            <div class="">
-                                @livewire('search')
-                            </div>
-                        </form>
-
-                        @livewireScripts
+                    <div class="col-md-12 text-center mb-5 probootstrap-animate fadeInUp probootstrap-animated">
+                            <h2 class="display-4 border-bottom probootstrap-section-heading">Bölgeler</h2>
                     </div>
-                    <div class="col-md-12">
-                        <div class="probootstrap-animate">
-                            <div class="owl-carousel js-owl-carousel-3">
-                                @foreach ($blog as $bl)
-                                    <div>
-                                        <div
-                                            class="media probootstrap-media d-block align-items-stretch probootstrap-animate">
-                                            <a href="{{ route('user_show_blog', ['id' => $bl->id]) }}">
-
-                                                <img src="{{ \Illuminate\Support\Facades\Storage::url($bl->image) }}"
-                                                    alt="{{ $bl->title }}" class="img-fluid"
-                                                    style="object-fit:cover; height:500px; width:100%">
-
-                                                <div class="media-body">
-                                                    <h5 class="mb-3">Blog-{{ $bl->camp->name }}: {{ $bl->title }}
-                                                    </h5>
-                                                    <p
-                                                        style="overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    display: -webkit-box;
-                                                    -webkit-line-clamp: 1;
-                                                    -webkit-box-orient: vertical; color:rgb(6, 73, 0)">
-                                                        {{ $bl->post }} </p>
-                                                    <p><a href="{{ route('user_show_blog', ['id' => $bl->id]) }}">Devamını
-                                                            Oku</a></p>
-
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                    $i = 0;
+                    ?>
                     @foreach ($datalist as $dl)
-                        <div class="col-lg-3 col-md-6 probootstrap-animate mb-3">
+                        <?php
+                        $i += 1;
+                        ?>
+                        <div class="col-lg-3 probootstrap-animate mb-3">
                             <a href="{{ route('camp_detail', ['id' => $dl->id]) }}" class="probootstrap-thumbnail">
-                                <img src="{{ \Illuminate\Support\Facades\Storage::url($dl->image) }}"
-                                    alt="{{ $dl->name }}" class="img-fluid" style="height: 200px; object-fit:cover">
+                                <img src="{{ asset('user') }}/images/camp_{{ $i }}.jpg"
+                                    alt="{{ $dl->title }}" class="img-fluid" style="height: 200px; object-fit:cover">
                                 <div class="probootstrap-text">
-                                    <h3>{{ $dl->name }}</h3>
+                                    <h5 class="category-info-title text-center">
+                                        {{ $dl->title }} </h5>
                                 </div>
                             </a>
+                        </div>
+                    @endforeach
+                    <div class="col-lg-3 probootstrap-animate mb-3">
+                        <a href="{{ route('camp_detail', ['id' => $dl->id]) }}" class="probootstrap-thumbnail">
+                            <img src="{{ asset('user') }}/images/camp_8.jpg" alt="Tümü" class="img-fluid"
+                                style="height: 200px; object-fit:cover">
+                            <div class="probootstrap-text">
+                                <h5 class="category-info-title text-center">
+                                    Tümü </h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="probootstrap_section">
+        <div class="container">
+            <div class="row text-center mb-5 probootstrap-animate fadeInUp probootstrap-animated">
+                <div class="col-md-12">
+                    <h2 class="display-4 border-bottom probootstrap-section-heading">Son Blog Yazıları</h2>
+                </div>
+            </div>
+
+            <div class="row probootstrap-animate fadeInUp probootstrap-animated">
+                <div class="col-md-12">
+                    <div class="owl-carousel js-owl-carousel-2 owl-loaded owl-drag">
+
+                        @foreach ($blog as $bl)
+                            <div>
+                                <div class="media probootstrap-media d-block align-items-stretch probootstrap-animate">
+                                    <a href="{{ route('user_show_blog', ['id' => $bl->id]) }}">
+
+                                        <img src="{{ \Illuminate\Support\Facades\Storage::url($bl->image) }}"
+                                            alt="{{ $bl->title }}" class="img-fluid"
+                                            style="object-fit:cover; height:500px; width:100%">
+
+                                        <div class="media-body">
+                                            <h5 class="mb-3">Blog-{{ $bl->camp->name }}: {{ $bl->title }}
+                                            </h5>
+                                            <p
+                                                style="overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        display: -webkit-box;
+                                        -webkit-line-clamp: 1;
+                                        -webkit-box-orient: vertical; color:rgb(6, 73, 0)">
+                                                {{ $bl->post }} </p>
+                                            <p><a href="{{ route('user_show_blog', ['id' => $bl->id]) }}">Devamını
+                                                    Oku</a></p>
+
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="probootstrap_section">
+        <div class="col-md-12">
+            <div class="probootstrap-animate">
+                <div class="owl-carousel js-owl-carousel-2">
+                    @foreach ($blog as $bl)
+                        <div>
+                            <div class="media probootstrap-media d-block align-items-stretch probootstrap-animate">
+                                <a href="{{ route('user_show_blog', ['id' => $bl->id]) }}">
+
+                                    <img src="{{ \Illuminate\Support\Facades\Storage::url($bl->image) }}"
+                                        alt="{{ $bl->title }}" class="img-fluid"
+                                        style="object-fit:cover; height:500px; width:100%">
+
+                                    <div class="media-body">
+                                        <h5 class="mb-3">Blog-{{ $bl->camp->name }}: {{ $bl->title }}
+                                        </h5>
+                                        <p
+                                            style="overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        display: -webkit-box;
+                                        -webkit-line-clamp: 1;
+                                        -webkit-box-orient: vertical; color:rgb(6, 73, 0)">
+                                            {{ $bl->post }} </p>
+                                        <p><a href="{{ route('user_show_blog', ['id' => $bl->id]) }}">Devamını
+                                                Oku</a></p>
+
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     @endforeach
                 </div>
             </div>
         </div>
     </section>
-
-    {{-- <section class="probootstrap_section">
-        <div class="container">
-            <div class="row text-center mb-5 probootstrap-animate">
-                <div class="col-md-12">
-                    <h2 class="display-4 border-bottom probootstrap-section-heading">Bizimle Kampa Gelin</h2>
-                </div>
-            </div>
-            <div class="row probootstrap-animate">
-                <div class="col-md-12">
-                    <div class="owl-carousel js-owl-carousel">
-                        <a class="probootstrap-slide" href="#">
-                            <span class="flaticon-teatro-de-la-caridad"></span>
-                            <em>Teatro de la Caridad</em>
-                        </a>
-                        <a class="probootstrap-slide" href="#">
-                            <span class="flaticon-royal-museum-of-the-armed-forces"></span>
-                            <em>Royal Museum of the Armed Forces</em>
-                        </a>
-                        <a class="probootstrap-slide" href="#">
-                            <span class="flaticon-parthenon"></span>
-                            <em>Parthenon</em>
-                        </a>
-                        <a class="probootstrap-slide" href="#">
-                            <span class="flaticon-marina-bay-sands"></span>
-                            <em>Marina Bay Sands</em>
-                        </a>
-                        <a class="probootstrap-slide" href="#">
-                            <span class="flaticon-samarra-minaret"></span>
-                            <em>Samarra Minaret</em>
-                        </a>
-                        <a class="probootstrap-slide" href="#">
-                            <span class="flaticon-chiang-kai-shek-memorial"></span>
-                            <em>Chiang Kai Shek Memorial</em>
-                        </a>
-                        <a class="probootstrap-slide" href="#">
-                            <span class="flaticon-heuvelse-kerk-tilburg"></span>
-                            <em>Heuvelse Kerk Tilburg</em>
-                        </a>
-                        <a class="probootstrap-slide" href="#">
-                            <span class="flaticon-cathedral-of-cordoba"></span>
-                            <em>Cathedral of Cordoba</em>
-                        </a>
-                        <a class="probootstrap-slide" href="#">
-                            <span class="flaticon-london-bridge"></span>
-                            <em>London Bridge</em>
-                        </a>
-                        <a class="probootstrap-slide" href="#">
-                            <span class="flaticon-taj-mahal"></span>
-                            <em>Taj Mahal</em>
-                        </a>
-                        <a class="probootstrap-slide" href="#">
-                            <span class="flaticon-leaning-tower-of-pisa"></span>
-                            <em>Leaning Tower of Pisa</em>
-                        </a>
-                        <a class="probootstrap-slide" href="#">
-                            <span class="flaticon-burj-al-arab"></span>
-                            <em>Burj al Arab</em>
-                        </a>
-                        <a class="probootstrap-slide" href="#">
-                            <span class="flaticon-gate-of-india"></span>
-                            <em>Gate of India</em>
-                        </a>
-                        <a class="probootstrap-slide" href="#">
-                            <span class="flaticon-osaka-castle"></span>
-                            <em>Osaka Castle</em>
-                        </a>
-                        <a class="probootstrap-slide" href="#">
-                            <span class="flaticon-statue-of-liberty"></span>
-                            <em>Statue of Liberty</em>
-                        </a>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
 
     <section class="probootstrap_section" id="section-feature-testimonial">
         <div class="container">

@@ -80,7 +80,7 @@
                                             <tr class="odd">
                                                 <td class="sorting_1">{{ $dl->id }}</td>
                                                 <td>{{ $dl->name }}</td>
-                                                <td>{{ $dl->user_id }}</td>
+                                                <td>{{ $dl->user->name }}</td>
                                                 <td>{{ $dl->operating_type }}</td>
                                                 <td>{{ $dl->web_address }}</td>
                                                 <td>{{ $dl->camp_phone }}</td>

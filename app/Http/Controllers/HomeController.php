@@ -26,13 +26,14 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public static function getcountreview($camp_id){
+    public static function getcountreview($camp_id)
+    {
         return Review::where([
-            ['camp_id',$camp_id],
-            ['status','Aktif'],
-            ])->count();
+            ['camp_id', $camp_id],
+            ['status', 'Aktif'],
+        ])->count();
     }
-    
+
 
     public static function get_city($title)
     {
@@ -94,12 +95,12 @@ class HomeController extends Controller
 
     public function get_filter_camp_id($camp_id_array)
     {
-        $merged_array=Array();
-        for($i=0;$i<count($camp_id_array);$i++){
-            $merged_array=array_merge($merged_array,DB::select('select * from camps where id= '.$camp_id_array[$i]));
+        $merged_array = array();
+        for ($i = 0; $i < count($camp_id_array); $i++) {
+            $merged_array = array_merge($merged_array, DB::select('select * from camps where id= ' . $camp_id_array[$i]));
         }
-        $filter=Filter::all();
-        return view('user.filtered_camp',['datalist'=>$merged_array,'data'=>$filter]);
+        $filter = Filter::all();
+        return view('user.filtered_camp', ['datalist' => $merged_array, 'data' => $filter]);
     }
 
 
@@ -140,7 +141,8 @@ class HomeController extends Controller
         return view('user.register');
     }
 
-    public function userProfile(){
+    public function userProfile()
+    {
         return view('user.user_profile');
     }
 
@@ -148,7 +150,8 @@ class HomeController extends Controller
     {
         $blog = Blog::all();
         $review = Review::all();
-        $datalist = Camp::all();
+        $parent = Category::where('title', 'Bölge')->first();
+        $datalist = Category::where('parent_id', $parent->id)->get();
         return view('user.index', ['datalist' => $datalist, 'review' => $review, 'blog' => $blog]);
     }
 
@@ -157,8 +160,8 @@ class HomeController extends Controller
         $data = Camp::find($id);
         $review = Review::where([
             ['camp_id', $id],
-            ['status','Aktif'],
-            ])->get();
+            ['status', 'Aktif'],
+        ])->get();
         $images = Image::where('camp_id', $id)->get();
         $data = [
             'review' => $review,
